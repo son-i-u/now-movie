@@ -30,8 +30,8 @@
 		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property> 
 			<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@temp.cktcad0qfxqe.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property> -->
 
-		<property name="username" value="sjk"></property>
-		<property name="password" value="0000"></property>
+		<property name="username" value="jy"></property>
+		<property name="password" value="jy"></property>
 		
 	</bean>
 
