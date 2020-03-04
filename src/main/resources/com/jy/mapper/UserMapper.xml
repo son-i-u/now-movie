@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soniu.mapper.UserMapper">
+
+  <resultMap type="com.soniu.domain.userInfo_VO" id="UserMap">
+  <!-- prop=vo column=db -->
+    <result property="userid" column="user_id"/>
+    <result property="userpw" column="pwd"/>  
+    <result property="userage" column="age"/>
+    <result property="usergender" column="gender"/>
+  </resultMap>
+  
+  <select id="read" resultMap="UserMap">
+	SELECT 
+		user_id, pwd, age, gender
+	 FROM 
+	 	user_info
+  </select>
+</mapper>
