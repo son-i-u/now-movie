@@ -29,7 +29,8 @@
 					class="dropdown-item" href="#">Activity Log</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="login.html">Logout</a>
-			</div></li>
+			</div>
+		</li>
 	</ul>
 </nav>
 <div id="layoutSidenav">
