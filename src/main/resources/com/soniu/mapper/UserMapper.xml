@@ -6,10 +6,11 @@
 
   <resultMap type="com.soniu.domain.userInfo_VO" id="UserMap">
   <!-- prop=vo column=db -->
-    <result property="userid" column="user_id"/>
-    <result property="userpw" column="pwd"/>  
-    <result property="userage" column="age"/>
-    <result property="usergender" column="gender"/>
+    <result property="userId" column="user_id"/>
+    <result property="userPwd" column="pwd"/>  
+    <result property="userAge" column="age"/>
+    <result property="userGender" column="gender"/>
+    <result property="enabled" column="enabled"/>
   </resultMap>
   
   <select id="read" resultMap="UserMap">
