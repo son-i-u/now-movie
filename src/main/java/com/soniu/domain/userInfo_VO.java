@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class userInfo_VO {
-	private String userid;
-	private String userpw;
-	private String userage;
-	private String usergender;
+	private String userId;
+	private String userPwd;
+	private int userAge;
+	private String userGender;
+	private int enabled;
 }
