@@ -10,12 +10,21 @@
 		</layout>
 	</appender>
 	
+	 <!-- *추가* -->
+    <appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
+          <layout class="org.apache.log4j.PatternLayout">
+              <param name="ConversionPattern" value="%d %5p %m%n"/>
+          </layout>  
+    </appender>
+    <!--  -->
+	
+	<!-- 기존코드 주석 처리 -->
 	<!-- Application Loggers -->
-	<logger name="com.soniu.app">
+	<!-- <logger name="com.soniu.app">
 		<level value="info" />
 	</logger>
 	
-	<!-- 3rdparty Loggers -->
+	3rdparty Loggers
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>	
@@ -32,10 +41,45 @@
 		<level value="info" />
 	</logger>
 
-	<!-- Root Logger -->
+	Root Logger
 	<root>
-		<priority value="info" />
+		<priority value="off" />
 		<appender-ref ref="console" />
 	</root>
 	
 </log4j:configuration>
+ -->
+ 
+ 
+ 	<!-- 변경 후 -->
+  <!-- Application Loggers -->
+    <logger name="com" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="console"/>
+    </logger>
+    
+    <!-- 3rdparty Loggers -->
+    <logger name="org.springframework.core">
+        <level value="info" />
+    </logger>
+    
+    <logger name="org.springframework.beans">
+        <level value="info" />
+    </logger>
+    
+    <logger name="org.springframework.context">
+        <level value="info" />
+    </logger>
+ 
+    <logger name="org.springframework.web">
+        <level value="info" />
+    </logger>
+ 
+    <!-- Root Logger -->
+    <root>
+        <priority value="off" />
+        <appender-ref ref="console" />
+    </root>
+    
+</log4j:configuration>
+ 
