@@ -24,63 +24,22 @@
 							</div>
 						</div>
 					</li>
-					<li>전의 영화입니다.</li>
+					<li>이내의 영화입니다.</li>
 				</ol>
 				<div class="row">
 					<div class="col-xl-6 col-lg-6">
-						<div class="card mb-3" style="max-width: 540px;">
+						<div class="card" style="max-width: 540px;">
 							<div class="row">
-								<div class="col-md-4">
-									<img src="http://placehold.it/300x390" class="card-img" alt="...">
+								<div class="col-4">
+									<img src="http://placehold.it/300x390" class="card-img"
+										alt="...">
 								</div>
-								<div class="col-md-8">
+								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">This is a wider card with supporting
-											text below as a natural lead-in to additional content. This
-											content is a little bit longer.</p>
+										<h5 class="card-title">상학옹의 하루</h5>
+										<p class="card-text">주연: 이상학</p>
 										<p class="card-text">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card mb-3" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-md-4">
-									<img src="http://placehold.it/300x390" class="card-img" alt="...">
-								</div>
-								<div class="col-md-8">
-									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">This is a wider card with supporting
-											text below as a natural lead-in to additional content. This
-											content is a little bit longer.</p>
-										<p class="card-text">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card mb-3" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-md-4">
-									<img src="http://placehold.it/300x390" class="card-img" alt="...">
-								</div>
-								<div class="col-md-8">
-									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">This is a wider card with supporting
-											text below as a natural lead-in to additional content. This
-											content is a little bit longer.</p>
-										<p class="card-text">
-											<small class="text-muted">Last updated 3 mins ago</small>
+											<small class="text-muted">시작 50분 전</small>
 										</p>
 									</div>
 								</div>
@@ -90,17 +49,35 @@
 					<div class="col-xl-6 col-lg-6">
 						<div class="card" style="max-width: 540px;">
 							<div class="row">
-								<div class="col-md-4 col-sm-4">
-									<img src="http://placehold.it/300x390" class="card-img" alt="...">
+								<div class="col-4">
+									<img src="http://placehold.it/300x390" class="card-img"
+										alt="...">
 								</div>
-								<div class="col-md-8 col-sm-8">
+								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">This is a wider card with supporting
-											text below as a natural lead-in to additional content. This
-											content is a little bit longer.</p>
+										<h5 class="card-title">점심은 까르보불닭</h5>
+										<p class="card-text">주연: 손지경</p>
 										<p class="card-text">
-											<small class="text-muted">Last updated 3 mins ago</small>
+											<small class="text-muted">시작 35분 전</small>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6">
+						<div class="card" style="max-width: 540px;">
+							<div class="row">
+								<div class="col-4">
+									<img src="http://placehold.it/300x390" class="card-img"
+										alt="...">
+								</div>
+								<div class="col-8">
+									<div class="card-body">
+										<h5 class="card-title">레미제라블</h5>
+										<p class="card-text">주연: 유재연</p>
+										<p class="card-text">
+											<small class="text-muted">시작 35분 전</small>
 										</p>
 									</div>
 								</div>
