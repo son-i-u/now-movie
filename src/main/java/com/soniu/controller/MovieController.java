@@ -23,5 +23,10 @@ public class MovieController {
 	public void movieInfoPage() {
 		
 	}
+	
+	@GetMapping("/movieselect")
+	public void movieSelect() {
+		
+	}
 
 }

@@ -1515,6 +1515,7 @@ pre code {
   .col-xl-2 {
     flex: 0 0 16.6666666667%;
     max-width: 16.6666666667%;
+     margin-top: 0.25rem; <!-- 영화 margin-top 추가-->
   }
 
   .col-xl-3 {
