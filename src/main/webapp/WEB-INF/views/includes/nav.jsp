@@ -114,7 +114,7 @@
 					<a class="nav-link" href="charts.html"><div
 							class="sb-nav-link-icon">
 							<i class="fas fa-chart-area"></i>
-						</div> Charts</a><a class="nav-link" href="tables.html"><div
+						</div> Charts</a><a class="nav-link" href='table.html'><div
 							class="sb-nav-link-icon">
 							<i class="fas fa-table"></i>
 						</div> Tables</a>
