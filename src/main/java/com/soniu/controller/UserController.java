@@ -11,9 +11,5 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/user/*")
 public class UserController {
 
-	@GetMapping("/main")
-	public String mainPage() {
-		
-		return "/user/main";
-	}
+
 }

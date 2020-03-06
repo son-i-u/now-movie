@@ -7,7 +7,7 @@
 <body>
 
 <script type="text/javascript">
-	self.location="/user/main";
+	self.location="/movie/recommend";
 </script>
 </body>
 </html>
