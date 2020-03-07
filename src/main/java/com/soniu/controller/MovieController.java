@@ -14,19 +14,18 @@ import lombok.extern.log4j.Log4j;
 public class MovieController {
 	
 
+	/* 재연 */	
 	@GetMapping("/recommend")
 	public void recommendPage() {
 		
 	}
 	
+	/* 재연 */
 	@GetMapping("/movieinfo")
 	public void movieInfoPage() {
 		
 	}
 	
-	@GetMapping("/movieselect")
-	public void movieSelect() {
-		
-	}
+	
 
 }

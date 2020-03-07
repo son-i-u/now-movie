@@ -19,6 +19,7 @@ public class CommonController {
 		model.addAttribute("msg","Access Denied");
 	}
 	
+	/* ªÛ«– */
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
