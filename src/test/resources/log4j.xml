@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
@@ -10,24 +10,15 @@
 		</layout>
 	</appender>
 	
-	 <!-- *추가* -->
-    <appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
-          <layout class="org.apache.log4j.PatternLayout">
-              <param name="ConversionPattern" value="%d %5p %m%n"/>
-          </layout>  
-    </appender>
-    <!--  -->
-	
-	<!-- 기존코드 주석 처리 -->
 	<!-- Application Loggers -->
-	<!-- <logger name="com.soniu.app">
+	<logger name="com.ldcc.codewith">
 		<level value="info" />
 	</logger>
 	
-	3rdparty Loggers
+	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
-	</logger>	
+	</logger>
 	
 	<logger name="org.springframework.beans">
 		<level value="info" />
@@ -41,45 +32,10 @@
 		<level value="info" />
 	</logger>
 
-	Root Logger
+	<!-- Root Logger -->
 	<root>
-		<priority value="off" />
+		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
 	
 </log4j:configuration>
- -->
- 
- 
- 	<!-- 변경 후 -->
-  <!-- Application Loggers -->
-    <logger name="com" additivity="false">
-        <level value="debug" />
-        <appender-ref ref="console"/>
-    </logger>
-    
-    <!-- 3rdparty Loggers -->
-    <logger name="org.springframework.core">
-        <level value="warn" />
-    </logger>
-    
-    <logger name="org.springframework.beans">
-        <level value="warn" />
-    </logger>
-    
-    <logger name="org.springframework.context">
-        <level value="warn" />
-    </logger>
- 
-    <logger name="org.springframework.web">
-        <level value="warn" />
-    </logger>
- 
-    <!-- Root Logger -->
-    <root>
-        <priority value="off" />
-        <appender-ref ref="console" />
-    </root>
-    
-</log4j:configuration>
- 

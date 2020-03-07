@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,177 +30,14 @@
 					<li>이내의 영화입니다.</li>
 				</ol>
 
-
 				<div class="row">
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
+					<c:forEach items="${list }" var="movie">
 						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-						<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-
-					</div>
-					<div class="col-xl-2 ">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					<div class="col-xl-2">
-						<img src="http://placehold.it/300x390" class="card-img" alt="...">
-					</div>
-					
+						${movie.img_loc }
+							<img src="<spring:url value="${movie.img_loc }"/>"
+								class="card-img" alt="...">
+						</div>
+					</c:forEach>
 				</div>
 </body>
 </html>

@@ -20,9 +20,5 @@ public class UserController {
 
 	}
 	
-	/* Áö°æ */
-	@GetMapping("/movieselect")
-	public void movieSelect() {
-		
-	}
+
 }
