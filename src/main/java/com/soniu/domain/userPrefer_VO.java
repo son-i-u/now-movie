@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class userPrefer_VO {
-	private String userId;
-	private String MovieId;
-	private String score;
+	private String user_id;
+	private String movie_id;
+	private int score;
 }

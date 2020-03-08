@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.soniu.domain.movie_VO;
+import com.soniu.domain.userPrefer_VO;
 import com.soniu.mapper.MovieMapper;
+import com.soniu.mapper.UserPreferMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -16,6 +18,7 @@ import lombok.extern.log4j.Log4j;
 public class MovieServiceImpl implements MovieService {
 
 	private MovieMapper movieMapper;
+	private UserPreferMapper userPreferMapper;
 
 	@Override
 	public List<movie_VO> getList() {
@@ -24,6 +27,13 @@ public class MovieServiceImpl implements MovieService {
 		log.info("first data... " + movieMapper.getList().get(0).getActor()+"");
 
 		return movieMapper.getList();
+	}
+
+	@Override		
+	public void preferInsert(userPrefer_VO pr_vo) {
+		log.info("userprefer insert...");
+		
+		userPreferMapper.insert(pr_vo);
 	}
 
 

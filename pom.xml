@@ -209,9 +209,9 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>12.2.0.1</version>
 		</dependency>
-		
-		
-		
+
+
+
 		<!-- fcm"pom.xml" -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
@@ -219,6 +219,13 @@
 			<version>1.1.1</version>
 		</dependency>
 
+		<!--JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
@@ -254,7 +261,7 @@
 			<version>27.0.1-jre</version>
 		</dependency>
 
-	<!-- ojdbc8 maven url -->
+		<!-- ojdbc8 maven url -->
 	</dependencies>
 	<repositories>
 		<repository>
@@ -281,7 +288,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version> <!--  2.5.1에서 바꿈 -->
+				<version>3.5.1</version> <!-- 2.5.1에서 바꿈 -->
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

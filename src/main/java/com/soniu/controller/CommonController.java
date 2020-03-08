@@ -1,6 +1,7 @@
 package com.soniu.controller;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,12 @@ public class CommonController {
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
 		log.info("logout : " + logout);
-		
+	
+		/* session user_id .. */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String user_id = auth.getName();
+        log.info(user_id+"사용자 id 입니다");
+        
 		if(error != null) {
 			model.addAttribute("error", "login error check your account");
 			
@@ -44,4 +50,6 @@ public class CommonController {
 	public void logoutPost() {
 		log.info("post custom logout");
 	}
+	
+
 }
