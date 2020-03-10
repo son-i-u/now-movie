@@ -36,5 +36,17 @@ public class MovieServiceImpl implements MovieService {
 		userPreferMapper.insert(pr_vo);
 	}
 
+	@Override
+	public List<userPrefer_VO> getNotSeeList(String user_id) {
+		
+		
+		return userPreferMapper.getNotSeeList(user_id);
+	}
+
+	@Override
+	public List<movie_VO> getMovieNotSee(String user_id) {
+		
+		return movieMapper.getMovieNotSee(user_id);
+	}
 
 }

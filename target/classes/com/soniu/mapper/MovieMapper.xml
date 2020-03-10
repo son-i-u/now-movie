@@ -11,10 +11,17 @@
 	</select>
 
 
-
 	<select id="read" resultType="com.soniu.domain.movie_VO">
 		select * from movie where movie_id
 		= #{movie_id}
 	</select>
+	
+	<select id="getMovieNotSee" resultType="com.soniu.domain.movie_VO">
+	<![CDATA[select * from movie where movie_id in
+	 (select movie_id from user_prefer where user_id=#{user_id} and score < 0)
+]]>
+	</select>
+
+
 
 </mapper>
