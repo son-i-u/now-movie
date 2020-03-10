@@ -8,5 +8,11 @@
 		insert into user_prefer values (#{user_id},#{movie_id},#{score})
 	</insert>
 
-
+	<!-- 아직 평가 하지 않은 영화들 -->
+	<select id="getNotSeeList" resultType="com.soniu.domain.userPrefer_VO">
+	 <![CDATA[select * from user_prefer where user_id=#{user_id} and score < 0 ]]>
+	</select>
+	
+	
+		
 </mapper>

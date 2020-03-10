@@ -14,24 +14,7 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">이런 영화 어때요?</h1>
-				<ol class="breadcrumb mb-4">
-					<li>시작하기</li>
-					<li>
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">30분</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">30분</a> <a
-									class="dropdown-item" href="#">1시간</a> <a class="dropdown-item"
-									href="#">2시간</a>
-							</div>
-						</div>
-					</li>
-					<li>이내의 영화입니다.</li>
-				</ol>
-
+				<h1 class="mt-4">아래 영화중 재밌는 영화 있으셨나요? 고객님을 위한 추천 시스템에 이용됩니다.</h1>
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row">
@@ -39,8 +22,8 @@
 						<div class="col-xl-2" id="${movie.movie_id }">
 							${movie.movie_nm }
 
-							<button type="button" id="${movie.movie_id }"
-								onclick="movieselect(${movie.movie_id})">
+							<button class="card-button" type="button" id="${movie.movie_id }"
+								onclick="movieselect(${movie.movie_id}); ">
 								<img src="<spring:url value="${movie.img_loc }"/>"
 									class="card-img" alt="...">
 							</button>
@@ -69,14 +52,15 @@
 						console.log(data + "클릭했습니다.");
 						movieArray.push(data);
 						console.log(movieArray.length+ "선택한 movie 수입니다.");
-					
-				    	<!-- 클릭시 이미지버튼 테두리 변경 -->
+				
 				    }
+				  
+				
 				    
 				    <!-- moviearray를 post로 전달 -->
 				    function moviePost(){
 				    	var $form = $('<form></form>');
-				    	$form.attr('action','/movie/movieselect');
+				    	$form.attr('action','/movie/select');
 				    	$form.attr('method','post');
 				    	
 				    	var test = $('<input name="test" type="hidden" value="test">');

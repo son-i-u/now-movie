@@ -9,5 +9,6 @@ import com.soniu.domain.Schedule_VO;
 
 public interface MovieMapper {
 	public List<movie_VO> getList();
+	public List<movie_VO> getMovieNotSee(String user_id);
 	public movie_VO read(String movie_id);
 }
