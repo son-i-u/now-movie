@@ -1,5 +1,7 @@
 package com.soniu.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,36 +37,45 @@ public class MovieController {
 
 	}
 
-	/* 지경 */
-	@GetMapping("/movieselect")
+	/* jk */
+	@GetMapping("/select")
 	public void movieSelect(Model model) {
-		/* movie 정보 (id, 주소 ) 를 가져와 movieselect 페이지에 뿌린다 */
 
+		/* get movie infomation and forward to select page */
 		log.info("list ...");
 		model.addAttribute("list", movieService.getList());
 	}
 
-	/* 지경 */
-	@PostMapping("/movieselect")
+	/* jk */
+	@GetMapping("/evaluate")
+	public void movieEvaluate(Model model) {
+
+		/* user session id , static cause error at server start */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user_id = auth.getName();
+
+		/* stil not evaluated.. */
+		log.info("evaluate page called.....");
+		model.addAttribute("nsList", movieService.getNotSeeList(user_id));
+		model.addAttribute("mncList", movieService.getMovieNotSee(user_id));
+	}
+
+	/* jk */
+	@PostMapping("/evaluate")
+	public String movieEvaluateInsert(String[] movieArray, String[] scoreArray) {
+		log.info("movieEvaluateInsert called....");
+
+		return "redirect:/movie/recommend";
+	}
+
+	/* jk */
+	@PostMapping("/select")
 	public String movieSelectInsert(@RequestParam("test") String test,
 			@RequestParam("movieArray") String[] movieArray) {
+
+		log.info(movieArray.length + "개의 영화선호 선택됐습니다.");
 		
-		log.info(movieArray.length+ "개의 영화선호 선택됐습니다.");
-		
-		/* 사용자 id */
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String user_id = auth.getName();
-		
-		/* 사용자 아이디와 선택된 영화 = userprefer */
-		for(int i=0; i<movieArray.length; i++) {
-			userPrefer_VO uf = new userPrefer_VO();
-			uf.setUser_id(user_id);
-			uf.setMovie_id(movieArray[i]);
-			uf.setScore(3);
-			
-			movieService.preferInsert(uf);
-		}
-		
+		movieService.preferInsert(movieArray);
 
 		return "redirect:/movie/recommend";
 	}
