@@ -27,8 +27,14 @@ public class MovieController {
 
 	/* jy */
 	@GetMapping("/recommend")
-	public void recommendPage() {
-
+	public void recommendPage(Model model) {
+		/* user session id , static cause error at server start */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user_id = auth.getName();
+		
+		log.info("/recommend called ...");
+		log.info("login id: "+ user_id);
+		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
 	}
 
 	/* jy */
@@ -73,7 +79,7 @@ public class MovieController {
 	public String movieSelectInsert(@RequestParam("test") String test,
 			@RequestParam("movieArray") String[] movieArray) {
 
-		log.info(movieArray.length + "���� ��ȭ��ȣ ���õƽ��ϴ�.");
+		log.info(movieArray.length + "개의 영화선호 선택됐습니다.");
 		
 		movieService.preferInsert(movieArray);
 

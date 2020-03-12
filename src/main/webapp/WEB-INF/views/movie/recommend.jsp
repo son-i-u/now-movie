@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,23 +12,34 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">ÀÌ·± ¿µÈ­ ¾î¶§¿ä?</h1>
+				<h1 class="mt-4">ì´ëŸ° ì˜í™” ì–´ë•Œìš”?</h1>
 				<ol class="breadcrumb mb-4">
-					<li>½ÃÀÛÇÏ±â</li>
+					<li>ì‹œìž‘í•˜ê¸°</li>
 					<li>
 						<div class="dropdown">
 							<button class="btn btn-secondary dropdown-toggle" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">30ºÐ</button>
+								aria-haspopup="true" aria-expanded="false">30ë¶„</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">30ºÐ</a> <a
-									class="dropdown-item" href="#">1½Ã°£</a> <a class="dropdown-item"
-									href="#">2½Ã°£</a>
+								<a class="dropdown-item" href="#">30ë¶„</a> <a
+									class="dropdown-item" href="#">1ì‹œê°„</a> <a class="dropdown-item"
+									href="#">2ì‹œê°„</a>
 							</div>
 						</div>
 					</li>
-					<li>ÀÌ³»ÀÇ ¿µÈ­ÀÔ´Ï´Ù.</li>
+					<li>ì´ë‚´ì˜ ì˜í™”ìž…ë‹ˆë‹¤.</li>
 				</ol>
+				
+				<!-- ì˜í™” ë¦¬ìŠ¤íŠ¸ ì´ë¯¸ì§€ ì¶œë ¥  / ë²„íŠ¼ì— ì´ë¯¸ì§€ ì‚½ìž… -->
+				<div class="row">
+					<c:forEach items="${ preferList }" var="prefer">
+						<div class="col-xl-2" id="${ prefer.user_id }">
+							<p>user_id: ${ prefer.user_id }</p>
+							<p>movie_name: ${ prefer.movie_id }</p>
+							<p>score: ${ prefer.score }</p>
+						</div>
+					</c:forEach>
+				
 				<div class="row">
 					<div class="col-xl-6 col-lg-6">
 						<div class="card" style="max-width: 540px;">
@@ -36,10 +50,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">»óÇÐ¿ËÀÇ ÇÏ·ç</h5>
-										<p class="card-text">ÁÖ¿¬: ÀÌ»óÇÐ</p>
+										<h5 class="card-title">ìƒí•™ì˜¹ì˜ í•˜ë£¨</h5>
+										<p class="card-text">ì£¼ì—°: ì´ìƒí•™</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 50ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 50ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -55,10 +69,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">Á¡½ÉÀº ±î¸£º¸ºÒ´ß</h5>
-										<p class="card-text">ÁÖ¿¬: ¼ÕÁö°æ</p>
+										<h5 class="card-title">ì ì‹¬ì€ ê¹Œë¥´ë³´ë¶ˆë‹­</h5>
+										<p class="card-text">ì£¼ì—°: ì†ì§€ê²½</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -74,10 +88,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -93,10 +107,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -112,10 +126,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -131,10 +145,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -150,10 +164,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -169,10 +183,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -188,10 +202,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -207,10 +221,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -226,10 +240,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -245,10 +259,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>
@@ -264,10 +278,10 @@
 								</div>
 								<div class="col-8">
 									<div class="card-body">
-										<h5 class="card-title">·¹¹ÌÁ¦¶óºí</h5>
-										<p class="card-text">ÁÖ¿¬: À¯Àç¿¬</p>
+										<h5 class="card-title">ë ˆë¯¸ì œë¼ë¸”</h5>
+										<p class="card-text">ì£¼ì—°: ìœ ìž¬ì—°</p>
 										<p class="card-text">
-											<small class="text-muted">½ÃÀÛ 35ºÐ Àü</small>
+											<small class="text-muted">ì‹œìž‘ 35ë¶„ ì „</small>
 										</p>
 									</div>
 								</div>

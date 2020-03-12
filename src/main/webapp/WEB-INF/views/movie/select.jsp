@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,9 +13,9 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-				<h1 class="mt-4">¾Æ·¡ ¿µÈ­Áß Àç¹Õ´Â ¿µÈ­ ÀÖÀ¸¼Ì³ª¿ä? °í°´´ÔÀ» À§ÇÑ ÃßÃµ ½Ã½ºÅÛ¿¡ ÀÌ¿ëµË´Ï´Ù.</h1>
+				<h1 class="mt-4">ì•„ë˜ ì˜í™”ì¤‘ ì¬ë°ŒëŠ” ì˜í™” ìˆìœ¼ì…¨ë‚˜ìš”? ê³ ê°ë‹˜ì„ ìœ„í•œ ì¶”ì²œ ì‹œìŠ¤í…œì— ì´ìš©ë©ë‹ˆë‹¤.</h1>
 
-				<!-- ¿µÈ­ ¸®½ºÆ® ÀÌ¹ÌÁö Ãâ·Â  / ¹öÆ°¿¡ ÀÌ¹ÌÁö »ğÀÔ -->
+				<!-- ì˜í™” ë¦¬ìŠ¤íŠ¸ ì´ë¯¸ì§€ ì¶œë ¥  / ë²„íŠ¼ì— ì´ë¯¸ì§€ ì‚½ì… -->
 				<div class="row">
 					<c:forEach items="${list }" var="movie">
 						<div class="col-xl-2" id="${movie.movie_id }">
@@ -32,47 +31,51 @@
 
 						</div>
 					</c:forEach>
-					<!-- Á¦Ãâ ¹öÆ° -->
+					<!-- ì œì¶œ ë²„íŠ¼ -->
 					<button type="button" onclick="moviePost()">submit</button>
 
-					<!-- Á¢±Ù °ÅºÎ¹æÁö¸¦ À§ÇÑ -->
+					<!-- ì ‘ê·¼ ê±°ë¶€ë°©ì§€ë¥¼ ìœ„í•œ -->
 					<sec:csrfInput />
 
 				</div>
 
-	<script type="text/javascript">
-		var movieArray = [];
-		
-		$(document).ready(
-			function() {
-			});
-					
-		    //Å¬¸¯½Ã ¼±ÅÃ ¿µÈ­ ¹è¿­¿¡ Ãß°¡
-		    function movieselect(data) {
-				console.log(data + "Å¬¸¯Çß½À´Ï´Ù.");
-				movieArray.push(data);
-				console.log(movieArray.length+ "¼±ÅÃÇÑ movie ¼öÀÔ´Ï´Ù.");
-		
-		    }
-	  
-	
-	    
-	    //moviearray¸¦ post·Î Àü´Ş
-	    function moviePost(){
-	    	var $form = $('<form></form>');
-	    	$form.attr('action','/movie/select');
-	    	$form.attr('method','post');
-	    	
-	    	var test = $('<input name="test" type="hidden" value="test">');
-	    	var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
-	    	var sec = $('<sec:csrfInput/>');
-	    	
-	    	$form.append(test);  
-	    	$form.append(mArray);
-	    	$form.append(sec);
-	    	$form.submit();
-	    }
+				<script type="text/javascript">
+				var movieArray = [];
+				var $form = $('<form></form>');
+				$(document.body).append($form);
+				
+				$(document).ready(
+					function() {
+						
+						
+					});
 							
-	</script>
+				    // í´ë¦­ì‹œ ì„ íƒ ì˜í™” ë°°ì—´ì— ì¶”ê°€ 
+				    function movieselect(data) {
+						console.log(data + "í´ë¦­í–ˆìŠµë‹ˆë‹¤.");
+						movieArray.push(data);
+						console.log(movieArray.length+ "ì„ íƒí•œ movie ìˆ˜ì…ë‹ˆë‹¤.");
+				
+				    }
+				  
+				
+				    
+				    // moviearrayë¥¼ postë¡œ ì „ë‹¬
+				    function moviePost(){
+				    	
+				    	$form.attr('action','/movie/select');
+				    	$form.attr('method','post');
+				    	
+				    	var test = $('<input name="test" type="hidden" value="test">');
+				    	var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
+				    	var sec = $('<sec:csrfInput/>');
+				    	
+				    	$form.append(test);  
+				    	$form.append(mArray);
+				    	$form.append(sec);
+				    	$form.submit();
+				    }
+							
+</script> 
 </body>
-</html>
+</html> 

@@ -47,6 +47,12 @@ public class MovieServiceImpl implements MovieService {
 		
 		return movieMapper.getMovieNotSee(user_id);
 	}
+	
+	@Override
+	public List<userPrefer_VO> getUserPrefer(String user_id) {
+		log.info("Service user_id: " + user_id);
+		return userPreferMapper.getUserPrefer(user_id);
+	}
 
 	@Override
 	public void preferInsert(String[] movieArray) {

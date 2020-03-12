@@ -7,7 +7,7 @@
 <body>
 
 <script type="text/javascript">
-	self.location="/sample";
+	self.location="/customLogin";
 </script>
 </body>
 </html>
