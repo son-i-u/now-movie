@@ -43,8 +43,14 @@
 				<script type="text/javascript">
 				var movieArray = [];
 				
+				<!-- 선호 영하 전송 폼을 document body에 추가 -->
+				var $form = $('<form></form>');
+				$(document.body).append($form);
+				
 				$(document).ready(
 					function() {
+						
+						
 					});
 							
 				    <!--클릭시 선택 영화 배열에 추가 -->
@@ -54,12 +60,11 @@
 						console.log(movieArray.length+ "선택한 movie 수입니다.");
 				
 				    }
-				  
-				
+				 	
 				    
 				    <!-- moviearray를 post로 전달 -->
 				    function moviePost(){
-				    	var $form = $('<form></form>');
+				    	
 				    	$form.attr('action','/movie/select');
 				    	$form.attr('method','post');
 				    	

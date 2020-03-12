@@ -56,7 +56,6 @@ public class MovieController {
 
 		/* stil not evaluated.. */
 		log.info("evaluate page called.....");
-		model.addAttribute("nsList", movieService.getNotSeeList(user_id));
 		model.addAttribute("mncList", movieService.getMovieNotSee(user_id));
 	}
 
