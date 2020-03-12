@@ -25,13 +25,13 @@ public class MovieController {
 
 	private MovieService movieService;
 
-	/* Àç¿¬ */
+	/* jy */
 	@GetMapping("/recommend")
 	public void recommendPage() {
 
 	}
 
-	/* Àç¿¬ */
+	/* jy */
 	@GetMapping("/movieinfo")
 	public void movieInfoPage() {
 
@@ -73,7 +73,7 @@ public class MovieController {
 	public String movieSelectInsert(@RequestParam("test") String test,
 			@RequestParam("movieArray") String[] movieArray) {
 
-		log.info(movieArray.length + "°³ÀÇ ¿µÈ­¼±È£ ¼±ÅÃµÆ½À´Ï´Ù.");
+		log.info(movieArray.length + "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½ï¿½ï¿½ÃµÆ½ï¿½ï¿½Ï´ï¿½.");
 		
 		movieService.preferInsert(movieArray);
 

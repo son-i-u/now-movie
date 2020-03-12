@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 
@@ -40,39 +40,39 @@
 
 				</div>
 
-				<script type="text/javascript">
-				var movieArray = [];
-				
-				$(document).ready(
-					function() {
-					});
+	<script type="text/javascript">
+		var movieArray = [];
+		
+		$(document).ready(
+			function() {
+			});
+					
+		    //클릭시 선택 영화 배열에 추가
+		    function movieselect(data) {
+				console.log(data + "클릭했습니다.");
+				movieArray.push(data);
+				console.log(movieArray.length+ "선택한 movie 수입니다.");
+		
+		    }
+	  
+	
+	    
+	    //moviearray를 post로 전달
+	    function moviePost(){
+	    	var $form = $('<form></form>');
+	    	$form.attr('action','/movie/select');
+	    	$form.attr('method','post');
+	    	
+	    	var test = $('<input name="test" type="hidden" value="test">');
+	    	var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
+	    	var sec = $('<sec:csrfInput/>');
+	    	
+	    	$form.append(test);  
+	    	$form.append(mArray);
+	    	$form.append(sec);
+	    	$form.submit();
+	    }
 							
-				    <!--클릭시 선택 영화 배열에 추가 -->
-				    function movieselect(data) {
-						console.log(data + "클릭했습니다.");
-						movieArray.push(data);
-						console.log(movieArray.length+ "선택한 movie 수입니다.");
-				
-				    }
-				  
-				
-				    
-				    <!-- moviearray를 post로 전달 -->
-				    function moviePost(){
-				    	var $form = $('<form></form>');
-				    	$form.attr('action','/movie/select');
-				    	$form.attr('method','post');
-				    	
-				    	var test = $('<input name="test" type="hidden" value="test">');
-				    	var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
-				    	var sec = $('<sec:csrfInput/>');
-				    	
-				    	$form.append(test);  
-				    	$form.append(mArray);
-				    	$form.append(sec);
-				    	$form.submit();
-				    }
-							
-</script>
+	</script>
 </body>
 </html>
