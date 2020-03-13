@@ -10,6 +10,7 @@ public interface MovieService {
 	
 	/* movie */
 	public List<movie_VO> getList();
+	public List<movie_VO> getMovieInfo(String movie_id);
 	public List<movie_VO> getMovieNotSee(String user_id);
 	
 	/* user_prefer */

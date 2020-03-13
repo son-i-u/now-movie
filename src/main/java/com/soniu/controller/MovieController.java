@@ -36,9 +36,10 @@ public class MovieController {
 	}
 
 	/* jy */
-	@GetMapping("/movieinfo")
-	public void movieInfoPage() {
-
+	@GetMapping("/info")
+	public void movieInfoPage(Model model, @RequestParam String id) {
+		
+		model.addAttribute("info", movieService.getMovieInfo(id));
 	}
 
 	/* jk */

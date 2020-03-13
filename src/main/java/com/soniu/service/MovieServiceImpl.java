@@ -29,6 +29,13 @@ public class MovieServiceImpl implements MovieService {
 		
 		return movieMapper.getList();
 	}
+	
+	@Override
+	public List<movie_VO> getMovieInfo(String movie_id){
+		
+		return movieMapper.getMovieInfo(movie_id);
+	}
+	
 
 	@Override		
 	public void preferInsert(userPrefer_VO pr_vo) {
