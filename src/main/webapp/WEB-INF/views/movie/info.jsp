@@ -17,7 +17,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<h2 class="page-header">${ loginID }님,요청하신영화정보입니다.</h1>
+						<h2 class="page-header">${ loginID }님,요청하신영화정보입니다.</h2>
 						<h1 class="page-header">movie info</h1>
 					</div>
 					<!--  /.col-lg-12 -->

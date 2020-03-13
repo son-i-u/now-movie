@@ -10,8 +10,31 @@
 <%@ include file="../includes/header.jsp"%>
 
 <script type="text/javascript">
-		function test(movie_id){
-			 location.href = '/movie/info?id=' + movie_id;
+		var time, i;
+		
+		function toDetailPage(movie_id){
+			
+			location.href = '/movie/info?id=' + movie_id;
+		}
+		
+		function removeAllChildNodes(element) {
+						
+			var size = element.length;
+			console.log("size = "+ size);
+			
+			for(i = 0; i < size; i++) {
+				
+				while (element[i].hasChildNodes()) {
+		        	element[i].removeChild(element[i].lastChild);
+		        }
+			} 
+	    }
+		
+		function timeLimit(limit){
+			
+			var card = document.getElementsByClassName("cardForm");
+			document.getElementById("dropdownMenuButton").innerText = limit;
+			removeAllChildNodes(card);
 		}
 </script>
 
@@ -28,9 +51,9 @@
 							id="dropdownMenuButton" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">30분</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="#">30분</a> <a
-								class="dropdown-item" href="#">1시간</a> <a class="dropdown-item"
-								href="#">2시간</a>
+							<a class="dropdown-item" onclick="timeLimit('30분')">30분</a> 
+							<a class="dropdown-item" onclick="timeLimit('1시간')">1시간</a> 
+							<a class="dropdown-item" onclick="timeLimit('2시간')">2시간</a>
 						</div>
 					</div>
 				</li>
@@ -40,8 +63,8 @@
 			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 			<div class="row">
 				<c:forEach items="${ preferList }" var="prefer">
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;" onclick="test(${ prefer.movie_id });">
+					<div class="col-xl-6 col-lg-6 cardForm">
+						<div class="card" style="max-width: 540px;" onclick="toDetailPage(${ prefer.movie_id });">
 							<div class="row">
 								<div class="col-4">
 									<img src="<spring:url value="${ prefer.img_loc }"/>"
