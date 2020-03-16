@@ -17,10 +17,11 @@
 			location.href = '/movie/info?id=' + movie_id;
 		}
 		
+		/*Delete all movie info card*/
 		function removeAllChildNodes(element) {
 						
 			var size = element.length;
-			console.log("size = "+ size);
+			//console.log("size = "+ size);
 			
 			for(i = 0; i < size; i++) {
 				
@@ -30,6 +31,7 @@
 			} 
 	    }
 		
+		/*When Drop Down menu is clicked*/
 		function timeLimit(limit){
 			
 			var card = document.getElementsByClassName("cardForm");

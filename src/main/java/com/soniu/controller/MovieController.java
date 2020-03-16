@@ -33,6 +33,8 @@ public class MovieController {
 		String user_id = auth.getName();
 		
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
+		
 	}
 
 	/* jy */

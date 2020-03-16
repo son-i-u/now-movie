@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.soniu.domain.movie_VO;
 import com.soniu.domain.userPrefer_VO;
 import com.soniu.domain.userPreferMovie_VO;
+import com.soniu.domain.movieLocationSchedule_VO;
 import com.soniu.mapper.MovieMapper;
 import com.soniu.mapper.UserPreferMapper;
 
@@ -99,4 +100,8 @@ public class MovieServiceImpl implements MovieService {
 		
 	}
 
+	public List<movieLocationSchedule_VO> getMovieLocationSchedule(){
+		
+		return movieMapper.getMovieLocationSchedule();
+	}
 }

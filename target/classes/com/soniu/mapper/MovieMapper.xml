@@ -22,6 +22,14 @@
 	 where user_id=#{user_id} and score < 0)]]>
 	</select>
 
-
+	<select id="getMovieLocationSchedule" resultType="com.soniu.domain.movieLocationSchedule_VO">
+		<![CDATA[
+		select * from
+		(select movie.*, theator.*
+		from movie, schedule, theator
+		where movie.movie_id = schedule.movie_id
+		and schedule.theator_id = theator.theator_id)
+		]]>
+	</select>
 
 </mapper>
