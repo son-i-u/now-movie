@@ -12,9 +12,7 @@
 <html lang="en">
 <%@ include file="../includes/header.jsp"%>
 
-<script type="text/javascript">
-		var time, i;
-		
+<script type="text/javascript">		
 		function toDetailPage(movie_id){
 			
 			location.href = '/movie/info?id=' + movie_id;
