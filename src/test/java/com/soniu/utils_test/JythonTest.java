@@ -16,7 +16,7 @@ public class JythonTest {
 	        interpreter.exec("print(s[1:-1])");
 	 
 	        interpreter = new PythonInterpreter();
-	        interpreter.execfile("C:\\develop\\sonU\\pythonFile\\hello.py");
+	        interpreter.execfile("C:\\develop\\sonU\\pythonFile\\userFileterExam.py");
 	        //interpreter.exec("print(sum(7,8))");
 	    }
 }

@@ -4580,12 +4580,13 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 }
 
 
-.card-button{
-	filter: brightness(100%);
+.card-a:hover{
+	filter: brightness(50%);
 }
 
-.card-button:active {
-	width: 70%;
+.card-visit{
+	width : 200px;
+	height : 300px;
 	filter: brightness(50%);
 }
 

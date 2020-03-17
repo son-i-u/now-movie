@@ -21,7 +21,7 @@
 						<div class="col-xl-2" id="${movie.movie_id }">
 							${movie.movie_nm }
 
-							<button class="card-button" type="button" id="${movie.movie_id }"
+							<a class="card-a" type="button" id="${movie.movie_id }"
 								onclick="movieselect(${movie.movie_id}); ">
 								<img src="<spring:url value="${movie.img_loc }"/>"
 									class="card-img" alt="...">
@@ -44,13 +44,8 @@
 				var $form = $('<form></form>');
 				$(document.body).append($form);
 				
-				<!-- ¼±È£ ¿µÇÏ Àü¼Û ÆûÀ» document body¿¡ Ãß°¡ -->
-				var $form = $('<form></form>');
-				$(document.body).append($form);
-				
 				$(document).ready(
 					function() {
-						
 						
 					});
 							
@@ -60,6 +55,7 @@
 						movieArray.push(data);
 						console.log(movieArray.length+ "ì„ íƒí•œ movie ìˆ˜ì…ë‹ˆë‹¤.");
 				
+						$("#"+data).attr('class','card-visit');
 				    }
 				 	
 				    
@@ -80,5 +76,10 @@
 				    }
 							
 </script> 
+
+<style>
+      .bg { background-color: #eeeeee; }
+      .bd { border: 1px solid #666666; }
+    </style>
 </body>
 </html> 
