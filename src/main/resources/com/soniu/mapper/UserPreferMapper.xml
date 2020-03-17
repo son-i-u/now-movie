@@ -13,6 +13,6 @@
 	 <![CDATA[select * from user_prefer where user_id=#{user_id} and score < 0 ]]>
 	</select>
 	
+
 	
-		
 </mapper>
