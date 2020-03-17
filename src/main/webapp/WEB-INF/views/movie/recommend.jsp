@@ -5,6 +5,9 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <sec:authentication property="name" var="loginID" />
 
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <%@ include file="../includes/header.jsp"%>
@@ -64,7 +67,7 @@
 
 			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 			<div class="row">
-				<c:forEach items="${ preferList }" var="prefer">
+				<c:forEach items="${ movieInfoList }" var="prefer">
 					<div class="col-xl-6 col-lg-6 cardForm">
 						<div class="card" style="max-width: 540px;" onclick="toDetailPage(${ prefer.movie_id });">
 							<div class="row">
@@ -78,7 +81,7 @@
 										<p class="card-text">주연: ${ prefer.actor }</p>
 										<p class="card-text">영화코드: ${ prefer.movie_id }</p>
 										<p class="card-text">
-											<small class="text-muted">시작 50분 전</small>
+											<small class="text-muted"> ${ prefer.left_min }분 뒤 시작 </small>
 										</p>
 									</div>
 								</div>

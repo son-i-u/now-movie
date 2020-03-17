@@ -12,10 +12,11 @@
 	</select>
 
 	<select id="getMovieInfo" resultType="com.soniu.domain.movie_VO">
-		select * from movie where movie_id
+		select * from movie where
+		movie_id
 		= #{movie_id}
 	</select>
-	
+
 	<select id="getMovieNotSee" resultType="com.soniu.domain.movie_VO">
 	<![CDATA[select * from movie where movie_id in
 	 (select movie_id from user_prefer 
@@ -23,13 +24,13 @@
 	</select>
 
 	<select id="getMovieLocationSchedule" resultType="com.soniu.domain.movieLocationSchedule_VO">
-		<![CDATA[
-		select * from
-		(select movie.*, theator.*
+		select movie.movie_id as movie_id, movie_nm, movie_nm_en, genre, director, actor, nation, img_loc, 
+			theator.theator_id as theator_id, theator_nm, location, latitude, longitude, url, 
+			to_char(start_time, 'yyyy-mm-dd hh24:mi:ss') as start_time, to_char(end_time, 'yyyy-mm-dd hh24:mi:ss') as end_time, 
+			(start_time - sysdate)*24*60 as left_min
 		from movie, schedule, theator
 		where movie.movie_id = schedule.movie_id
-		and schedule.theator_id = theator.theator_id)
-		]]>
+		and schedule.theator_id = theator.theator_id
 	</select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.soniu.domain;
 
+import java.util.Date;
 import lombok.Data;
 
 @Data
@@ -14,6 +15,8 @@ public class movieLocationSchedule_VO {
 	private String img_loc;
 	
 	private String theator_id;
-	private String start_time;
-	private String end_time;
+	private Date start_time;
+	private Date end_time;
+	private int left_min;
+	//private long interval = end_time.getTime() - start_time.getTime();
 }
