@@ -2,21 +2,27 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- <mapper namespace="com.soniu.mapper.UserMapper"> <resultMap type="com.soniu.domain.userInfo_VO" 
+	id="UserMap"> prop=vo column=db <result property="userId" column="user_id"/> 
+	<result property="userPwd" column="pwd"/> <result property="userAge" column="age"/> 
+	<result property="userGender" column="gender"/> <result property="enabled" 
+	column="enabled"/> </resultMap> <select id="read" resultMap="UserMap"> SELECT 
+	user_id, pwd, age, gender FROM user_info </select> -->
+
 <mapper namespace="com.soniu.mapper.UserMapper">
 
-  <resultMap type="com.soniu.domain.userInfo_VO" id="UserMap">
-  <!-- prop=vo column=db -->
-    <result property="userId" column="user_id"/>
-    <result property="userPwd" column="pwd"/>  
-    <result property="userAge" column="age"/>
-    <result property="userGender" column="gender"/>
-    <result property="enabled" column="enabled"/>
-  </resultMap>
-  
-  <select id="read" resultMap="UserMap">
-	SELECT 
-		user_id, pwd, age, gender
-	 FROM 
-	 	user_info
-  </select>
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="com.soniu.domain.userInfo_VO">
+		insert into USER_INFO
+		values(
+		#{USER_ID},
+		#{PWD},
+		#{BIRTH},
+		#{GENDER},
+		#{ENABLED},
+		#{PHONE_NUM}
+		)
+	</insert>
+
 </mapper>
