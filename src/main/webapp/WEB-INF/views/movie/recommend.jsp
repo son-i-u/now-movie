@@ -1,279 +1,121 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<sec:authentication property="name" var="loginID" />
+
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <%@ include file="../includes/header.jsp"%>
+
+<script type="text/javascript">
+		var time, i;
+		
+		function toDetailPage(movie_id){
+			
+			location.href = '/movie/info?id=' + movie_id;
+		}
+		
+		/* Delete all movie info card */
+		function removeAllChildNodes(element) {
+						
+			var size = element.length;
+			//console.log("size = "+ size);
+			
+			//for(i = 0; i < size; i++) 
+			{
+				while (element.hasChildNodes()) {
+		        	element.removeChild(element.firstChild);
+		        }
+			} 
+	    }
+		
+		/* Create Movie Card */
+		function createMovieCard(limit){
+			
+			<c:forEach items="${ movieInfoList }" var="prefer">
+			if ('${prefer.left_min}' <= limit){
+				//console.log('${prefer.movie_nm}');
+				//console.log('${prefer.theator_id}');
+				
+				var card = document.createElement('div');
+				
+		        var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage(${ prefer.movie_id });"><div class="row">'
+		        				+ '<div class="col-4">' + '<img src="<spring:url value="${ prefer.img_loc }"/>"'
+								+ 'class="card-img" alt="..."></div>'
+								+ '<div class="col-8">'
+		        				+ '<div class="card-body">'
+		        				+ '<h5 class="card-title">${ prefer.movie_nm }</h5>'
+		        				+ '<p class="card-text">Ï£ºÏó∞: ${ prefer.actor }</p>'
+								+ '<p class="card-text">ÏòÅÌôîÏΩîÎìú: ${ prefer.movie_id }</p>'
+								+ '<p class="card-text">'
+								+ '<small class="text-muted"> ${ prefer.left_min }Î∂Ñ Îí§ ÏãúÏûë </small>'
+								+ '</p></div></div></div></div>';
+		        
+		        card.innerHTML = itemStr;
+		        card.className = 'col-xl-6 col-lg-6 cardForm'
+		        
+		        document.getElementById("cardContainer").appendChild(card);
+			}
+		</c:forEach>
+		
+		var last = document.createElement('p');
+		last.innerHTML = "ÎßàÏßÄÎßâ Í≤∞Í≥ºÏûÖÎãàÎã§.";
+		document.getElementById("cardContainer").appendChild(last);
+		}
+		
+		/* When Drop Down menu is clicked */
+		function timeLimit(limit){
+			
+			var card = document.getElementById("cardContainer");
+			document.getElementById("dropdownMenuButton").innerText = limit;
+			removeAllChildNodes(card);
+			
+			if(limit == '30Î∂Ñ')
+				createMovieCard(30);
+			else if (limit == '1ÏãúÍ∞Ñ')
+				createMovieCard(60);
+			else if (limit == '2ÏãúÍ∞Ñ')
+				createMovieCard(120);
+		}
+		
+		window.onload=function(){			
+			createMovieCard(30);
+		}
+</script>
+
 <body class="sb-nav-fixed">
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
-		<main>
-			<div class="container-fluid">
-				<h1 class="mt-4">¿Ã∑± øµ»≠ æÓ∂ßø‰?</h1>
-				<ol class="breadcrumb mb-4">
-					<li>Ω√¿€«œ±‚</li>
-					<li>
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">30∫–</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">30∫–</a> <a
-									class="dropdown-item" href="#">1Ω√∞£</a> <a class="dropdown-item"
-									href="#">2Ω√∞£</a>
-							</div>
-						</div>
-					</li>
-					<li>¿Ã≥ª¿« øµ»≠¿‘¥œ¥Ÿ.</li>
-				</ol>
-				<div class="row">
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">ªÛ«–øÀ¿« «œ∑Á</h5>
-										<p class="card-text">¡÷ø¨: ¿ÃªÛ«–</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 50∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
+		<div class="container-fluid">
+			<h1 class="mt-4">${ loginID }Îãò,Ïù¥Îü∞ÏòÅÌôî Ïñ¥ÎïåÏöî?</h1>
+			<ol class="breadcrumb mb-4">
+				<li>ÏãúÏûëÌïòÍ∏∞</li>
+				<li>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">30Î∂Ñ</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" onclick="timeLimit('30Î∂Ñ')">30Î∂Ñ</a> 
+							<a class="dropdown-item" onclick="timeLimit('1ÏãúÍ∞Ñ')">1ÏãúÍ∞Ñ</a> 
+							<a class="dropdown-item" onclick="timeLimit('2ÏãúÍ∞Ñ')">2ÏãúÍ∞Ñ</a>
 						</div>
 					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">¡°Ω…¿∫ ±Ó∏£∫∏∫“¥ﬂ</h5>
-										<p class="card-text">¡÷ø¨: º’¡ˆ∞Ê</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6">
-						<div class="card" style="max-width: 540px;">
-							<div class="row">
-								<div class="col-4">
-									<img src="http://placehold.it/300x390" class="card-img"
-										alt="...">
-								</div>
-								<div class="col-8">
-									<div class="card-body">
-										<h5 class="card-title">∑ππÃ¡¶∂Û∫Ì</h5>
-										<p class="card-text">¡÷ø¨: ¿Ø¿Áø¨</p>
-										<p class="card-text">
-											<small class="text-muted">Ω√¿€ 35∫– ¿¸</small>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				</li>
+				<li>Ïù¥ÎÇ¥Ïùò ÏòÅÌôîÏûÖÎãàÎã§.</li>
+			</ol>
+
+			<!-- ÏòÅÌôî Î¶¨Ïä§Ìä∏ Ïù¥ÎØ∏ÏßÄ Ï∂úÎ†•  / Î≤ÑÌäºÏóê Ïù¥ÎØ∏ÏßÄ ÏÇΩÏûÖ -->
+			<div class="row" id="cardContainer"></div>
+			
+		</div>
+	</div>
+
+	
 </body>
 </html>

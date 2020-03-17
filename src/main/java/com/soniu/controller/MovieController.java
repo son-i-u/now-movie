@@ -25,16 +25,23 @@ public class MovieController {
 
 	private MovieService movieService;
 
-	/* Àç¿¬ */
+	/* jy */
 	@GetMapping("/recommend")
-	public void recommendPage() {
-
+	public void recommendPage(Model model) {
+		/* user session id , static cause error at server start */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user_id = auth.getName();
+		
+		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
+		
 	}
 
-	/* Àç¿¬ */
-	@GetMapping("/movieinfo")
-	public void movieInfoPage() {
-
+	/* jy */
+	@GetMapping("/info")
+	public void movieInfoPage(Model model, @RequestParam String id) {
+		
+		model.addAttribute("info", movieService.getMovieInfo(id));
 	}
 
 	/* jk */
@@ -73,7 +80,7 @@ public class MovieController {
 	public String movieSelectInsert(@RequestParam("test") String test,
 			@RequestParam("movieArray") String[] movieArray) {
 
-		log.info(movieArray.length + "°³ÀÇ ¿µÈ­¼±È£ ¼±ÅÃµÆ½À´Ï´Ù.");
+		log.info(movieArray.length + "ê°œì˜ ì˜í™”ì„ í˜¸ ì„ íƒëìŠµë‹ˆë‹¤.");
 		
 		movieService.preferInsert(movieArray);
 

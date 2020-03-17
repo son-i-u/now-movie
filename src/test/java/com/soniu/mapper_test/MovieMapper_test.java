@@ -20,18 +20,21 @@ public class MovieMapper_test {
 	@Setter(onMethod_ = @Autowired)
 	private MovieMapper mapper;
 
+	
 	@Test
 	public void testGetList() {
 		System.out.println(mapper.getList().get(0).getActor() + "입니다");
 		mapper.getList().forEach(movie -> log.info(movie));
 	}
 
+	
+	
 	@Test
-	public void testGetMovie() {
-		movie_VO movie = mapper.read("5");
-
-		log.info(movie.getActor() + "");
+	public void testGetMovieJoin() {
+		//System.out.println(mapper.getMovieLocationSchedule().get(0).getActor() + "입니다");
+		mapper.getMovieLocationSchedule().forEach(movie -> log.info(movie));
 	}
+	
 	/*
 	 * @Test public void testInsert() { BoardVO board = new BoardVO();
 	 * board.setTitle("�깉濡쒖옉�꽦�븯�뒗湲�"); board.setContent("�깉濡� �옉�꽦�븯�뒗 �궡�슜");
