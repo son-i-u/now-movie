@@ -30,7 +30,7 @@ public class MovieMapper_test {
 	
 	
 	@Test
-	public void testGetMocieJoin() {
+	public void testGetMovieJoin() {
 		//System.out.println(mapper.getMovieLocationSchedule().get(0).getActor() + "입니다");
 		mapper.getMovieLocationSchedule().forEach(movie -> log.info(movie));
 	}

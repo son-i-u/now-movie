@@ -23,6 +23,7 @@
 	 where user_id=#{user_id} and score < 0)]]>
 	</select>
 
+	<!-- 현재 시각과 비교해서 시작 전인 영화만 보여줌 -->
 	<select id="getMovieLocationSchedule" resultType="com.soniu.domain.movieLocationSchedule_VO">
 		select movie.movie_id as movie_id, movie_nm, movie_nm_en, genre, director, actor, nation, img_loc, 
 			theator.theator_id as theator_id, theator_nm, location, latitude, longitude, url, 
@@ -31,6 +32,7 @@
 		from movie, schedule, theator
 		where movie.movie_id = schedule.movie_id
 		and schedule.theator_id = theator.theator_id
+		and (start_time - sysdate)*24*60 > 0
 	</select>
 
 </mapper>
