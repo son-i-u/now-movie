@@ -34,7 +34,6 @@ public class MovieController {
 		
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
-		
 	}
 
 	/* jy */
