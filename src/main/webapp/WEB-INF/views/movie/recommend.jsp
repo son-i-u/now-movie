@@ -9,7 +9,11 @@
 <html lang="en">
 <%@ include file="../includes/header.jsp"%>
 
-<script type="text/javascript">		
+<script type="text/javascript">	
+		<!-- 로그인 안했으면 추천 페이지에 들어오지 못함 -->
+		if('${ loginID }' == "anonymousUser")
+			self.location="/customLogin";
+
 		function toDetailPage(movie_id){
 			
 			location.href = '/movie/info?id=' + movie_id;
@@ -21,21 +25,19 @@
 			var size = element.length;
 			//console.log("size = "+ size);
 			
-			//for(i = 0; i < size; i++) 
-			{
-				while (element.hasChildNodes()) {
-		        	element.removeChild(element.firstChild);
-		        }
-			} 
+			while (element.hasChildNodes()) {
+	        	element.removeChild(element.firstChild);
+	        }
 	    }
 		
 		/* Create Movie Card */
 		function createMovieCard(limit){
-			
+			console.log('${ movieInfoList }');
+			console.log(limit);
 			<c:forEach items="${ movieInfoList }" var="prefer">
 			if ('${prefer.left_min}' <= limit){
-				//console.log('${prefer.movie_nm}');
-				//console.log('${prefer.theator_id}');
+				console.log('${prefer.movie_nm}');
+				console.log('${prefer.theator_id}');
 				
 				var card = document.createElement('div');
 				
@@ -79,7 +81,7 @@
 		}
 		
 		/* default time limit = 30min */
-		window.onload=function(){			
+		window.onload=function(){				
 			createMovieCard(30);
 		}
 </script>
