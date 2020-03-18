@@ -32,6 +32,7 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<!-- login page는 temporary 후에 변경할 것 -->
 		<security:form-login login-page="/customLogin"
+			login-processing-url="/login"
 			authentication-success-handler-ref="customLoginSuccess" />
 
 		<security:logout logout-url="/customLogout"

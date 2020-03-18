@@ -19,12 +19,15 @@
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row">
-					<c:forEach items="${ list }" var="movie">
-						<div class="col-xl-2" id="${ movie.movie_id }">
-							${ movie.movie_nm } 
-							<img src="<spring:url value="${ movie.img_loc }"/>" class="card-img" alt="..."> 
-							<input type='hidden' name="${movie.movie_id }" value="${movie.movie_id }">
-
+					<c:forEach items="${list }" var="movie">
+						<div class="col-xl-2" id="${movie.movie_id }">
+							${movie.movie_nm } <a class="card-a" type="button"
+								id="${movie.movie_id }"
+								onclick="movieselect(${movie.movie_id}); "> <img
+								src="<spring:url value="${movie.img_loc }"/>" class="card-img"
+								alt="...">
+								</button> <input type='hidden' name="${movie.movie_id }"
+								value="${movie.movie_id }">
 						</div>
 					</c:forEach>
 					<!-- 제출 버튼 -->
@@ -36,11 +39,13 @@
 				</div>
 
 				<script type="text/javascript">
+
 					var movieArray = [];
 					var $form = $('<form></form>');
 					$(document.body).append($form);
 
 					$(document).ready(function() {
+
 
 					});
 
@@ -48,25 +53,28 @@
 					function movieselect(data) {
 						console.log(data + "클릭했습니다.");
 						movieArray.push(data);
-						console.log(movieArray.length + "선택한 movie 수입니다.");
-
-					}
-
-					// moviearray를 post로 전달
-					function moviePost() {
-
-						$form.attr('action', '/movie/select');
-						$form.attr('method', 'post');
-
-						var test = $('<input name="test" type="hidden" value="test">');
-						var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
-						var sec = $('<sec:csrfInput/>');
-
-						$form.append(test);
-						$form.append(mArray);
-						$form.append(sec);
-						$form.submit();
-					}
-				</script>
+						console.log(movieArray.length+ "선택한 movie 수입니다.");
+				
+						$("#"+data).attr('class','card-visit');
+				    }
+				 	
+				    
+				    // moviearray를 post로 전달
+				    function moviePost(){
+				    	
+				    	$form.attr('action','/movie/select');
+				    	$form.attr('method','post');
+				    	
+				    	var test = $('<input name="test" type="hidden" value="test">');
+				    	var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
+				    	var sec = $('<sec:csrfInput/>');
+				    	
+				    	$form.append(test);  
+				    	$form.append(mArray);
+				    	$form.append(sec);
+				    	$form.submit();
+				    }
+							
+</script>
 </body>
 </html>

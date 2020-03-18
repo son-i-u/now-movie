@@ -5,16 +5,11 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <sec:authentication property="name" var="loginID" />
 
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <%@ include file="../includes/header.jsp"%>
 
-<script type="text/javascript">
-		var time, i;
-		
+<script type="text/javascript">		
 		function toDetailPage(movie_id){
 			
 			location.href = '/movie/info?id=' + movie_id;
@@ -83,6 +78,7 @@
 				createMovieCard(120);
 		}
 		
+		/* default time limit = 30min */
 		window.onload=function(){			
 			createMovieCard(30);
 		}
@@ -112,7 +108,6 @@
 
 			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 			<div class="row" id="cardContainer"></div>
-			
 		</div>
 	</div>
 

@@ -46,6 +46,7 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
     	<property name="dataSource" ref="dataSource"/>
 	</bean>
+	
 	<!-- class(패키지명을)보면 스프링과 연동작업을 처리하는 mybatis-spring 라이브러리의 클래스임을알수있다. -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
