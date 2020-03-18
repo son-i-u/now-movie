@@ -19,7 +19,6 @@
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row">
-					<<<<<<< HEAD
 					<c:forEach items="${list }" var="movie">
 						<div class="col-xl-2" id="${movie.movie_id }">
 							${movie.movie_nm } <a class="card-a" type="button"
@@ -77,26 +76,5 @@
 				    }
 							
 </script>
-
-				<style>
-.bg {
-	background-color: #eeeeee;
-}
-
-.bd {
-	border: 1px solid #666666;
-}
-</style>
-				======= console.log(movieArray.length + "선택한 movie 수입니다."); } //
-				moviearray를 post로 전달 function moviePost() { $form.attr('action',
-				'/movie/select'); $form.attr('method', 'post'); var test = $('<input
-					name="test" type="hidden" value="test">'); var mArray = $('<input
-					name="movieArray" type="hidden" value='+movieArray+'>');
-				var sec = $('
-				<sec:csrfInput />
-				'); $form.append(test); $form.append(mArray); $form.append(sec);
-				$form.submit(); }
-				</script>
-				>>>>>>> master
 </body>
 </html>
