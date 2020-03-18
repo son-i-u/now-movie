@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 
 
 <!DOCTYPE html>
@@ -22,10 +23,11 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-			</div>
-			</main>
-			</div>
-</body>
+			
+			
+			
+			
+			
 <!-- daum 도로명주소 찾기 api -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -292,7 +294,7 @@ $('#phone_check').css('color', 'red');
 
 		</div>
 		<div class="col-sm-6 col-md-offset-3">
-			
+
 			<form action="/user/register" method="post" role="form"
 				id="usercheck" name="user_info">
 
@@ -347,7 +349,12 @@ $('#phone_check').css('color', 'red');
 		</div>
 	</article>
 </body>
+</div>
+</main>
+	</div>
+</body>
 </html>
+
 
 
 
