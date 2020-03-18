@@ -3,8 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.soniu.mapper.UserPreferMapper">
-	<select id="getUserPrefer" resultType="com.soniu.domain.userPrefer_VO">
-		select * from user_prefer where user_id = #{user_id}
+	<select id="getUserPrefer" resultType="com.soniu.domain.userPreferMovie_VO">
+		<!-- select * from user_prefer where user_id = #{user_id} -->
+		select * from user_prefer, movie 
+		where user_prefer.movie_id = movie.movie_id
+		and user_id = #{user_id}
 	</select>
 
 	<insert id="insert">
@@ -16,6 +19,6 @@
 	 <![CDATA[select * from user_prefer where user_id=#{user_id} and score < 0 ]]>
 	</select>
 	
+
 	
-		
 </mapper>

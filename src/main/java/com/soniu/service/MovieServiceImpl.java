@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.soniu.domain.movie_VO;
 import com.soniu.domain.userPrefer_VO;
+import com.soniu.domain.userPreferMovie_VO;
+import com.soniu.domain.movieLocationSchedule_VO;
 import com.soniu.mapper.MovieMapper;
 import com.soniu.mapper.UserPreferMapper;
 
@@ -28,6 +30,13 @@ public class MovieServiceImpl implements MovieService {
 		
 		return movieMapper.getList();
 	}
+	
+	@Override
+	public List<movie_VO> getMovieInfo(String movie_id){
+		
+		return movieMapper.getMovieInfo(movie_id);
+	}
+	
 
 	@Override		
 	public void preferInsert(userPrefer_VO pr_vo) {
@@ -49,7 +58,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<userPrefer_VO> getUserPrefer(String user_id) {
+	public List<userPreferMovie_VO> getUserPrefer(String user_id) {
 		log.info("Service user_id: " + user_id);
 		return userPreferMapper.getUserPrefer(user_id);
 	}
@@ -91,4 +100,8 @@ public class MovieServiceImpl implements MovieService {
 		
 	}
 
+	public List<movieLocationSchedule_VO> getMovieLocationSchedule(){
+		
+		return movieMapper.getMovieLocationSchedule();
+	}
 }

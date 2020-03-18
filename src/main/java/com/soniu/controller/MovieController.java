@@ -32,15 +32,15 @@ public class MovieController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
 		
-		log.info("/recommend called ...");
-		log.info("login id: "+ user_id);
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
 
 	/* jy */
-	@GetMapping("/movieinfo")
-	public void movieInfoPage() {
-
+	@GetMapping("/info")
+	public void movieInfoPage(Model model, @RequestParam String id) {
+		
+		model.addAttribute("info", movieService.getMovieInfo(id));
 	}
 
 	/* jk */

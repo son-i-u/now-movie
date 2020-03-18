@@ -1,6 +1,7 @@
 package com.soniu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,10 +12,17 @@ import com.soniu.domain.userInfo_VO;
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper userMapper;
-	
-	@Transactional
+
 	@Override
-	public userInfo_VO getAllUserInfo() {
-		return userMapper.read();
+	public void joinUser(userInfo_VO uv) {
+		
+		/* pw encreted */
+		BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+		String ecPw = bc.encode(uv.getPWD());
+		uv.setPWD(ecPw);
+	
+		userMapper.join(uv);
 	}
+	
+	
 }

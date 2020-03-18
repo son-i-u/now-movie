@@ -17,6 +17,7 @@
 	<bean id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 	</bean>
+	
 	<bean id="customLoginSuccess"
 		class="com.soniu.security.CustomLoginSuccessHandler"></bean>
 	<bean id="customAccessDenied"
