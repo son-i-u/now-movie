@@ -17,7 +17,7 @@
 	<bean id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 	</bean>
-	
+
 	<bean id="customLoginSuccess"
 		class="com.soniu.security.CustomLoginSuccessHandler"></bean>
 	<bean id="customAccessDenied"
@@ -30,6 +30,11 @@
 			pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
 		<security:intercept-url pattern="/sample/admin"
 			access="hasRole('ROLE_ADMIN')" />
+
+		<!-- schedule -->
+		<security:intercept-url
+			pattern="/schedule/**" access="hasAnyRole('ROLE_MEMBER, ROLE_AMDIN')" />
+
 		<!-- login page는 temporary 후에 변경할 것 -->
 		<security:form-login login-page="/customLogin"
 			login-processing-url="/login"
