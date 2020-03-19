@@ -2,8 +2,7 @@ package com.soniu.utils_test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
-import org.python.jline.internal.InputStreamReader;
+import java.io.InputStreamReader;
 
 public class getBatchFileTest {
 	public static void main(String[] args) {
