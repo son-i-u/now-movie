@@ -12,17 +12,20 @@
 <%@ include file="../includes/header.jsp"%>
 
 <script type="text/javascript">
-<!-- 로그인 안했으면 추천 페이지에 들어오지 못함 -->
-	if ('${ loginID }' == "anonymousUser")
+	/*로그인 안했으면 추천 페이지에 들어오지 못함 */
+	if ('${ loginID }' == "anonymousUser" || '${ loginID }' == null) {
+
 		self.location = "/customLogin";
+	}
 
 	/* 선호 영화를 하나도 선택하지 않았으면 영화 선택 페이지로 이동 */
 	else if ('${ preferList.size() }' < 1) {
-		console.log('${ preferList.size() }');
+
 		self.location = "/movie/select";
 	}
 
 	function toDetailPage(movie_id) {
+
 		location.href = '/movie/info?id=' + movie_id;
 	}
 
@@ -39,12 +42,12 @@
 
 	/* Create Movie Card */
 	function createMovieCard(limit) {
-		console.log('${ movieInfoList }');
-		console.log(limit);
+		//console.log('${ movieInfoList }');
+		//console.log(limit);
 		<c:forEach items="${ movieInfoList }" var="prefer">
 		if ('${prefer.left_min}' <= limit) {
-			console.log('${prefer.movie_nm}');
-			console.log('${prefer.theator_id}');
+			//console.log('${prefer.movie_nm}');
+			//console.log('${prefer.theator_id}');
 
 			var card = document.createElement('div');
 
