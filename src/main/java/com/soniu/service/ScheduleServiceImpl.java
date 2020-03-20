@@ -36,4 +36,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 		mapper.movieInsert(sv);
 	}
 
+	@Override
+	public boolean remove(String schedule_id) {
+		log.info("shcedule remove is called..");
+		log.info(schedule_id);
+		
+		return mapper.remove(schedule_id);
+	}
+
 }

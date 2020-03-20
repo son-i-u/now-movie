@@ -7,8 +7,8 @@
 	<select id="getListWithPaging"
 		resultType="com.soniu.domain.Schedule_VO">
 		<![CDATA[
-		select theator_id, movie_id, start_time, end_time
-		from ( select rownum rn,  theator_id, movie_id, start_time, end_time
+		select theator_id, movie_id, start_time, end_time, schedule_id
+		from ( select rownum rn,  theator_id, movie_id, start_time, end_time,schedule_id
 		       from schedule 
 		       where rownum <= #{pageNum} * #{amount}
 		        )
@@ -17,10 +17,14 @@
 	</select>
 
 	<insert id="movieInsert">
-		insert into schedule (theator_id, movie_id, start_time, end_time)
+		insert into schedule (theator_id, movie_id, start_time, end_time,schedule_id)
 		values
-		(#{theator_id}, #{movie_id}, TO_DATE(#{start_time},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{end_time},'yyyy-mm-dd hh24:mi:ss'))
+		(#{theator_id}, #{movie_id}, TO_DATE(#{start_time},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{end_time},'yyyy-mm-dd hh24:mi:ss'),schedule_seq)
 
 	</insert>
+	
+	<delete id="remove">
+		delete from schedule where schedule_id = #{schedule_id}
+	</delete>
 
 </mapper>

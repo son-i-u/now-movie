@@ -1,96 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <sec:authentication property="name" var="loginID" />
 
 <!DOCTYPE html>
 <html lang="en">
 <%@ include file="../includes/header.jsp"%>
 
-<script type="text/javascript">	
-		<!-- 로그인 안했으면 추천 페이지에 들어오지 못함 -->
-		if('${ loginID }' == "anonymousUser")
-			self.location="/customLogin";
+<script type="text/javascript">
+<!-- 로그인 안했으면 추천 페이지에 들어오지 못함 -->
+	if ('${ loginID }' == "anonymousUser")
+		self.location = "/customLogin";
 
-		function toDetailPage(movie_id){
-			
-			location.href = '/movie/info?id=' + movie_id;
+	/* 선호 영화를 하나도 선택하지 않았으면 영화 선택 페이지로 이동 */
+	else if ('${ preferList.size() }' < 1) {
+		console.log('${ preferList.size() }');
+		self.location = "/movie/select";
+	}
+
+	function toDetailPage(movie_id) {
+		location.href = '/movie/info?id=' + movie_id;
+	}
+
+	/* Delete all movie info card */
+	function removeAllChildNodes(element) {
+
+		var size = element.length;
+		//console.log("size = "+ size);
+
+		while (element.hasChildNodes()) {
+			element.removeChild(element.firstChild);
 		}
-		
-		/* Delete all movie info card */
-		function removeAllChildNodes(element) {
-						
-			var size = element.length;
-			//console.log("size = "+ size);
-			
-			while (element.hasChildNodes()) {
-	        	element.removeChild(element.firstChild);
-	        }
-	    }
-		
-		/* Create Movie Card */
-		function createMovieCard(limit){
-			console.log('${ movieInfoList }');
-			console.log(limit);
-			<c:forEach items="${ movieInfoList }" var="prefer">
-			if ('${prefer.left_min}' <= limit){
-				console.log('${prefer.movie_nm}');
-				console.log('${prefer.theator_id}');
-				
-				var card = document.createElement('div');
-				
-		        var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage(${ prefer.movie_id });"><div class="row">'
-		        				+ '<div class="col-4">' + '<img src="<spring:url value="${ prefer.img_loc }"/>"'
-								+ 'class="card-img" alt="..."></div>'
-								+ '<div class="col-8">'
-		        				+ '<div class="card-body">'
-		        				+ '<h5 class="card-title">${ prefer.movie_nm }</h5>'
-		        				+ '<p class="card-text">주연: ${ prefer.actor }</p>'
-								+ '<p class="card-text">영화코드: ${ prefer.movie_id }</p>'
-								+ '<p class="card-text">'
-								+ '<small class="text-muted"> ${ prefer.left_min }분 뒤 시작 </small>'
-								+ '</p></div></div></div></div>';
-		        
-		        card.innerHTML = itemStr;
-		        card.className = 'col-xl-6 col-lg-6 cardForm'
-		        
-		        document.getElementById("cardContainer").appendChild(card);
-			}
+	}
+
+	/* Create Movie Card */
+	function createMovieCard(limit) {
+		console.log('${ movieInfoList }');
+		console.log(limit);
+		<c:forEach items="${ movieInfoList }" var="prefer">
+		if ('${prefer.left_min}' <= limit) {
+			console.log('${prefer.movie_nm}');
+			console.log('${prefer.theator_id}');
+
+			var card = document.createElement('div');
+
+			var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage(${ prefer.movie_id });"><div class="row">'
+					+ '<div class="col-4">'
+					+ '<img src="<spring:url value="${ prefer.img_loc }"/>"'
+					+ 'class="card-img" alt="..."></div>'
+					+ '<div class="col-8">'
+					+ '<div class="card-body">'
+					+ '<h5 class="card-title">${ prefer.movie_nm }</h5>'
+					+ '<p class="card-text">주연: ${ prefer.actor }</p>'
+					+ '<p class="card-text">영화코드: ${ prefer.movie_id }</p>'
+					+ '<p class="card-text">'
+					+ '<small class="text-muted"> ${ prefer.left_min }분 뒤 시작 </small>'
+					+ '</p></div></div></div></div>';
+
+			card.innerHTML = itemStr;
+			card.className = 'col-xl-6 col-lg-6 cardForm'
+
+			document.getElementById("cardContainer").appendChild(card);
+		}
 		</c:forEach>
-		
+
 		var last = document.createElement('p');
 		last.innerHTML = "마지막 결과입니다.";
 		document.getElementById("cardContainer").appendChild(last);
-		}
-		
-		/* When Drop Down menu is clicked */
-		function timeLimit(limit){
-			
-			var card = document.getElementById("cardContainer");
-			document.getElementById("dropdownMenuButton").innerText = limit;
-			removeAllChildNodes(card);
-			
-			if(limit == '30분')
-				createMovieCard(30);
-			else if (limit == '1시간')
-				createMovieCard(60);
-			else if (limit == '2시간')
-				createMovieCard(120);
-		}
-		
-		/* default time limit = 30min */
-		window.onload=function(){				
+	}
+
+	/* When Drop Down menu is clicked */
+	function timeLimit(limit) {
+
+		var card = document.getElementById("cardContainer");
+		document.getElementById("dropdownMenuButton").innerText = limit;
+		removeAllChildNodes(card);
+
+		if (limit == '30분')
 			createMovieCard(30);
-		}
+		else if (limit == '1시간')
+			createMovieCard(60);
+		else if (limit == '2시간')
+			createMovieCard(120);
+	}
+
+	/* default time limit = 30min */
+	window.onload = function() {
+		createMovieCard(30);
+	}
 </script>
 
 <body class="sb-nav-fixed">
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
-			<h1 class="mt-4">${ loginID }님,이런영화 어때요?</h1>
+			<h1 class="mt-4">${ loginID }님,이런영화어때요?</h1>
 			<ol class="breadcrumb mb-4">
 				<li>시작하기</li>
 				<li>
@@ -99,9 +107,9 @@
 							id="dropdownMenuButton" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">30분</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" onclick="timeLimit('30분')">30분</a> 
-							<a class="dropdown-item" onclick="timeLimit('1시간')">1시간</a> 
-							<a class="dropdown-item" onclick="timeLimit('2시간')">2시간</a>
+							<a class="dropdown-item" onclick="timeLimit('30분')">30분</a> <a
+								class="dropdown-item" onclick="timeLimit('1시간')">1시간</a> <a
+								class="dropdown-item" onclick="timeLimit('2시간')">2시간</a>
 						</div>
 					</div>
 				</li>
@@ -113,6 +121,6 @@
 		</div>
 	</div>
 
-	
+
 </body>
 </html>

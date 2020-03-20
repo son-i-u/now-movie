@@ -28,7 +28,7 @@ public class ScheduleController {
 	public void ScheduleList(Criteria cri, Model model) {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 20));
+		model.addAttribute("pageMaker", new PageDTO(cri, 100));
 	}
 
 	/* jk */
@@ -44,6 +44,22 @@ public class ScheduleController {
 		service.insertSchedule(sv);
 		rttr.addFlashAttribute("result", sv.getTheator_id());
 
+		return "redirect:/schedule/list";
+	}
+	
+	/* jk */
+	@PostMapping("/remove")
+	public String ScheduleRemove(String schedule_id,Criteria cri, RedirectAttributes rttr) {
+		log.info("ScheduleRemove is called.. " + schedule_id);
+	
+		if(service.remove(schedule_id)) {
+			rttr.addFlashAttribute("result","success");
+		}
+		
+		/* list �룎�븘媛덈븣 page �쑀吏� */
+		rttr.addAttribute("pageNum",cri.getPageNum());
+		rttr.addAttribute("amount",cri.getAmount());
+		
 		return "redirect:/schedule/list";
 	}
 }

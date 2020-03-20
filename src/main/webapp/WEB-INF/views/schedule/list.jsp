@@ -18,23 +18,29 @@
 			<button id='regBtn' type="button" class="btn btn-xs pull-right">Register
 				New Schedule</button>
 			<div class="container-fluid">
+
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
+							<th>스케쥴 ID</th>
 							<th>영화관 ID</th>
 							<th>영화 ID</th>
 							<th>시작 시간</th>
 							<th>종료 시간</th>
+							<th>삭제버튼</th>
 						</tr>
 					</thead>
 
 					<c:forEach items="${list}" var="schedule">
 						<tr>
+							<td><c:out value="${schedule.schedule_id}" /></td>
 							<td><c:out value="${schedule.theator_id}" /></td>
 							<td><c:out value="${schedule.movie_id }" /></td>
 							<td><c:out value="${schedule.start_time}" /></td>
 							<td><c:out value="${schedule.end_time}" /></td>
-
+							<td><button type="submit"
+									onclick="removeSubmit(${schedule.schedule_id})"
+									class="btn btn-default">remove</button></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -71,7 +77,7 @@
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(
+		$(document).ready(				
 				function() {
 					var result = '<c:out value="${result}"/>';
 
@@ -96,7 +102,6 @@
 					
 					
 					var actionForm = $("#actionForm");
-
 					$(".paginate_button a").on(
 							"click",
 							function(e) {
@@ -112,8 +117,21 @@
 					$("#regBtn").on("click", function() {
 						self.location = "/schedule/insert";
 					});
-
 				});
+		
+		<!-- remove button -->
+		function removeSubmit(data){
+			var actionForm = $("#actionForm");
+			actionForm.attr("action", "/schedule/remove").attr("method","post");
+			
+			var sec = $('<sec:csrfInput/>');
+			var schedule_id = $('<input name="schedule_id" type="hidden" value='+data+'>');
+			
+			console.log(data);
+			actionForm.append(sec);
+			actionForm.append(schedule_id);
+			actionForm.submit();
+		}
 	</script>
 </body>
 </html>
