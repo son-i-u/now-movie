@@ -15,8 +15,12 @@ public class movieLocationSchedule_VO {
 	private String img_loc;
 	
 	private String theator_id;
+	private String theator_nm;
+	private String location;
+	private double latitude;
+	private double longitude;
+	
 	private Date start_time;
 	private Date end_time;
 	private int left_min;
-	//private long interval = end_time.getTime() - start_time.getTime();
 }

@@ -7,11 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.soniu.domain.movieLocationSchedule_VO;
+import com.soniu.service.MovieService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
 public class CommonController {
+	private MovieService movieService;
+	
 	@GetMapping("/")
 	public String home() {
 		
