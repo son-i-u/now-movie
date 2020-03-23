@@ -334,8 +334,8 @@ $('#phone_check').css('color', 'red');
 
 				<div class="form-group">
 					<label for="GENDER">성별 </label> <input type="checkbox" id="GENDER"
-						name="GENDER" value="남">남 <input type="checkbox"
-						id="GENDER" name="GENDER" value="여">여
+						name="GENDER" value="male">남 <input type="checkbox"
+						id="GENDER" name="GENDER" value="female">여
 				</div>
 
 
