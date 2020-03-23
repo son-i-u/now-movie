@@ -21,6 +21,12 @@ public class CommonController {
 		
 		return "home";
 	}
+	
+	@GetMapping("/NewFile")
+	public String file() {
+		
+		return "NewFile";
+	}
 
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {

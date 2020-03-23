@@ -30,6 +30,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		log.warn("ROLE NAMES: " + roleNames);
 		
+		if(roleNames.contains("ROLE_USER")) {
+			response.sendRedirect("/movie/recommend");
+			return;
+		}
+		
 		//일단 recommend로 보내고 나중에 admin 페이지 생기면 그쪽으로 redirect
 		if(roleNames.contains("ROLE_ADMIN")) {
 			response.sendRedirect("/movie/recommend");

@@ -1,35 +1,17 @@
-package com.soniu.utils_test;
+package com.soniu.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
 
-public class getBatchFileTest {
 
-	public static void main(String[] args) {
-		Map<String, String> map = CalPreferList("user10");
-
-		List<String> keySetList = new ArrayList<>(map.keySet());
-		
-		// 내림차순
-		System.out.println("------value 내림차순------");
-		Collections.sort(keySetList, (o1, o2) -> (map.get(o2).compareTo(map.get(o1))));
-		for(String key : keySetList) {
-			System.out.println("key : " + key + " / " + "value : " + map.get(key));
-		}
-	}
-
-	
-
-	public static Map<String, String> CalPreferList(String user_id) {
-		Map<String, String> ret_map = new HashMap<>();
+public class getBatchFile {
+	public static Map<String,Double> CalPreferList(String user_id) {
+		Map<String,Double> ret_map = new HashMap<>();
 
 		boolean MoSoCross = true;
 
@@ -46,20 +28,22 @@ public class getBatchFileTest {
 			// read output from the command
 			System.out.println("python should be run.");
 
-			String score = null;
+			Double score = null;
 			String movie = null;
-
+			
+			/* 영화 _id  - predict 순으로 출력 됨 */
 			while ((s = stdInput.readLine()) != null) {
 				System.out.println(s);
-
-				if (MoSoCross == true & s.length() < 20 & s.length() != 0) {
-					score = s;
+				
+				if( MoSoCross == true & s.length() <20 & s.length() != 0 ) {
+					movie = s;
 					MoSoCross = !MoSoCross;
-				} else if (MoSoCross == false & s.length() < 20 & s.length() != 0) {
-					ret_map.put(s, score);
+				}else if(MoSoCross == false & s.length() <20 & s.length() != 0){
+					score = Double.parseDouble(s);
 					MoSoCross = !MoSoCross;
+					ret_map.put(movie, score);
 				}
-
+				
 			}
 
 			System.out.println("Here is the standard error of the command( if any) : \n");
@@ -76,7 +60,7 @@ public class getBatchFileTest {
 			System.exit(-1);
 		}
 
+		
 		return ret_map;
 	}
-
 }
