@@ -39,9 +39,13 @@
 		<security:form-login login-page="/customLogin"
 			login-processing-url="/login"
 			authentication-success-handler-ref="customLoginSuccess" />
+		<!-- Auto-login -->
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 
 		<security:logout logout-url="/customLogout"
-			invalidate-session="true" />
+			invalidate-session="true" delete-cookies="remember-me
+			,JSESSION_ID" />
+		
 		<security:access-denied-handler
 			ref="customAccessDenied" />
 
@@ -53,7 +57,7 @@
 				data-source-ref="dataSource"
 				users-by-username-query="select user_id username, pwd password, enabled from user_info where user_id= ? "
 				authorities-by-username-query="select userid username, auth authority from user_info_auth where userid= ? " />
-
+			
 			<security:password-encoder
 				ref="bcryptPasswordEncoder" />
 		</security:authentication-provider>

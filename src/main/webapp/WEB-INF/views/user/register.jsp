@@ -335,11 +335,19 @@ $('#phone_check').css('color', 'red');
 									<div class="eheck_font" id="phone_check"></div>
 								</div>
 
+<<<<<<< HEAD
 								<div class="form-group">
 									<label for="GENDER">성별 </label> <input type="checkbox"
 										id="GENDER" name="GENDER" value="남">남 <input
 										type="checkbox" id="GENDER" name="GENDER" value="여">여
 								</div>
+=======
+				<div class="form-group">
+					<label for="GENDER">성별 </label> <input type="checkbox" id="GENDER"
+						name="GENDER" value="male">남 <input type="checkbox"
+						id="GENDER" name="GENDER" value="female">여
+				</div>
+>>>>>>> 21b88dd6d8438b24d69587f72903ddb387c34910
 
 
 								<div class="form-group text-center">

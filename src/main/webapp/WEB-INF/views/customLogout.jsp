@@ -7,7 +7,7 @@
 <html http-equiv="Content-type" content="text/html; charset=UTF-8">
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>Good Bye</title>
 </head>
 <body>
 
