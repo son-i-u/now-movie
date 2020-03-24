@@ -52,7 +52,7 @@ public class UserController {
 		log.info("registerPost called_....");
 		userService.joinUser(uv);
 		
-		return "redirect:/movie/select/";
+		return "redirect:/customLogin";
 	}
 	
 
