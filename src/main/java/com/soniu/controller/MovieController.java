@@ -70,6 +70,8 @@ public class MovieController {
 	public String movieEvaluateInsert(String[] movieArray, String[] scoreArray) {
 		log.info("movieEvaluateInsert called....");
 
+		movieService.preferInsert(movieArray, scoreArray);
+		
 		return "redirect:/movie/recommend";
 	}
 

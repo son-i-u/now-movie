@@ -27,7 +27,10 @@
 							<th>영화 ID</th>
 							<th>시작 시간</th>
 							<th>종료 시간</th>
-							<th>삭제버튼</th>
+							<c:if test="${auth == 'true'}">
+								<th>삭제버튼</th>
+							</c:if>
+							
 						</tr>
 					</thead>
 
@@ -38,9 +41,11 @@
 							<td><c:out value="${schedule.movie_id }" /></td>
 							<td><c:out value="${schedule.start_time}" /></td>
 							<td><c:out value="${schedule.end_time}" /></td>
-							<td><button type="submit"
-									onclick="removeSubmit(${schedule.schedule_id})"
-									class="btn btn-default">remove</button></td>
+							<c:if test="${auth == 'true'}">
+								<td><button type="submit"
+										onclick="removeSubmit(${schedule.schedule_id})"
+										class="btn btn-default">remove</button></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</table>
@@ -119,7 +124,7 @@
 					});
 				});
 		
-		<!-- remove button -->
+		/* remove button */
 		function removeSubmit(data){
 			var actionForm = $("#actionForm");
 			actionForm.attr("action", "/schedule/remove").attr("method","post");

@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+@import url("../css/main.css");
 /*!
 * Start Bootstrap - SB Admin v6.0.0 (https://startbootstrap.com/templates/sb-admin)
 * Copyright 2013-2020 Start Bootstrap
@@ -10,7 +12,7 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-:root { -
+:root { 
 	-blue: #007bff; -
 	-indigo: #6610f2; -
 	-purple: #6f42c1; -
@@ -4584,13 +4586,19 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 	filter: brightness(50%);
 }
 
-.card-visit{
-	width : 200px;
-	height : 300px;
-	filter: brightness(50%);
+.jk_card{
+	max-width:100%;height:auto;
 }
 
+.submit_btn{
+	margin-top: 100px;
+	max-width: 30%;
+	height:auto;
+}
+
+
 .card-img, .card-img-top {
+	filter: brightness(50%);
 	border-top-left-radius: calc(0.25rem - 1px);
 	border-top-right-radius: calc(0.25rem - 1px);
 }
@@ -7734,6 +7742,7 @@ supports ((position: -webkit-sticky ) or (position: sticky )) { .sticky-top
 }
 
 .mt-4, .my-4 {
+	@extend .txt1;
 	margin-top: 1.5rem !important;
 }
 

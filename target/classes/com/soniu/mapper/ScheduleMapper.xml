@@ -16,10 +16,10 @@
 		]]>
 	</select>
 
-	<insert id="movieInsert">
+	<insert id="scheduleInsert">
 		insert into schedule (theator_id, movie_id, start_time, end_time,schedule_id)
 		values
-		(#{theator_id}, #{movie_id}, TO_DATE(#{start_time},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{end_time},'yyyy-mm-dd hh24:mi:ss'),schedule_seq)
+		(#{theator_id}, #{movie_id}, TO_DATE(#{start_time},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{end_time},'yyyy-mm-dd hh24:mi:ss'),schedule_seq.nextval)
 
 	</insert>
 	

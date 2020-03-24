@@ -45,11 +45,12 @@ public class MovieServiceImpl implements MovieService {
 		return movieMapper.getMovieInfo(movie_id);
 	}
 
+	/* 단독 영화 평가 */
 	@Override
 	public void preferInsert(userPrefer_VO pr_vo) {
 		log.info("userprefer insert...");
 
-		userPreferMapper.insert(pr_vo);
+		userPreferMapper.update(pr_vo);
 	}
 
 	@Override
@@ -70,6 +71,7 @@ public class MovieServiceImpl implements MovieService {
 		return userPreferMapper.getUserPrefer(user_id);
 	}
 
+	/* 처음 선호영화 선택, default score 4 */
 	@Override
 	public void preferInsert(String[] movieArray) {
 
@@ -82,13 +84,14 @@ public class MovieServiceImpl implements MovieService {
 			userPrefer_VO uf = new userPrefer_VO();
 			uf.setUser_id(user_id);
 			uf.setMovie_id(movieArray[i]);
-			uf.setScore(3);
+			uf.setScore(4);
 
 			userPreferMapper.insert(uf);
 		}
 
 	}
 
+	/* 다중 영화 평가 */
 	@Override
 	public void preferInsert(String[] movieArray, String[] scoreArray) {
 		/* user session id , static cause error at server start */
@@ -102,7 +105,7 @@ public class MovieServiceImpl implements MovieService {
 			uf.setMovie_id(movieArray[i]);
 			uf.setScore(Integer.parseInt(scoreArray[i]));
 
-			userPreferMapper.insert(uf);
+			userPreferMapper.update(uf);
 		}
 
 	}

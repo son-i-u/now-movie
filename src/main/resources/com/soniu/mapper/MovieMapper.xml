@@ -8,7 +8,7 @@
 	<select id="getList" resultType="com.soniu.domain.movie_VO"> 
 		<![CDATA[select * 
 		from ( select * from movie order by dbms_random.value) 
-		where rownum <= 100]]>
+		where rownum <= 99]]>
 	</select>
 
 	<select id="getMovieInfo" resultType="com.soniu.domain.movie_VO">

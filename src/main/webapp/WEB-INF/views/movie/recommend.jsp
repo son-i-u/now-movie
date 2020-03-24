@@ -101,7 +101,7 @@
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
-			<h1 class="mt-4">${ loginID }님,이런영화어때요?</h1>
+			<h1 class="mt-4" >${ loginID }님,이런영화어때요?</h1>
 			<ol class="breadcrumb mb-4">
 				<li>시작하기</li>
 				<li>
