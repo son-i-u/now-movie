@@ -24,6 +24,12 @@ import lombok.extern.log4j.Log4j;
 public class MovieController {
 
 	private MovieService movieService;
+	
+	@GetMapping("/NewFile")
+	public void test(Model model) {
+		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
+		//return "NewFile";
+	}
 
 	/* jy */
 	@GetMapping("/recommend")

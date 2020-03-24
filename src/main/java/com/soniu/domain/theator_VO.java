@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class theator_VO {
-	private String theatorId;
-	private String theatorName;
-	private String theatorLocation;
-	private double theatorLatitude;
-	private double theatorLongitude;
+	private String theator_id;
+	private String theator_nm;
+	private String location;
+	private double latitude;
+	private double longitude;
 }
