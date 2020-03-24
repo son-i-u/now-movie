@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class userInfoAuth_VO {
 	private String userId;
-	private String auth;
+	private String auth = "ROLE_USER";
 }

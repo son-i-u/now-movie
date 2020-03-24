@@ -8,6 +8,6 @@ public class userInfo_VO {
 	private String PWD;
 	private String BIRTH;
 	private String GENDER;
-	private int ENABLED;
+	private int ENABLED = 1;
 	private String PHONE_NUM;
 }
