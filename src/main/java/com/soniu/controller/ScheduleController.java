@@ -1,5 +1,7 @@
 package com.soniu.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +24,19 @@ import lombok.extern.log4j.Log4j;
 public class ScheduleController {
 
 	ScheduleService service;
-
+	
 	/* jk */
 	@GetMapping("/list")
 	public void ScheduleList(Criteria cri, Model model) {
 		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 100));
+		
+		/* 스케쥴 리스트와 페이징을 리스트 길이 */
+		List<Schedule_VO> svList = service.getList(cri);
+		int svList_len = svList.size();
+		
+		model.addAttribute("auth", service.authCheck());
+		model.addAttribute("list", svList);
+		model.addAttribute("pageMaker", new PageDTO(cri, svList_len));
 	}
 
 	/* jk */
@@ -37,7 +45,7 @@ public class ScheduleController {
 		log.info("insert page called..");
 	}
 
-	/* jk */
+	/* jk*/
 	@PostMapping("/insert")
 	public String ScheduleInsertPost(Schedule_VO sv, RedirectAttributes rttr) {
 		log.info("insert...: " + sv);

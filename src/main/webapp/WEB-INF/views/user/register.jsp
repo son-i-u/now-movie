@@ -23,15 +23,15 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-			
-			
-			
-			
-			
-<!-- daum 도로명주소 찾기 api -->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<style type="text/css">
+
+
+
+
+				<!-- daum 도로명주소 찾기 api -->
+				<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+				<style type="text/css">
 td {
 	border: 1px solid #000000;
 	border-collapse: collapse;
@@ -185,6 +185,7 @@ $('#id_check').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)�
 $('#id_check').css('color', 'red');
 }
 });
+
 $('#PWD').blur(function() {
 if (pwJ.test($('#PWD').val())) {
 console.log('true');
@@ -283,74 +284,84 @@ $('#phone_check').css('color', 'red');
 
 
 </script>
-</head>
-<body>
+				</head>
+				<body>
 
-	<article class="container">
-		<div class="page-header">
-			<div class="col-md-6 col-md-offset-3">
-				<h3>회원가입</h3>
-			</div>
+					<article class="container">
+						<div class="page-header">
+							<div class="col-md-6 col-md-offset-3">
+								<h3>회원가입</h3>
+							</div>
 
-		</div>
-		<div class="col-sm-6 col-md-offset-3">
+						</div>
+						<div class="col-sm-6 col-md-offset-3">
 
-			<form action="/user/register" method="post" role="form"
-				id="usercheck" name="user_info">
+							<form action="/user/register" method="post" role="form"
+								id="usercheck" name="user_info">
 
-				<div class="form-group">
-					<label for="id">아이디</label> <input type="text" class="form-control"
-						id="USER_ID" name="USER_ID" placeholder="ID">
-					<div class="eheck_font" id="id_check"></div>
-				</div>
+								<div class="form-group">
+									<label for="id">아이디</label> <input type="text"
+										class="form-control" id="USER_ID" name="USER_ID"
+										placeholder="ID">
+									<div class="eheck_font" id="id_check"></div>
+								</div>
 
-				<div class="form-group">
-					<label for="pw">비밀번호</label> <input type="password"
-						class="form-control" id="PWD" name="PWD" placeholder="PASSWORD">
-					<div class="eheck_font" id="pw_check"></div>
-				</div>
-				<div class="form-group">
-					<label for="pw2">비밀번호 확인</label> <input type="password"
-						class="form-control" id="PWD2" name="PWD2"
-						placeholder="Confirm Password">
-					<div class="eheck_font" id="pw2_check"></div>
-				</div>
-
-
-				<div class="form-group">
-					<label for="BIRTH">생년월일</label> <input type="tel"
-						class="form-control" id="BIRTH" name="BIRTH"
-						placeholder="ex) 19990101">
-					<div class="eheck_font" id="birth_check"></div>
-				</div>
+								<div class="form-group">
+									<label for="pw">비밀번호</label> <input type="password"
+										class="form-control" id="PWD" name="PWD"
+										placeholder="PASSWORD">
+									<div class="eheck_font" id="pw_check"></div>
+								</div>
+								<div class="form-group">
+									<label for="pw2">비밀번호 확인</label> <input type="password"
+										class="form-control" id="PWD2" name="PWD2"
+										placeholder="Confirm Password">
+									<div class="eheck_font" id="pw2_check"></div>
+								</div>
 
 
-				<div class="form-group">
-					<label for="PHONE_NUM">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input
-						type="tel" class="form-control" id="PHONE_NUM" name="PHONE_NUM"
-						placeholder="Phone Number">
-					<div class="eheck_font" id="phone_check"></div>
-				</div>
+								<div class="form-group">
+									<label for="BIRTH">생년월일</label> <input type="tel"
+										class="form-control" id="BIRTH" name="BIRTH"
+										placeholder="ex) 19990101">
+									<div class="eheck_font" id="birth_check"></div>
+								</div>
 
+
+								<div class="form-group">
+									<label for="PHONE_NUM">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input
+										type="tel" class="form-control" id="PHONE_NUM"
+										name="PHONE_NUM" placeholder="Phone Number">
+									<div class="eheck_font" id="phone_check"></div>
+								</div>
+
+<<<<<<< HEAD
+								<div class="form-group">
+									<label for="GENDER">성별 </label> <input type="checkbox"
+										id="GENDER" name="GENDER" value="남">남 <input
+										type="checkbox" id="GENDER" name="GENDER" value="여">여
+								</div>
+=======
 				<div class="form-group">
 					<label for="GENDER">성별 </label> <input type="checkbox" id="GENDER"
 						name="GENDER" value="male">남 <input type="checkbox"
 						id="GENDER" name="GENDER" value="female">여
 				</div>
+>>>>>>> 21b88dd6d8438b24d69587f72903ddb387c34910
 
 
-				<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary">회원가입</button>
-				</div>
+								<div class="form-group text-center">
+									<button type="submit" class="btn btn-primary">회원가입</button>
+								</div>
 
-				<!-- 접근 거부방지를 위한 -->
-				<sec:csrfInput />
-			</form>
-		</div>
-	</article>
-</body>
-</div>
-</main>
+								<!-- 접근 거부방지를 위한 -->
+								<sec:csrfInput />
+							</form>
+						</div>
+					</article>
+				</body>
+			</div>
+		</main>
 	</div>
 </body>
 </html>

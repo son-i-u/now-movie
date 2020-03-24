@@ -14,6 +14,11 @@
 		insert into user_prefer values (#{user_id},#{movie_id},#{score})
 	</insert>
 
+	<!-- 영화를 본 후 , 평점 재입력 -->
+	<update id="update">
+	 <![CDATA[update user_prefer set score = #{score} where user_id=#{user_id} and movie_id=#{movie_id} ]]>
+	</update>
+	
 	<!-- 아직 평가 하지 않은 영화들 -->
 	<select id="getNotSeeList" resultType="com.soniu.domain.userPrefer_VO">
 	 <![CDATA[select * from user_prefer where user_id=#{user_id} and score < 0 ]]>
