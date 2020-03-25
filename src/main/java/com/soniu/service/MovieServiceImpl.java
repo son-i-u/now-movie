@@ -1,10 +1,9 @@
 package com.soniu.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +15,7 @@ import com.soniu.domain.userPreferMovie_VO;
 import com.soniu.domain.userPrefer_VO;
 import com.soniu.mapper.MovieMapper;
 import com.soniu.mapper.UserPreferMapper;
+import com.soniu.utils.HttpConnectionExample;
 import com.soniu.utils.getBatchFile;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +31,9 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	getBatchFile Gbf = new getBatchFile();
+	
+	@Autowired
+	HttpConnectionExample hce = new HttpConnectionExample();
 
 	@Override
 	public List<movie_VO> getList() {
@@ -111,46 +114,27 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	public List<movieLocationSchedule_VO> getMovieLocationSchedule() {
-
 		/* user session id , static cause error at server start */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
 
-		/* collect_movie_list */
-		List<String> collec_movie_list = new ArrayList<>();
-
-		/* movie list 중 score 상위 고르고 */
-		Map<String, Double> mc_map = Gbf.CalPreferList(user_id);
-
-		/* value 기준 정렬 */
-		List<String> keySetList = new ArrayList<>(mc_map.keySet());
-
-		/* 상위 5개, 넘치면 탈출 */
-		System.out.println("------value 내림차순------");
-		Collections.sort(keySetList, (o1, o2) -> (mc_map.get(o2).compareTo(mc_map.get(o1))));
-		for (String key : keySetList) {
-			System.out.println("key : " + key + " / " + "value : " + mc_map.get(key));
-			collec_movie_list.add(key);
-
-			if (collec_movie_list.size() >= 5) {
-				break;
-			}
-
-		}
+		ArrayList<String> movieList = hce.get("http://127.0.0.1:8090/CF", user_id);
 
 		List<movieLocationSchedule_VO> getMLS = movieMapper.getMovieLocationSchedule();
 		List<movieLocationSchedule_VO> ret_getMLS = new ArrayList<>();
 
 		/* getMSL 에서 상위 무비만 다시 넣어서 ret */
 		for (int i = 0; i < getMLS.size(); i++) {
-			if (collec_movie_list.contains(getMLS.get(i).getMovie_id())) {
+			if (movieList.contains(getMLS.get(i).getMovie_id())) {
 				log.info(getMLS.get(i).getMovie_id());
 				ret_getMLS.add(getMLS.get(i));
 			}
 		}
 
 		/* 위치 */
-
+		
 		return ret_getMLS;
 	}
+	
+
 }

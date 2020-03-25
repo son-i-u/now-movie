@@ -1,7 +1,5 @@
 package com.soniu.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.soniu.domain.userPrefer_VO;
 import com.soniu.service.MovieService;
 
 import lombok.AllArgsConstructor;
@@ -31,10 +28,8 @@ public class MovieController {
 		//return "NewFile";
 	}
 
-	/* jy */
 	@GetMapping("/recommend")
 	public void recommendPage(Model model) {
-		/* user session id , static cause error at server start */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
 		
