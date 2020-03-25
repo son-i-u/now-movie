@@ -1,6 +1,6 @@
 package com.soniu.controller;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,9 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.soniu.domain.userPrefer_VO;
 import com.soniu.service.MovieService;
 
 import lombok.AllArgsConstructor;
@@ -25,10 +26,10 @@ public class MovieController {
 
 	private MovieService movieService;
 	
-	@GetMapping("/NewFile")
+	@GetMapping("/getUserLocation")
 	public void test(Model model) {
-		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
-		//return "NewFile";
+		
+		
 	}
 
 	/* jy */
@@ -41,6 +42,24 @@ public class MovieController {
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
+	
+	@PostMapping("/recommend")
+    public ModelAndView goStudent(HttpServletRequest httpServletRequest, Model model) {
+        
+        log.info("RequestMethod.POST");
+        
+        String userLat = httpServletRequest.getParameter("userLat");
+        String userLon = httpServletRequest.getParameter("userLon");
+        System.out.println("---user : " + userLat + ", " + userLon);
+        
+        model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("movie/recommend");
+        mav.addObject("userLat", userLat);
+        mav.addObject("userLon", userLon);
+        
+        return mav; 
+    }
 
 	/* jy */
 	@GetMapping("/info")
