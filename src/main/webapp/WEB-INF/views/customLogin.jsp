@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/htm14/loose.dtd">
 <html http-equiv="Content-type" content="text/html; charset=UTF-8">
@@ -89,5 +90,22 @@
 	<script src="/resources/vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="/resources/vendor/countdowntime/countdowntime.js"></script>
 	<script src="/resources/js/main.js"></script>
+	
+	<c:if test="${param.logout != null }">
+	<script>
+		$(document).ready(function(){
+			if (history.state) {
+				return;
+			}
+			alert("로그아웃 되었습니다.");
+			
+			history.replaceState({},null,null);
+		});
+	</script>
+	</c:if>
+
+
+	
+	
 </body>
 </html>
