@@ -15,13 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class HttpConnectionExample {
-/*
+	public boolean conn = false;
+
 	public static void main(String[] args) {
 		//함수 test
 		get("http://127.0.0.1:8090/CF", "user10");
 
 	}
-*/
+
 	public static ArrayList<String> get(String requestURL, String user_id) {
 		ArrayList ret_arrayList = new ArrayList<>();
 
@@ -43,10 +44,11 @@ public class HttpConnectionExample {
 				for(int i=0; i<splitStr.length; i++) {
 					ret_arrayList.add(splitStr[i]);
 				}
-
+				
 			} else {
 				System.out.println("response is error : " + response.getStatusLine().getStatusCode());
 			}
+
 
 		} catch (Exception e) {
 			System.err.println(e.toString());

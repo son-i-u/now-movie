@@ -31,9 +31,6 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	getBatchFile Gbf = new getBatchFile();
-	
-	@Autowired
-	HttpConnectionExample hce = new HttpConnectionExample();
 
 	@Override
 	public List<movie_VO> getList() {
@@ -118,8 +115,11 @@ public class MovieServiceImpl implements MovieService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
 
+		HttpConnectionExample hce = new HttpConnectionExample();
 		ArrayList<String> movieList = hce.get("http://127.0.0.1:8090/CF", user_id);
-
+			
+		
+		
 		List<movieLocationSchedule_VO> getMLS = movieMapper.getMovieLocationSchedule();
 		List<movieLocationSchedule_VO> ret_getMLS = new ArrayList<>();
 
@@ -135,6 +135,5 @@ public class MovieServiceImpl implements MovieService {
 		
 		return ret_getMLS;
 	}
-	
 
 }
