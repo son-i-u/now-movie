@@ -37,35 +37,40 @@
 	///////////LOCATION LOGIC//////////////
 	///////////////////////////////////////
 
+	var jsonArr = new Array(); //모든 객체 저장 배열
+		
 	/* 주소-좌표 변환 객체를 생성 */
 	var geocoder = new kakao.maps.services.Geocoder();
-	
-	var arrNumber = new Array(); //거리 결과 저장 배열
-	var callback = function(result, status) {
-		if (status === kakao.maps.services.Status.OK) {
-			arrNumber.push(distance(result[0].y, result[0].x,"K"));
-			console.log(result[0].x); // 126.570667
-			console.log(result[0].y); // 33.45070100000001
-		}
-		
-	};
-
-	//WTM 좌표를 WGS84 좌표계의 좌표로 변환한다
-	function test(){
-		<c:forEach items="${ movieInfoList }" var="prefer">
-			//console.log('${prefer}');
-			geocoder.transCoord('${ prefer.longitude }', '${ prefer.latitude }', callback, {
-				input_coord : kakao.maps.services.Coords.WTM,
-				output_coord : kakao.maps.services.Coords.WGS84	
-			});
-		</c:forEach>
-		console.log(arrNumber);
-	}
-	test();
-	
 
 	/* 현재 위치를 저장할 변수 생성 */
 	var lat1 = 0, lon1 = 0;
+	
+	/* 모든 데이터 json화 */
+	<c:forEach items="${ movieInfoList }" var="prefer">
+		var json = new Object();
+		json.movie_id = '${ prefer.movie_id }';
+		json.movie_nm = '${ prefer.movie_nm }';
+		json.movie_nm_en = '${ prefer.movie_nm_en }';
+		json.genre = '${ prefer.genre }';
+		json.director = '${ prefer.director }';
+		json.actor = '${ prefer.actor }';
+		json.nation = '${ prefer.nation }';
+		json.img_loc = '${ prefer.img_loc }';
+	
+		json.theator_id = '${ prefer.theator_id }';
+		json.theator_nm = '${ prefer.theator_nm }';
+		json.location = '${ prefer.location }';
+		json.latitude = '${ prefer.latitude }';
+		json.longitude = '${ prefer.longitude }';
+	
+		json.start_time = '${ prefer.start_time }';
+		json.end_time = '${ prefer.end_time }';
+		json.left_min = '${ prefer.left_min }';	
+		json.distance = 0;
+		
+		jsonArr.push(json);
+	</c:forEach>	
+	console.log(jsonArr);
 
 	/* Get User's Longitude & Latitude */
 	function getUserLocation() {
@@ -75,6 +80,7 @@
 			navigator.geolocation.getCurrentPosition(function(pos) {
 				lon1 = pos.coords.longitude;
 				lat1 = pos.coords.latitude;
+				console.log("user: " + lon1 + ", " + lat1);
 			});
 		} else {
 			alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
@@ -83,44 +89,17 @@
 	getUserLocation();
 
 	/* calculate distance between coords */
-	function distance(lat2, lon2, unit) {
-		//console.log("lat1: " + lat1);
-		//console.log("lon1: " + lon1);
-		//console.log("lat2: " + lat2);
-		//console.log("lon2: " + lon2);
-
+	function distance(lat2, lon2) {
+		
+		console.log("lat1: " + lat1 + ", lon1: "+ lon1);
+		console.log("lat2: " + lat2 + ", lon1: "+ lon2);
+		
 		if ((lat1 == lat2) && (lon1 == lon2)) {
 			return 0;
 		} else {
-			var radlat1 = Math.PI * lat1 / 180;
-			var radlat2 = Math.PI * lat2 / 180;
-			var theta = lon1 - lon2;
-			var radtheta = Math.PI * theta / 180;
-			var dist = Math.sin(radlat1) * Math.sin(radlat2)
-					+ Math.cos(radlat1) * Math.cos(radlat2)
-					* Math.cos(radtheta);
-			if (dist > 1) {
-				dist = 1;
-			}
-			dist = Math.acos(dist);
-			dist = dist * 180 / Math.PI;
-			dist = dist * 60 * 1.1515;
-			if (unit == "K") {
-				dist = dist * 1.609344
-			}
-			if (unit == "N") {
-				dist = dist * 0.8684
-			}
+			dist = (lat1 - lat2) * (lat1 - lat2) + (lon1 - lon2) * (lon1 - lon2);
+			dist = Math.sqrt(dist);
 			return dist;
-		}
-	}
-
-	function wait(msecs) {
-
-		var start = new Date().getTime();
-		var cur = start;
-		while (cur - start < msecs) {
-			cur = new Date().getTime();
 		}
 	}
 
@@ -177,10 +156,10 @@
 	var index = 0;
 	/* Create Movie Card */
 	function createMovieCard(limit) {
-
+		
 		<c:forEach items="${ movieInfoList }" var="prefer">
 		if ('${prefer.left_min}' <= limit) {
-
+			
 			/* VO to JSON */
 			var json = new Object();
 			json.movie_id = '${ prefer.movie_id }';
@@ -207,17 +186,12 @@
 			// 주소로 좌표를 검색합니다
 			geocoder.addressSearch(address,
 					function(result, status) {
-						console.log("dist start!!")
-						printCard(json, dist, index);
-						console.log("lat2: " + result[0].y);
-						console.log("lon2: " + result[0].x);
 						// 정상적으로 검색이 완료됐으면 
+						printCard(json, dist, index);
 						if (status === kakao.maps.services.Status.OK) {
-							console.log(result);
+							//console.log(result);
 							var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-							dist = distance(result[0].y, result[0].x, "K"); //wait
-							console.log("dist"+ index + ": " + dist);
-							console.log('#distance' + String(index));
+							dist = 0;
 							$('#distance' + String(index)).html(dist);
 						}
 						
@@ -274,6 +248,9 @@
 				</li>
 				<li>이내의 영화입니다.</li>
 			</ol>
+
+    		userLat : ${userLat}
+    		userLon : ${userLon}
 
 			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 			<div class="row" id="cardContainer"></div>
