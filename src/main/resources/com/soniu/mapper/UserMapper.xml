@@ -25,12 +25,12 @@
 		)
 	</insert>
 	
-	<!-- <insert id="join" parameterType="com.soniu.domain.userInfoAuth_VO">
+	 <insert id="join2" parameterType="com.soniu.domain.userInfoAuth_VO">
 		insert into USER_INFO_AUTH
 		values(
 		#{USERID},
 		#{AUTH}
 		)
-	</insert> -->
+	</insert>
 
 </mapper>

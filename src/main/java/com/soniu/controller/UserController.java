@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soniu.domain.userInfo_VO;
+import com.soniu.domain.userInfoAuth_VO;
 import com.soniu.service.UserService;
 
 import lombok.extern.log4j.Log4j;
@@ -38,19 +39,19 @@ public class UserController {
 	
 	/* sh */
 	@PostMapping("/register_test")
-	public String registerPostTest(userInfo_VO uv) {
+	public String registerPostTest(userInfo_VO uv,userInfoAuth_VO at) {
 		log.info("registerPostTest called_....");
 		
-		userService.joinUser(uv);
+		userService.joinUser(uv, at);
 		
 		return "redirect:/movie/select/";
 	}
 	
 		
 	@PostMapping("/register")
-	public String registerPost(userInfo_VO uv) {
+	public String registerPost(userInfo_VO uv, userInfoAuth_VO at) {
 		log.info("registerPost called_....");
-		userService.joinUser(uv);
+		userService.joinUser(uv, at);
 		
 		return "redirect:/customLogin";
 	}

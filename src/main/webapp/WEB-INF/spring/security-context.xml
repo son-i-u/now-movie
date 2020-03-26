@@ -48,7 +48,7 @@
 		
 		<security:access-denied-handler
 			ref="customAccessDenied" />
-
+			
 	</security:http>
 
 	<security:authentication-manager>
