@@ -34,7 +34,7 @@
 			<div class="wrap-login100 p-t-50 p-b-90">
 				<form class="login100-form validate-form flex-sb flex-w" method='post' action="/login">
 					<span class="login100-form-title p-b-51">
-						Login
+						now movie
 					</span>
 
 					
@@ -60,8 +60,8 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
-								Forgot?
+							<a href="/user/register" class="txt1">
+								Join us!
 							</a>
 						</div>
 					</div>

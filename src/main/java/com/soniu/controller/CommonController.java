@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.soniu.domain.movieLocationSchedule_VO;
 import com.soniu.service.MovieService;
+
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -19,13 +19,7 @@ public class CommonController {
 	@GetMapping("/")
 	public String home() {
 		
-		return "home";
-	}
-	
-	@GetMapping("/NewFile")
-	public String file() {
-		
-		return "NewFile";
+		return "redirect:/customLogin";
 	}
 
 	@GetMapping("/accessError")
