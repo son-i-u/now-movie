@@ -23,7 +23,6 @@
 
 	/* 선호 영화를 하나도 선택하지 않았으면 영화 선택 페이지로 이동 */
 	else if ('${ preferList.size() }' < 1) {
-		console.log('${ preferList }');
 		self.location = "/movie/select";
 	}
 
