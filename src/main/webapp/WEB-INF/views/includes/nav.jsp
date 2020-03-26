@@ -1,5 +1,5 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-	<a class="navbar-brand" href="/user/main">Now Movie</a>
+	<a class="navbar-brand" href="/movie/recommend">Now Movie</a>
 
 	<!-- Navbar-->
 	<ul class="navbar-nav ml-auto ml-md-0">

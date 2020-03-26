@@ -14,8 +14,7 @@
 <title>지금영화 회원가입</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+
 
 <%@ include file="../includes/header.jsp"%>
 <body class="sb-nav-fixed">
@@ -28,8 +27,7 @@
 
 
 
-				<!-- daum 도로명주소 찾기 api -->
-				<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 
 				<style type="text/css">
 td {
@@ -38,7 +36,7 @@ td {
 }
 </style>
 
-<script type="text/javascript">
+				<script type="text/javascript">
 
 //모든 공백 체크 정규식
 var empJ = /\s/g;
@@ -335,11 +333,11 @@ $('#phone_check').css('color', 'red');
 									<div class="eheck_font" id="phone_check"></div>
 								</div>
 
-				<div class="form-group">
-					<label for="GENDER">성별 </label> <input type="checkbox" id="GENDER"
-						name="GENDER" value="male">남 <input type="checkbox"
-						id="GENDER" name="GENDER" value="female">여
-				</div>
+								<div class="form-group">
+									<label for="GENDER">성별 </label> <input type="checkbox"
+										id="GENDER" name="GENDER" value="male">남 <input
+										type="checkbox" id="GENDER" name="GENDER" value="female">여
+								</div>
 
 
 
