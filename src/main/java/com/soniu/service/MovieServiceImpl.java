@@ -117,8 +117,6 @@ public class MovieServiceImpl implements MovieService {
 
 		HttpConnectionExample hce = new HttpConnectionExample();
 		ArrayList<String> movieList = hce.get("http://127.0.0.1:8090/CF", user_id);
-			
-		
 		
 		List<movieLocationSchedule_VO> getMLS = movieMapper.getMovieLocationSchedule();
 		List<movieLocationSchedule_VO> ret_getMLS = new ArrayList<>();

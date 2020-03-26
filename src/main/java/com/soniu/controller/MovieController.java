@@ -41,6 +41,7 @@ public class MovieController {
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
 	
+	/*
 	@PostMapping("/recommend")
     public ModelAndView goStudent(HttpServletRequest httpServletRequest, Model model) {
         
@@ -57,7 +58,7 @@ public class MovieController {
         mav.addObject("userLon", userLon);
         
         return mav; 
-    }
+    }*/
 
 	/* jy */
 	@GetMapping("/info")
