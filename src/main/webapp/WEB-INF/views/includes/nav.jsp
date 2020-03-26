@@ -9,10 +9,16 @@
 				class="fas fa-user fa-fw"></i></a>
 			<div class="dropdown-menu dropdown-menu-right"
 				aria-labelledby="userDropdown">
-				    <!-- <a class="dropdown-item" href="#">Settings</a> --><a
-					class="dropdown-item" href="/schedule/list">manager page</a>
+				    <!-- <a class="dropdown-item" href="#">Settings</a> -->
+				    <a class="dropdown-item" href="/schedule/list">manager page</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="/customLogin">Logout</a>
+				<form class="user" action="/nav" method='post'>
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+					<a class="dropdown-item" href="/customLogin">Logout</a>
+				</form>
+				<div>
+					<c:out value="${error}"/>
+				</div>
 			</div>
 		</li>
 	</ul>
