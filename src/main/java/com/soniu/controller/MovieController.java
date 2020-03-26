@@ -41,10 +41,12 @@ public class MovieController {
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
 	
-	/*
+	
 	@PostMapping("/recommend")
     public ModelAndView goStudent(HttpServletRequest httpServletRequest, Model model) {
-        
+		/* user session id , static cause error at server start */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user_id = auth.getName();
         log.info("RequestMethod.POST");
         
         String userLat = httpServletRequest.getParameter("userLat");
@@ -52,13 +54,15 @@ public class MovieController {
         System.out.println("---user : " + userLat + ", " + userLon);
         
         model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
+        model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+        
         ModelAndView mav = new ModelAndView();
         mav.setViewName("movie/recommend");
         mav.addObject("userLat", userLat);
         mav.addObject("userLon", userLon);
         
         return mav; 
-    }*/
+    }
 
 	/* jy */
 	@GetMapping("/info")

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -24,7 +23,7 @@
 
 	/* 선호 영화를 하나도 선택하지 않았으면 영화 선택 페이지로 이동 */
 	else if ('${ preferList.size() }' < 1) {
-
+		console.log('${ preferList }');
 		self.location = "/movie/select";
 	}
 
@@ -38,12 +37,44 @@
 	///////////////////////////////////////
 
 	var jsonArr = new Array(); //모든 객체 저장 배열
-		
-	/* 주소-좌표 변환 객체를 생성 */
-	var geocoder = new kakao.maps.services.Geocoder();
 
 	/* 현재 위치를 저장할 변수 생성 */
-	var lat1 = 0, lon1 = 0;
+	var lat1 = '${userLat}', lon1 = '${userLon}';
+	console.log("user location: " + lat1 + ", " + lon1);
+
+	/* calculate distance between coords */
+	function distance(lat2, lon2) {
+		var dist = 0;
+		var result = ''; 
+		
+		/* 거리 구하기 */
+		if ((lat1 == lat2) && (lon1 == lon2)) {
+			return '0m';
+		} else {
+			dist = (lat1 - lat2) * (lat1 - lat2) + (lon1 - lon2) * (lon1 - lon2);
+			dist = Math.sqrt(dist);
+			
+			if(dist < 0){
+				dist = dist * 10;
+				dist = Math.round(dist);
+				dist = dist / 10;
+			}
+			else
+				dist = Math.round(dist);
+		}
+		
+		/* 단위 쪼개기 */
+		if(dist > 1000){
+			dist = dist / 10;
+			dist = Math.round(dist);
+			dist = dist / 100;
+			result = result + dist + 'km';
+		}
+		else
+			result = result + dist + 'm';
+		
+		return result;
+	}
 	
 	/* 모든 데이터 json화 */
 	<c:forEach items="${ movieInfoList }" var="prefer">
@@ -66,42 +97,11 @@
 		json.start_time = '${ prefer.start_time }';
 		json.end_time = '${ prefer.end_time }';
 		json.left_min = '${ prefer.left_min }';	
-		json.distance = 0;
+		json.distance = distance(json.latitude, json.longitude);
 		
 		jsonArr.push(json);
 	</c:forEach>	
 	console.log(jsonArr);
-
-	/* Get User's Longitude & Latitude */
-	function getUserLocation() {
-		// Geolocation API에 액세스할 수 있는지를 확인
-		if (navigator.geolocation) {
-			//위치 정보를 얻기
-			navigator.geolocation.getCurrentPosition(function(pos) {
-				lon1 = pos.coords.longitude;
-				lat1 = pos.coords.latitude;
-				console.log("user: " + lon1 + ", " + lat1);
-			});
-		} else {
-			alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
-		}
-	}
-	getUserLocation();
-
-	/* calculate distance between coords */
-	function distance(lat2, lon2) {
-		
-		console.log("lat1: " + lat1 + ", lon1: "+ lon1);
-		console.log("lat2: " + lat2 + ", lon1: "+ lon2);
-		
-		if ((lat1 == lat2) && (lon1 == lon2)) {
-			return 0;
-		} else {
-			dist = (lat1 - lat2) * (lat1 - lat2) + (lon1 - lon2) * (lon1 - lon2);
-			dist = Math.sqrt(dist);
-			return dist;
-		}
-	}
 
 	///////////////////////////////////////
 	///////////HTML TAG MAKING/////////////
@@ -115,8 +115,8 @@
 		}
 	}
 
-	function printCard(prefer, dist, i) {
-		console.log("printCard");
+	function printCard(prefer, i) {
+		
 		var card = document.createElement('div');
 
 		var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage('
@@ -138,9 +138,9 @@
 				+ prefer.theator_nm
 				+ ' '
 				+ '<label id="distance' + i + '">'
-				+ dist
+				+ prefer.distance
 				+ '</label>'
-				+ 'km </small></p>'
+				+ '</small></p>'
 				+ '<p class="card-text">'
 				+ '<small class="text-muted">'
 				+ prefer.left_min
@@ -152,54 +152,12 @@
 		document.getElementById("cardContainer").appendChild(card);
 	}
 
-	var dist = 0;
-	var index = 0;
 	/* Create Movie Card */
 	function createMovieCard(limit) {
-		
-		<c:forEach items="${ movieInfoList }" var="prefer">
-		if ('${prefer.left_min}' <= limit) {
-			
-			/* VO to JSON */
-			var json = new Object();
-			json.movie_id = '${ prefer.movie_id }';
-			json.movie_nm = '${ prefer.movie_nm }';
-			json.movie_nm_en = '${ prefer.movie_nm_en }';
-			json.genre = '${ prefer.genre }';
-			json.director = '${ prefer.director }';
-			json.actor = '${ prefer.actor }';
-			json.nation = '${ prefer.nation }';
-			json.img_loc = '${ prefer.img_loc }';
-
-			json.theator_id = '${ prefer.theator_id }';
-			json.theator_nm = '${ prefer.theator_nm }';
-			json.location = '${ prefer.location }';
-			json.latitude = '${ prefer.latitude }';
-			json.longitude = '${ prefer.longitude }';
-
-			json.start_time = '${ prefer.start_time }';
-			json.end_time = '${ prefer.end_time }';
-			json.left_min = '${ prefer.left_min }';
-
-			var address = '${ prefer.location }';
-
-			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(address,
-					function(result, status) {
-						// 정상적으로 검색이 완료됐으면 
-						printCard(json, dist, index);
-						if (status === kakao.maps.services.Status.OK) {
-							//console.log(result);
-							var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-							dist = 0;
-							$('#distance' + String(index)).html(dist);
-						}
-						
-						index = index + 1;
-					});
-
+		var size = jsonArr.length;
+		for(var i = 0; i < size; i++){
+			printCard(jsonArr[i], i);
 		}
-		</c:forEach>
 
 		var last = document.createElement('p');
 		last.innerHTML = "마지막 결과입니다."; //wait
@@ -248,9 +206,6 @@
 				</li>
 				<li>이내의 영화입니다.</li>
 			</ol>
-
-    		userLat : ${userLat}
-    		userLon : ${userLon}
 
 			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 			<div class="row" id="cardContainer"></div>
