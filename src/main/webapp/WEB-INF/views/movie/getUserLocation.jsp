@@ -48,13 +48,6 @@
 			});
 		});
 	}
-
-	var callback = function(result, status) {
-	    if (status === kakao.maps.services.Status.OK) {
-	        console.log(result[0].x); // 126.570667
-	        console.log(result[0].y); // 33.45070100000001
-	    }
-	};
 		
 	var callback = function(result, status) {
 		
@@ -80,19 +73,16 @@
 		});
 	}
 	
-	function getAllDistance(){
-		return new Promise(function(resolve, reject){
-			var size = jsonArr.length;
-			for(var i = 0; i < size; i++){
-				jsonArr[i].distance = distance(jsonArr[i].latitude, jsonArr[i].longitude);
-			}
-			resolve();
-		});
-	}
 
+	var callback2 = function(result, status) {
+	    if (status === kakao.maps.services.Status.OK) {
 
+	        console.log('지역 명칭 : ' + result[0].address_name);
+	        console.log('행정구역 코드 : ' + result[0].code);
+	    }
+	};
 	
-	
+	geocoder.coord2RegionCode(126.8788277, 37.4915792, callback2);
 	
 	//비동기적 함수 호출
 	isGeoUseable()
@@ -107,6 +97,7 @@
 </head>
 <body>
 	<p>위지 정보를 받아오는 중입니다...</p>
+	<!-- Form 말고 세션에 저장하는 방식으로 ㄱㄱ -->
 	<form id ="location" action="/movie/recommend" method="POST">
 		<input type="hidden" id="userLon" name="userLon" value='0'></input>
 		<input type="hidden" id="userLat" name="userLat" value='0'></input>
@@ -122,7 +113,7 @@
         			document.getElementById('location').submit();
     			else 
     				return;
-    		},10);
+    		},100);
     	};
     </script>
 </body>
