@@ -1,5 +1,6 @@
 package com.soniu.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
@@ -9,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,10 +32,8 @@ public class MovieController {
 		
 	}
 
-	/* jy */
 	@GetMapping("/recommend")
 	public void recommendPage(Model model) {
-		/* user session id , static cause error at server start */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
 		
@@ -43,9 +41,10 @@ public class MovieController {
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
 	
+	/*
 	@PostMapping("/recommend")
     public ModelAndView goStudent(HttpServletRequest httpServletRequest, Model model) {
-		/* user session id , static cause error at server start */
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
         log.info("RequestMethod.POST");
@@ -64,7 +63,8 @@ public class MovieController {
         
         return mav; 
     }
-
+	*/
+	
 	/* jy */
 	@GetMapping("/info")
 	public void movieInfoPage(Model model, @RequestParam String id) {

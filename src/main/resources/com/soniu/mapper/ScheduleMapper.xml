@@ -23,6 +23,11 @@
 
 	</insert>
 	
+	
+	<insert id="movieInsert">
+	insert into movie values (seq_movie.nextval,#{movie_nm}, #{movie_nm_en},#{genre},#{director},#{actor},#{nation},#{img_loc})
+	</insert>
+	
 	<delete id="remove">
 		delete from schedule where schedule_id = #{schedule_id}
 	</delete>

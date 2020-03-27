@@ -23,7 +23,7 @@ public class MovieMapper_test {
 	
 	@Test
 	public void testGetList() {
-		System.out.println(mapper.getList().get(0).getActor() + "입니다");
+		System.out.println(mapper.getList().get(0)+ "입니다");
 		mapper.getList().forEach(movie -> log.info(movie));
 	}
 

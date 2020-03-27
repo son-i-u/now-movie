@@ -20,12 +20,13 @@
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row">
 					<c:forEach items="${list }" var="movie">
-						<div class="col-xl-2" id="${movie.movie_id }">
+						<div class="col-xl-2 col-md-3" id="${movie.movie_id }">
 							${movie.movie_nm } <a id="${movie.movie_id }"
 								onclick="movieselect(${movie.movie_id}); "> <img
 								src="<spring:url value="${movie.img_loc }"/>" alt="..."
 								id="${movie.movie_id}img" class="jk_card">
 						</div>
+						
 					</c:forEach>
 
 					<!-- 접근 거부방지를 위한 -->
@@ -62,7 +63,7 @@
 						/* 이미지 변경을 위한 class 변경 */
 						var class_id = $("#"+data+"img").attr('class');
 
-						if(class_id == 'card-img'){
+						if(class_id == 'card-img-top'){
 							
 							/* 재클릭한 영화는 배열에서 제거 */
 							$("#"+data+"img").attr('class','jk_card');
@@ -73,7 +74,7 @@
 							console.log(data + "클릭했습니다.");
 							movieArray.push(data);
 							console.log(movieArray.length+ "선택한 movie 수입니다.");
-							$("#"+data+"img").attr('class','card-img');
+							$("#"+data+"img").attr('class','card-img-top');
 						}
 						
 				    }
