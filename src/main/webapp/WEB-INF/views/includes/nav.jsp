@@ -1,3 +1,9 @@
+<%@page session="true"%>
+<%
+	response.setContentType("text/html");
+	request.setCharacterEncoding("utf-8");
+%>
+
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 	<a class="navbar-brand" href="/movie/recommend">Now Movie</a>
 
@@ -9,18 +15,26 @@
 				class="fas fa-user fa-fw"></i></a>
 			<div class="dropdown-menu dropdown-menu-right"
 				aria-labelledby="userDropdown">
-				    <!-- <a class="dropdown-item" href="#">Settings</a> -->
-				    <a class="dropdown-item" href="/schedule/list">manager page</a>
-				<div class="dropdown-divider"></div>
-				<form class="user" action="/nav" method='post'>
-					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-					<a class="dropdown-item" href="/customLogin">Logout</a>
-				</form>
-				<div>
-					<c:out value="${error}"/>
+				<!-- <a class="dropdown-item" href="#">Settings</a> -->
+				<div class="dropdown-item">
+					<c:out value="${sessionScope.USER_ID } : ${sessionScope.AUTH_ROLE}" />
 				</div>
-			</div>
-		</li>
+				<form class="user" action="/nav" method='post'>
+					<input type="hidden" name="${_csrf.parameterName }"
+						value="${_csrf.token }" /> <a class="dropdown-item"
+						href="/customLogin">Logout</a>
+				</form>
+				<a class="dropdown-item" href="/schedule/list"> <c:if
+						test="${sessionScope.AUTH_ROLE  eq 'ROLE_MANAGER'}">
+						<c:out value="admin page" />
+					</c:if> <c:if test="${sessionScope.AUTH_ROLE eq 'ROLE_ADMIN'}">
+						<c:out value="admin page" />
+					</c:if>
+				</a>
+				<div>
+					<c:out value="${error}" />
+				</div>
+			</div></li>
 	</ul>
 </nav>
 <div id="layoutSidenav">
@@ -38,8 +52,7 @@
 					<div class="sb-sidenav-menu-heading">Interface</div>
 					<a class="nav-link collapsed" href="#" data-toggle="collapse"
 						data-target="#collapseLayouts" aria-expanded="false"
-						aria-controls="collapseLayouts"><div
-							class="sb-nav-link-icon">
+						aria-controls="collapseLayouts"><div class="sb-nav-link-icon">
 							<i class="fas fa-columns"></i>
 						</div> Layouts
 						<div class="sb-sidenav-collapse-arrow">
@@ -55,8 +68,7 @@
 					</div>
 					<a class="nav-link collapsed" href="#" data-toggle="collapse"
 						data-target="#collapsePages" aria-expanded="false"
-						aria-controls="collapsePages"><div
-							class="sb-nav-link-icon">
+						aria-controls="collapsePages"><div class="sb-nav-link-icon">
 							<i class="fas fa-book-open"></i>
 						</div> Pages
 						<div class="sb-sidenav-collapse-arrow">

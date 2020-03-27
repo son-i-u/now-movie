@@ -1,6 +1,7 @@
 package com.soniu.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,9 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.soniu.service.MovieService;
 
@@ -22,53 +22,65 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/movie/*")
 @AllArgsConstructor
+@SessionAttributes({ "user_lat", "user_lon" })
 public class MovieController {
 
 	private MovieService movieService;
-	
+
 	@GetMapping("/getUserLocation")
-	public void test(Model model) {
-		
-		
+	public void location() {
+
 	}
 
-	/* jy */
+	@GetMapping("/nowMovie")
+	public String nowMovie(@RequestParam String movie_id) {
+
+		System.out.println("---now movie---");
+		System.out.println("--movie_id:" + movie_id + "--");
+		movieService.nowMovieInsert(movie_id, -1);
+
+		return "redirect:/movie/recommend";
+	}
+
 	@GetMapping("/recommend")
-	public void recommendPage(Model model) {
-		/* user session id , static cause error at server start */
+	public void recommendPage(Model model, HttpServletRequest request) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
-		
+
+		HttpSession session = request.getSession();
+		String user_lat = (String) session.getAttribute("user_lat");
+		String user_lon = (String) session.getAttribute("user_lon");
+
+		System.out.println("--session: " + user_lat + ", " + user_lon + "--");
+
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
-	
-	@PostMapping("/recommend")
-    public ModelAndView goStudent(HttpServletRequest httpServletRequest, Model model) {
-		/* user session id , static cause error at server start */
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String user_id = auth.getName();
-        log.info("RequestMethod.POST");
-        
-        String userLat = httpServletRequest.getParameter("userLat");
-        String userLon = httpServletRequest.getParameter("userLon");
-        System.out.println("---user : " + userLat + ", " + userLon);
-        
-        model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
-        model.addAttribute("preferList", movieService.getUserPrefer(user_id));
-        
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("movie/recommend");
-        mav.addObject("userLat", userLat);
-        mav.addObject("userLon", userLon);
-        
-        return mav; 
-    }
+
+	/*
+	 * @PostMapping("/recommend") public ModelAndView goStudent(HttpServletRequest
+	 * httpServletRequest, Model model) {
+	 * 
+	 * Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	 * String user_id = auth.getName(); log.info("RequestMethod.POST");
+	 * 
+	 * String userLat = httpServletRequest.getParameter("userLat"); String userLon =
+	 * httpServletRequest.getParameter("userLon"); System.out.println("---user : " +
+	 * userLat + ", " + userLon);
+	 * 
+	 * model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
+	 * model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.setViewName("movie/recommend");
+	 * mav.addObject("userLat", userLat); mav.addObject("userLon", userLon);
+	 * 
+	 * return mav; }
+	 */
 
 	/* jy */
 	@GetMapping("/info")
 	public void movieInfoPage(Model model, @RequestParam String id) {
-		
+
 		model.addAttribute("info", movieService.getMovieInfo(id));
 	}
 
@@ -100,7 +112,7 @@ public class MovieController {
 		log.info("movieEvaluateInsert called....");
 
 		movieService.preferInsert(movieArray, scoreArray);
-		
+
 		return "redirect:/movie/recommend";
 	}
 
@@ -110,10 +122,9 @@ public class MovieController {
 			@RequestParam("movieArray") String[] movieArray) {
 
 		log.info(movieArray.length + "개의 영화선호 선택됐습니다.");
-		
+
 		movieService.preferInsert(movieArray);
 
 		return "redirect:/movie/recommend";
 	}
-
 }

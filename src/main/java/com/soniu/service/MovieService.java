@@ -15,6 +15,7 @@ public interface MovieService {
 	public List<movie_VO> getMovieNotSee(String user_id);
 	
 	/* user_prefer */
+	public void nowMovieInsert(String movie_id, int score);
 	public void preferInsert(userPrefer_VO pr_vo);
 	public void preferInsert(String[] movieArray);
 	public void preferInsert(String[] movieArray, String[] scoreArray);

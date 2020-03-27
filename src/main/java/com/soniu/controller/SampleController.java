@@ -37,10 +37,15 @@ public class SampleController {
 	
 	@PostMapping("gpstest")
 	public String gpsGetTest(String lat, String lon, Model model) {
-		log.info("lat �Դϴ� : " + lat);
-		log.info("lon �Դϴ� : " + lon);
+		log.info("lat �Դϴ� : " + lat);
+		log.info("lon �Դϴ� : " + lon);
 		
 		return "return:/movie/recommend";
+	}
+	
+	@GetMapping("/APItest")
+	public void apiTest() {
+		
 	}
 
 }

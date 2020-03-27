@@ -21,6 +21,11 @@ public class CommonController {
 		
 		return "redirect:/customLogin";
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "/movie/APItest";
+	}
 
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {

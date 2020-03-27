@@ -16,6 +16,9 @@
 <script type="text/javascript">
 	/*로그인 안했으면 추천 페이지에 들어오지 못함 */
 	
+	console.log(sessionStorage.getItem('user_lon'));
+	console.log(sessionStorage.getItem('user_lat'));
+	
 	if ('${ loginID }' == "anonymousUser" || '${ loginID }' == null) {
 
 		self.location = "/customLogin";
@@ -30,6 +33,12 @@
 
 		location.href = '/movie/info?id=' + movie_id;
 	}
+	
+	function movieSelect(movie_nm, movie_id) {
+
+		alert(movie_nm + "을(를) 선택했습니다.");
+		location.href = '/movie/nowMovie?movie_id=' + movie_id;
+	}
 
 	///////////////////////////////////////
 	///////////LOCATION LOGIC//////////////
@@ -38,7 +47,7 @@
 	var jsonArr = new Array(); //모든 객체 저장 배열
 
 	/* 현재 위치를 저장할 변수 생성 */
-	var lat1 = '${userLat}', lon1 = '${userLon}';
+	var lat1 = sessionStorage.getItem('user_lon'), lon1 = sessionStorage.getItem('user_lat');
 	console.log("user location: " + lat1 + ", " + lon1);
 
 	/* calculate distance between coords */
@@ -118,13 +127,11 @@
 		
 		var card = document.createElement('div');
 
-		var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage('
-				+ prefer.movie_id
-				+ ');"><div class="row">'
-				+ '<div class="col-4">'
+		var itemStr = '<div class="card" style="max-width: 540px;"><div class="row">'
+				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;" onclick="toDetailPage(' + prefer.movie_id + ')">'
 				+ '<img src="<spring:url value="' + prefer.img_loc + '"/>"'
 				+ 'class="card-img" alt="..."></div>'
-				+ '<div class="col-8">'
+				+ '<div class="col-7">'
 				+ '<div class="card-body">'
 				+ '<h5 class="card-title">'
 				+ prefer.movie_nm
@@ -143,7 +150,10 @@
 				+ '<p class="card-text">'
 				+ '<small class="text-muted">'
 				+ prefer.left_min
-				+ '분 뒤 시작 </small></p>' + '</div></div></div></div>';
+				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;" onclick="movieSelect(\'' 
+						+ prefer.movie_nm + '\', ' + prefer.movie_id 
+				+ ');">영화 보기</button></p>' 
+				+ '</div></div></div></div>';
 
 		card.innerHTML = itemStr;
 		card.className = 'col-xl-6 col-lg-6 cardForm'
@@ -153,9 +163,11 @@
 
 	/* Create Movie Card */
 	function createMovieCard(limit) {
+		
 		var size = jsonArr.length;
 		for(var i = 0; i < size; i++){
-			printCard(jsonArr[i], i);
+			if(jsonArr[i].left_min <= limit)
+				printCard(jsonArr[i], i);
 		}
 
 		var last = document.createElement('p');
@@ -182,13 +194,15 @@
 	window.onload = function() {
 		createMovieCard(30);
 	}
+	
+	
 </script>
 
 <body class="sb-nav-fixed">
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
-			<h1 class="mt-4" >${ loginID }님,이런영화어때요?</h1>
+			<h3 class="mt-4" >${ loginID }님 맞춤 추천 영화</h1>
 			<ol class="breadcrumb mb-4">
 				<li>시작하기</li>
 				<li>
