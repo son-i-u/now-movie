@@ -73,17 +73,6 @@
 		});
 	}
 	
-
-	var callback2 = function(result, status) {
-	    if (status === kakao.maps.services.Status.OK) {
-
-	        console.log('지역 명칭 : ' + result[0].address_name);
-	        console.log('행정구역 코드 : ' + result[0].code);
-	    }
-	};
-	
-	geocoder.coord2RegionCode(126.8788277, 37.4915792, callback2);
-	
 	//비동기적 함수 호출
 	isGeoUseable()
 		.then(getUserLoc)

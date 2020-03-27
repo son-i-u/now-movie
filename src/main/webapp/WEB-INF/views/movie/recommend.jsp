@@ -30,6 +30,12 @@
 
 		location.href = '/movie/info?id=' + movie_id;
 	}
+	
+	function movieSelect(movie_nm, movie_id) {
+		
+		alert(movie_nm + "을 선택했습니다.");
+		location.href = '/movie/evaluate';
+	}
 
 	///////////////////////////////////////
 	///////////LOCATION LOGIC//////////////
@@ -121,10 +127,10 @@
 		var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage('
 				+ prefer.movie_id
 				+ ');"><div class="row">'
-				+ '<div class="col-4">'
+				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;">'
 				+ '<img src="<spring:url value="' + prefer.img_loc + '"/>"'
 				+ 'class="card-img" alt="..."></div>'
-				+ '<div class="col-8">'
+				+ '<div class="col-7">'
 				+ '<div class="card-body">'
 				+ '<h5 class="card-title">'
 				+ prefer.movie_nm
@@ -143,7 +149,7 @@
 				+ '<p class="card-text">'
 				+ '<small class="text-muted">'
 				+ prefer.left_min
-				+ '분 뒤 시작 </small></p>' + '</div></div></div></div>';
+				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;">영화 보기</button></p>' + '</div></div></div></div>';
 
 		card.innerHTML = itemStr;
 		card.className = 'col-xl-6 col-lg-6 cardForm'
@@ -153,9 +159,11 @@
 
 	/* Create Movie Card */
 	function createMovieCard(limit) {
+		
 		var size = jsonArr.length;
 		for(var i = 0; i < size; i++){
-			printCard(jsonArr[i], i);
+			if(jsonArr[i].left_min <= limit)
+				printCard(jsonArr[i], i);
 		}
 
 		var last = document.createElement('p');
@@ -188,7 +196,7 @@
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
-			<h1 class="mt-4" >${ loginID }님,이런영화어때요?</h1>
+			<h3 class="mt-4" >${ loginID }님 맞춤 추천 영화</h1>
 			<ol class="breadcrumb mb-4">
 				<li>시작하기</li>
 				<li>
