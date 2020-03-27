@@ -194,6 +194,8 @@
 	window.onload = function() {
 		createMovieCard(30);
 	}
+	
+	
 </script>
 
 <body class="sb-nav-fixed">

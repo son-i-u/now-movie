@@ -1,6 +1,8 @@
 <%@page session="true"%>
-<% response.setContentType("text/html");
-   request.setCharacterEncoding("utf-8");%> 
+<%
+	response.setContentType("text/html");
+	request.setCharacterEncoding("utf-8");
+%>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 	<a class="navbar-brand" href="/movie/recommend">Now Movie</a>
@@ -14,21 +16,21 @@
 			<div class="dropdown-menu dropdown-menu-right"
 				aria-labelledby="userDropdown">
 				<!-- <a class="dropdown-item" href="#">Settings</a> -->
-				<div class="dropdown-item"> <c:out
-						value="${sessionScope.USER_ID } : ${sessionScope.AUTH_ROLE}" />
-				</a> <a class="dropdown-item" href="/schedule/list"> <c:if
+				<div class="dropdown-item">
+					<c:out value="${sessionScope.USER_ID } : ${sessionScope.AUTH_ROLE}" />
+				</div>
+				<form class="user" action="/nav" method='post'>
+					<input type="hidden" name="${_csrf.parameterName }"
+						value="${_csrf.token }" /> <a class="dropdown-item"
+						href="/customLogin">Logout</a>
+				</form>
+				<a class="dropdown-item" href="/schedule/list"> <c:if
 						test="${sessionScope.AUTH_ROLE  eq 'ROLE_MANAGER'}">
 						<c:out value="admin page" />
 					</c:if> <c:if test="${sessionScope.AUTH_ROLE eq 'ROLE_ADMIN'}">
 						<c:out value="admin page" />
 					</c:if>
 				</a>
-				<div class="dropdown-divider"></div>
-				<form class="user" action="/nav" method='post'>
-					<input type="hidden" name="${_csrf.parameterName }"
-						value="${_csrf.token }" /> <a class="dropdown-item"
-						href="/customLogin">Logout</a>
-				</form>
 				<div>
 					<c:out value="${error}" />
 				</div>
