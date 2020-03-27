@@ -41,10 +41,10 @@ public class MovieController {
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
 	
-	
+	/*
 	@PostMapping("/recommend")
     public ModelAndView goStudent(HttpServletRequest httpServletRequest, Model model) {
-		/* user session id , static cause error at server start */
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
         log.info("RequestMethod.POST");
@@ -63,7 +63,8 @@ public class MovieController {
         
         return mav; 
     }
-
+	*/
+	
 	/* jy */
 	@GetMapping("/info")
 	public void movieInfoPage(Model model, @RequestParam String id) {

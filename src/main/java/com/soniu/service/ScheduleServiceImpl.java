@@ -1,17 +1,16 @@
 package com.soniu.service;
 
-import java.security.Principal;
-import java.util.Collection;
-import java.util.Iterator;
+import java.io.File;
 import java.util.List;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soniu.domain.Schedule_VO;
+import com.soniu.domain.movie_VO;
 import com.soniu.domain.page.Criteria;
 import com.soniu.mapper.ScheduleMapper;
 
@@ -46,35 +45,63 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return mapper.remove(schedule_id);
 	}
 
+
+
 	@Override
-	public String authCheck() {
-		/* user session id , static cause error at server start */
+	public void movieInsert(movie_VO mv, MultipartFile[] uploadFile) {
 
-		// 시큐리티 컨텍스트 객체를 얻습니다.
-		SecurityContext context = SecurityContextHolder.getContext();
+		/* 저장 위치 */
+		String uploadFolder = "C:\\image";
 
-		// 인증 객체를 얻습니다.
-		Authentication authentication = context.getAuthentication();
+		/* img_loc 을 위한 파싱 */
+		String img_loc = "/img/";
 
-		// 로그인한 사용자정보를 가진 객체를 얻습니다.
-		Object principal = authentication.getPrincipal();
+		for (MultipartFile multipartFile : uploadFile) {
+			log.info("------------------------------------------------");
+			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size :" + multipartFile.getSize());
 
-		// 사용자가 가진 모든 롤 정보를 얻습니다.
-		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+			/* 파일 타입 지정을 위한 파싱 */
+			String file_type = multipartFile.getContentType();
+			String[] type_parse = file_type.split("/");
 
-		Iterator<? extends GrantedAuthority> iter = authorities.iterator();
+			if (type_parse[1].equals("jpeg")) {
+				type_parse[1] = "jpg";
+			}
 
-		boolean member_check = false;
-		
-		while (iter.hasNext()) {
-			GrantedAuthority auth = iter.next();
-			System.out.println(auth.getAuthority().toString());
-			if (auth.getAuthority().toString().equals("ROLE_ADMIN")) {
-				member_check = !member_check;
+			/* 파일이름 movie_nm_en + jpg / png */
+			String file_name = mv.getMovie_nm_en() + "." + type_parse[1];
+
+			/* 파일 저장 */
+			File saveFile = new File(uploadFolder, file_name);
+
+			/* movie 객체 변경 */
+			img_loc = img_loc + file_name;
+			mv.setImg_loc(img_loc);
+
+			/* transferTo = 저장 */
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				log.error(e.getMessage());
 			}
 		}
 
+		mapper.movieInsert(mv);
+	}
 
+	@Override
+	public String authCheck(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String object_role = (String) session.getAttribute("AUTH_ROLE");
+
+		boolean member_check = false;
+
+		log.info(object_role + "입니다");
+		log.info(session);
+		if (object_role.equals("ROLE_ADMIN")) {
+			member_check = !member_check;
+		}
 		return Boolean.toString(member_check);
 	}
 
