@@ -15,6 +15,10 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
+			
+				<div>
+					 영화 다시 부르기<button class="btn" type="button" onclick="reload()"><img class="btn-img" src="/resources/images/icons/reload.png"></button>
+				</div>
 				<h1 class="mt-2">아래 영화중 재밌는 영화 있으셨나요? 고객님을 위한 추천 시스템에 이용됩니다.</h1>
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
@@ -79,7 +83,11 @@
 						
 				    }
 				 	
-				    
+					/* 새로고침 */
+				    function reload(){
+						location.reload();
+					}
+					
 				    // moviearray를 post로 전달
 				    function moviePost(){
 				    	
