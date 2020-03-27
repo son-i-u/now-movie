@@ -32,9 +32,9 @@
 	}
 	
 	function movieSelect(movie_nm, movie_id) {
-		
-		alert(movie_nm + "을 선택했습니다.");
-		location.href = '/movie/evaluate';
+
+		alert(movie_nm + "을(를) 선택했습니다.");
+		location.href = '/movie/nowMovie?movie_id=' + movie_id;
 	}
 
 	///////////////////////////////////////
@@ -124,10 +124,8 @@
 		
 		var card = document.createElement('div');
 
-		var itemStr = '<div class="card" style="max-width: 540px;" onclick="toDetailPage('
-				+ prefer.movie_id
-				+ ');"><div class="row">'
-				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;">'
+		var itemStr = '<div class="card" style="max-width: 540px;"><div class="row">'
+				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;" onclick="toDetailPage(' + prefer.movie_id + ')">'
 				+ '<img src="<spring:url value="' + prefer.img_loc + '"/>"'
 				+ 'class="card-img" alt="..."></div>'
 				+ '<div class="col-7">'
@@ -149,7 +147,10 @@
 				+ '<p class="card-text">'
 				+ '<small class="text-muted">'
 				+ prefer.left_min
-				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;">영화 보기</button></p>' + '</div></div></div></div>';
+				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;" onclick="movieSelect(\'' 
+						+ prefer.movie_nm + '\', ' + prefer.movie_id 
+				+ ');">영화 보기</button></p>' 
+				+ '</div></div></div></div>';
 
 		card.innerHTML = itemStr;
 		card.className = 'col-xl-6 col-lg-6 cardForm'
