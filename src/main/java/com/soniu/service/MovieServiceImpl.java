@@ -70,6 +70,20 @@ public class MovieServiceImpl implements MovieService {
 		log.info("Service user_id: " + user_id);
 		return userPreferMapper.getUserPrefer(user_id);
 	}
+	
+	public void nowMovieInsert(String movie_id, int score) {
+		
+		/* user session id , static cause error at server start */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user_id = auth.getName();
+		
+		userPrefer_VO uf = new userPrefer_VO();
+		uf.setUser_id(user_id);
+		uf.setMovie_id(movie_id);
+		uf.setScore(score);
+
+		userPreferMapper.insert(uf);
+	}
 
 	/* 처음 선호영화 선택, default score 4 */
 	@Override

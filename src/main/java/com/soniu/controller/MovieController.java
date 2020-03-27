@@ -27,9 +27,18 @@ public class MovieController {
 	private MovieService movieService;
 	
 	@GetMapping("/getUserLocation")
-	public void test(Model model) {
-		
-		
+	public void location() {
+
+	}
+	
+	@GetMapping("/nowMovie")
+	public String nowMovie(Model model, @RequestParam String movie_id) {
+
+		System.out.println("---now movie---");
+		System.out.println("--movie_id:" + movie_id + "--");
+		movieService.nowMovieInsert(movie_id, -1);
+
+		return "redirect:/movie/recommend";
 	}
 
 	@GetMapping("/recommend")
@@ -115,5 +124,4 @@ public class MovieController {
 
 		return "redirect:/movie/recommend";
 	}
-
 }
