@@ -16,6 +16,9 @@
 <script type="text/javascript">
 	/*로그인 안했으면 추천 페이지에 들어오지 못함 */
 	
+	console.log(sessionStorage.getItem('user_lon'));
+	console.log(sessionStorage.getItem('user_lat'));
+	
 	if ('${ loginID }' == "anonymousUser" || '${ loginID }' == null) {
 
 		self.location = "/customLogin";
@@ -44,7 +47,7 @@
 	var jsonArr = new Array(); //모든 객체 저장 배열
 
 	/* 현재 위치를 저장할 변수 생성 */
-	var lat1 = '${userLat}', lon1 = '${userLon}';
+	var lat1 = sessionStorage.getItem('user_lon'), lon1 = sessionStorage.getItem('user_lat');
 	console.log("user location: " + lat1 + ", " + lon1);
 
 	/* calculate distance between coords */
