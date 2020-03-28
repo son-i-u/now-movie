@@ -13,11 +13,37 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d101820d01fc7c6e277e618c7103d0b1&libraries=services"></script>
 
+<body class="sb-nav-fixed">
+	<%@ include file="../includes/nav.jsp"%>
+	<div id="layoutSidenav_content">
+		<div class="container-fluid">
+			<h3 class="mt-4" >${ loginID }님 맞춤 추천 영화</h1>
+			<ol class="breadcrumb mb-4">
+				<li>시작하기</li>
+				<li>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">30분</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" onclick="timeLimit('30분')">30분</a> <a
+								class="dropdown-item" onclick="timeLimit('1시간')">1시간</a> <a
+								class="dropdown-item" onclick="timeLimit('2시간')">2시간</a>
+						</div>
+					</div>
+				</li>
+				<li>이내의 영화입니다.
+					<image onclick="refresh();" src="/resources/images/icons/reload.png" style="height: 20px; width: 20px"></image>
+				</li>
+			</ol>
+
+			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
+			<div class="row" id="cardContainer"></div>
+		</div>
+	</div>
+	
 <script type="text/javascript">
 	/*로그인 안했으면 추천 페이지에 들어오지 못함 */
-	
-	console.log(sessionStorage.getItem('user_lon'));
-	console.log(sessionStorage.getItem('user_lat'));
 	
 	if ('${ loginID }' == "anonymousUser" || '${ loginID }' == null) {
 
@@ -39,6 +65,11 @@
 		alert(movie_nm + "을(를) 선택했습니다.");
 		location.href = '/movie/nowMovie?movie_id=' + movie_id;
 	}
+	
+	function refresh() {
+		
+		location.href="/movie/refresh";
+	}
 
 	///////////////////////////////////////
 	///////////LOCATION LOGIC//////////////
@@ -47,7 +78,8 @@
 	var jsonArr = new Array(); //모든 객체 저장 배열
 
 	/* 현재 위치를 저장할 변수 생성 */
-	var lat1 = sessionStorage.getItem('user_lon'), lon1 = sessionStorage.getItem('user_lat');
+	var lat1 = sessionStorage.getItem('user_lat');
+	var lon1 = sessionStorage.getItem('user_lon');
 	console.log("user location: " + lat1 + ", " + lon1);
 
 	/* calculate distance between coords */
@@ -197,32 +229,6 @@
 	
 	
 </script>
-
-<body class="sb-nav-fixed">
-	<%@ include file="../includes/nav.jsp"%>
-	<div id="layoutSidenav_content">
-		<div class="container-fluid">
-			<h3 class="mt-4" >${ loginID }님 맞춤 추천 영화</h1>
-			<ol class="breadcrumb mb-4">
-				<li>시작하기</li>
-				<li>
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">30분</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" onclick="timeLimit('30분')">30분</a> <a
-								class="dropdown-item" onclick="timeLimit('1시간')">1시간</a> <a
-								class="dropdown-item" onclick="timeLimit('2시간')">2시간</a>
-						</div>
-					</div>
-				</li>
-				<li>이내의 영화입니다.</li>
-			</ol>
-
-			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
-			<div class="row" id="cardContainer"></div>
-		</div>
-	</div>
+	
 </body>
 </html>
