@@ -19,10 +19,15 @@
 				<div class="dropdown-item">
 					<c:out value="${sessionScope.USER_ID } : ${sessionScope.AUTH_ROLE}" />
 				</div>
-				<form class="user" action="/nav" method='post'>
-					<input type="hidden" name="${_csrf.parameterName }"
+				<a class="dropdown-item" href="/movie/evaluate"> evalaute
+				</a>
+				<form class="user" action="/logout_force" method='post'>
+					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token }" /> <a class="dropdown-item"
 						href="/customLogin">Logout</a>
+
+					<!-- 접근 거부방지를 위한 -->
+					<sec:csrfInput />
 				</form>
 				<a class="dropdown-item" href="/schedule/list"> <c:if
 						test="${sessionScope.AUTH_ROLE  eq 'ROLE_MANAGER'}">

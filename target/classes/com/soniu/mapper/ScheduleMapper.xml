@@ -31,5 +31,9 @@
 	<delete id="remove">
 		delete from schedule where schedule_id = #{schedule_id}
 	</delete>
+	
+	<select id="getScheduleSize" resultType="int">
+		select count(*) from schedule
+	</select>
 
 </mapper>

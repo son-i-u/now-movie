@@ -12,13 +12,11 @@
 <%@ include file="../includes/header.jsp"%>
 
 <script type="text/javascript">
-	
 	var jungu_array = new Array(2).fill(false);
 
 	/* 입력 정규식 */
 	var start_timeJ = /^([0-9]{3,4})-?([0-9]{2})-?([0-9]{2}) ?([0-9]{2}):?([0-9]{2}):?([0-9]{2})$/;
-	var end_timeJ   = /^([0-9]{3,4})-?([0-9]{2})-?([0-9]{2}) ?([0-9]{2}):?([0-9]{2}):?([0-9]{2})$/;
-
+	var end_timeJ = /^([0-9]{3,4})-?([0-9]{2})-?([0-9]{2}) ?([0-9]{2}):?([0-9]{2}):?([0-9]{2})$/;
 
 	$(document).ready(function() {
 
@@ -31,7 +29,7 @@
 				$('#start_tm_check').css('color', 'red');
 			}
 		});
-		
+
 		$('#end_time').blur(function() {
 			if (end_timeJ.test($(this).val())) {
 				$("#end_tm_check").text('');
@@ -51,7 +49,7 @@
 		var movie_idn = $("#movie_id").val();
 		var start_timen = $("#start_time").val();
 		var end_timen = $("#end_time").val();
-		
+
 		/* 입력 항목 확인 */
 		if (theator_idn == "" || movie_idn == "" || start_timen == ""
 				|| end_time == "") {
@@ -60,15 +58,17 @@
 		}
 
 		/* 정규식 확인 */
-		for(var i=0; i<jungu_array.length; i++){
-			if(jungu_array[i] == false){
+		for (var i = 0; i < jungu_array.length; i++) {
+			if (jungu_array[i] == false) {
 				alert('형식을 맞춰주세요');
 				return;
 			}
 		}
+
 		
 		var formObj = $("form");
 		$(document.body).append(formObj);
+
 		formObj.submit();
 	};
 </script>
@@ -102,24 +102,21 @@
 					<div class="form-group">
 						<label>end_time</label> <input class="form-control"
 							name='end_time' id='end_time' placeholder="yyyy-mm-dd hh:mi:ss">
-							<div class="eheck_font" id="end_tm_check"></div>
+						<div class="eheck_font" id="end_tm_check"></div>
 					</div>
-
-					<button type="button" onclick="submit_check()"
-						class="btn btn-default">Submit Button</button>
-					<button type="reset" class="btn btn-default">Reset Button</button>
 
 					<!-- 접근 거부방지를 위한 -->
 					<sec:csrfInput />
+
+					<button type="submit" 
+						class="btn btn-default">Submit Button</button>
+					<button type="reset" class="btn btn-default">Reset Button</button>
+
 				</form>
 
 			</div>
 		</main>
 	</div>
-
-
-
-
 
 </body>
 </html>

@@ -38,8 +38,9 @@ public class ScheduleController {
 		
 		/* 스케쥴 리스트와 페이징을 리스트 길이 */
 		List<Schedule_VO> svList = service.getList(cri);
-		int svList_len = svList.size();
+		int svList_len = service.getScheduleSize();
 
+		log.info(svList_len+ "사이즈 입니다");
 		model.addAttribute("auth", service.authCheck(request));
 		model.addAttribute("list", svList);
 		model.addAttribute("pageMaker", new PageDTO(cri, svList_len));
