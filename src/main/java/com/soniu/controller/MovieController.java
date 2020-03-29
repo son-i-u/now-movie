@@ -27,6 +27,12 @@ public class MovieController {
 
 	private MovieService movieService;
 
+	@GetMapping("/refresh")
+	public String location() {
+
+		return "redirect:/movie/recommend";
+	}
+
 	@GetMapping("/nowMovie")
 	public String nowMovie(@RequestParam String movie_id) {
 
