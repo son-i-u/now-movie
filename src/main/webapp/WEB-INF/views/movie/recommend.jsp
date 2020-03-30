@@ -229,7 +229,7 @@
 				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;" onclick="toDetailPage(' + prefer.movie_id + ')">'
 				+ '<img src="<spring:url value="' + prefer.img_loc + '"/>"'
 				+ 'class="card-img" alt="..."></div>'
-				+ '<div class="col-7">'
+				+ '<div class="col-7" style="padding-left: 0px;">'
 				+ '<div class="card-body">'
 				+ '<h5 class="card-title">'
 				+ prefer.movie_nm
@@ -237,20 +237,19 @@
 				+ '<p class="card-text">주연:'
 				+ prefer.actor
 				+ '</p>'
-				+ '<p class="card-text">'
-				+ '<small class="text-muted">'
+				+ '<p class="card-text" style="margin: 0px;"><small class="text-muted">'
 				+ prefer.theator_nm
 				+ ' '
 				+ '<label id="distance' + i + '">'
 				+ prefer.distance
 				+ '</label>'
 				+ '</small></p>'
-				+ '<p class="card-text">'
-				+ '<small class="text-muted">'
+				+ '<p class="card-text" style="margin: 0px;"><small class="text-muted">'
 				+ prefer.left_min
-				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;" class="txt1" onclick="movieSelect(\'' 
+				+ '분 뒤 시작 </small></p>'
+				+'<button id="select" class="login100-form-btn" onclick="movieSelect(\'' 
 						+ prefer.movie_nm + '\', ' + prefer.movie_id + ', ' + prefer.schedule_id
-				+ ');">영화 보기</button></p>' 
+				+ ');">영화 보기</button>' 
 				+ '</div></div></div></div>';
 
 		card.innerHTML = itemStr;

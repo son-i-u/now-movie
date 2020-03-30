@@ -17,7 +17,7 @@
 			<div class="container-fluid">
 			
 				<div>
-					 영화 다시 부르기<button class="btn" type="button" onclick="reload()"><img class="btn-img" src="/resources/images/icons/reload.png"></button>
+					 영화 다시 부르기<button class="btn" type="button" onclick="reload()"><img class="btn-img" src="/resources/images/icons/reload.png"  style="height: 20px; width: 20px"></button>
 				</div>
 				<h1 class="mt-2">아래 영화중 재밌는 영화 있으셨나요? 고객님을 위한 추천 시스템에 이용됩니다.</h1>
 
@@ -28,7 +28,7 @@
 							${movie.movie_nm } <a id="${movie.movie_id }"
 								onclick="movieselect(${movie.movie_id}); "> <img
 								src="<spring:url value="${movie.img_loc }"/>" alt="..."
-								id="${movie.movie_id}img" class="jk_card">
+								id="${movie.movie_id}img" class="jk_card" style="height: 230px; width: 310px">
 						</div>
 						
 					</c:forEach>
@@ -38,7 +38,11 @@
 
 				</div>
 				<!-- 제출 버튼 -->
-				<button class='submit_btn' type="button" onclick="moviePost()">submit</button>
+				<div class="container-login100-form-btn m-t-17">
+					<button class='submit_btn login100-form-btn' type="button" onclick="moviePost()" style="margin: 30px 0px">
+						submit
+					</button>
+				</div>
 			</div>
 		</main>
 	</div>
