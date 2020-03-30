@@ -29,7 +29,7 @@ public class MovieController {
 
 	@GetMapping("/refresh")
 	public String location() {
-		
+
 		return "redirect:/movie/recommend";
 	}
 

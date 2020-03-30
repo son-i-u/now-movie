@@ -15,6 +15,7 @@ public interface ScheduleService {
 	public void insertSchedule(Schedule_VO sv);
 	public boolean remove(String schedule_id);
 	public String authCheck(HttpServletRequest request);
+	public int getScheduleSize();
 	
 	/*movie*/
 	public void movieInsert(movie_VO mv, MultipartFile[] uploadFile);

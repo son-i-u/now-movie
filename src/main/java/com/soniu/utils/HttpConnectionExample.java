@@ -19,7 +19,7 @@ public class HttpConnectionExample {
 
 	public static void main(String[] args) {
 		//함수 test
-		get("http://127.0.0.1:8090/CF", "user10");
+		get("http://127.0.0.1:8090/CF", "senok80001");
 
 	}
 
