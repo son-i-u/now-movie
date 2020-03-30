@@ -60,10 +60,28 @@
 		location.href = '/movie/info?id=' + movie_id;
 	}
 	
-	function movieSelect(movie_nm, movie_id) {
-
-		alert(movie_nm + "을(를) 선택했습니다.");
-		location.href = '/movie/nowMovie?movie_id=' + movie_id;
+	function movieSelect(movie_nm, movie_id, schedule_id) {
+		var user_watching = sessionStorage.getItem('user_watching');
+		
+		if(sessionStorage.getItem('schedule_id') == schedule_id){
+			alert("이미 이 영화를 보고 있습니다.");
+		}
+		else if(user_watching == 'false'){
+			alert(movie_nm + "을(를) 선택했습니다.");
+			sessionStorage.setItem('schedule_id', schedule_id);
+			//location.href = '/movie/nowMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id;
+		}
+		else {
+			var result = confirm("이미 보고있는 영화가 있습니다. 이 영화로 바꾸시겠습니까?");
+			
+			if(result){
+				alert("지금 보고있는 영화를 바꿉니다.");
+				location.href = '/movie/changeMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id
+						+ '&prev_schedule=' + String(sessionStorage.getItem('schedule_id'));
+			}else{
+				alert("영화 그대로 두기");
+			}
+		}
 	}
 	
 	function refresh() {
@@ -134,6 +152,7 @@
 		json.latitude = '${ prefer.latitude }';
 		json.longitude = '${ prefer.longitude }';
 	
+		json.schedule_id = '${ prefer.schedule_id }';
 		json.start_time = '${ prefer.start_time }';
 		json.end_time = '${ prefer.end_time }';
 		json.left_min = '${ prefer.left_min }';	
@@ -146,7 +165,54 @@
 	///////////////////////////////////////
 	///////////HTML TAG MAKING/////////////
 	///////////////////////////////////////
+	
+	/* 현재 시간 설정 */
+    var nowTime = new Date();	
+	var nowString = String(nowTime);
+	var now_hour, now_min;
+	now_hour = Number(nowString.substring(16, 18));
+	now_min = Number(nowString.substring(19, 21));
+	sessionStorage.setItem('user_watching', 'false');
 
+	function isUserWatching(movieTime, schedule_id) {
+		var movie_hour, movie_min;
+		movie_hour = Number(movieTime.substring(11, 13));
+		movie_min = Number(movieTime.substring(14, 16));
+		
+		if(movie_hour > now_hour){
+			console.log(movie_hour - now_hour + "시간 남음: 영화가 아직 끝나지 않았습니다.");
+			sessionStorage.setItem('user_watching', 'true');
+			sessionStorage.setItem('movie_hour', movie_hour);
+			sessionStorage.setItem('movie_min', movie_min);
+			sessionStorage.setItem('schedule_id', schedule_id);
+			console.log("지금 보고있는 영화: " + sessionStorage.getItem('schedule_id'));
+		}
+		else if(movie_hour == now_hour) {
+			if(movie_min > now_min){
+				console.log(movie_min - now_min + "분 남음: 영화가 아직 끝나지 않았습니다.");
+				sessionStorage.setItem('schedule_id', schedule_id);
+			}
+		}
+		else{
+			console.log("지금 보고 있는 영화가 없습니다.");
+		}	
+	}
+	
+	<c:forEach items="${ preferScheduleList }" var="preferSchedule">
+		//다 String으로 끊어서 비교하면 될듯~!
+		if("${preferSchedule.score}" < 0){
+			console.log("평가하지 않은 영화가 있습니다.");
+			isUserWatching(String('${preferSchedule.end_time}'), String("${preferSchedule.schedule_id}"));
+		}	
+		
+		console.log("end: " + "${preferSchedule.end_time}");
+		console.log("now: " + nowTime);
+		console.log(typeof("${preferSchedule.end_time}"));
+		
+		console.log("${preferSchedule.end_time}" >= nowTime);
+		console.log("${preferSchedule.end_time}" < nowTime);
+	</c:forEach>	
+	
 	/* Delete all movie info card */
 	function removeAllChildNodes(element) {
 
@@ -183,7 +249,7 @@
 				+ '<small class="text-muted">'
 				+ prefer.left_min
 				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;" onclick="movieSelect(\'' 
-						+ prefer.movie_nm + '\', ' + prefer.movie_id 
+						+ prefer.movie_nm + '\', ' + prefer.movie_id + ', ' + prefer.schedule_id
 				+ ');">영화 보기</button></p>' 
 				+ '</div></div></div></div>';
 

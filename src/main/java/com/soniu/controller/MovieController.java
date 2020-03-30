@@ -34,11 +34,21 @@ public class MovieController {
 	}
 
 	@GetMapping("/nowMovie")
-	public String nowMovie(@RequestParam String movie_id) {
+	public String nowMovie(@RequestParam String movie_id, @RequestParam String schedule_id) {
 
 		System.out.println("---now movie---");
-		System.out.println("--movie_id:" + movie_id + "--");
-		movieService.nowMovieInsert(movie_id, -1);
+		System.out.println("--movie:" + movie_id + ", schedule" + schedule_id + "--");
+		movieService.nowMovieInsert(movie_id, -1, schedule_id);
+
+		return "redirect:/movie/recommend";
+	}
+	
+	@GetMapping("/changeMovie")
+	public String changeMovie(@RequestParam String movie_id, @RequestParam String schedule_id, @RequestParam String prev_schedule) {
+
+		System.out.println("---change movie---");
+		System.out.println("--movie:" + movie_id + ", schedule" + schedule_id + "--");
+		movieService.nowMovieChange(movie_id, schedule_id, prev_schedule);
 
 		return "redirect:/movie/recommend";
 	}
@@ -55,6 +65,7 @@ public class MovieController {
 		System.out.println("--session: " + user_lat + ", " + user_lon + "--");
 
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+		model.addAttribute("preferScheduleList", movieService.getUserPreferSchedule(user_id));
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
 
