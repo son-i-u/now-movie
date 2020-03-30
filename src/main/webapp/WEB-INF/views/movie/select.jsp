@@ -15,11 +15,13 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-			
-				<div>
-					 영화 다시 부르기<button class="btn" type="button" onclick="reload()"><img class="btn-img" src="/resources/images/icons/reload.png"  style="height: 20px; width: 20px"></button>
-				</div>
-				<h1 class="mt-2">아래 영화중 재밌는 영화 있으셨나요? 고객님을 위한 추천 시스템에 이용됩니다.</h1>
+				<h1>선호 영화 선택</h1>
+				<p>고객님을 위한 추천 시스템에 이용됩니다.</p>
+				<ol class="breadcrumb mb-4">
+					<li>영화 다시 부르기
+						<button class="btn" type="button" onclick="reload()"><img class="btn-img" src="/resources/images/icons/reload.png"  style="height: 20px; width: 20px"></button>
+					</li>
+				</ol>
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row">
@@ -39,7 +41,7 @@
 				</div>
 				<!-- 제출 버튼 -->
 				<div class="container-login100-form-btn m-t-17">
-					<button class='submit_btn login100-form-btn' type="button" onclick="moviePost()" style="margin: 30px 0px">
+					<button class='submit_btn login100-form-btn' type="button" onclick="moviePost()" style="margin: 30px 0px; float:right;">
 						submit
 					</button>
 				</div>
