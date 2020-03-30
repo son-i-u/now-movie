@@ -69,7 +69,7 @@
 		else if(user_watching == 'false'){
 			alert(movie_nm + "을(를) 선택했습니다.");
 			sessionStorage.setItem('schedule_id', schedule_id);
-			//location.href = '/movie/nowMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id;
+			location.href = '/movie/nowMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id;
 		}
 		else {
 			var result = confirm("이미 보고있는 영화가 있습니다. 이 영화로 바꾸시겠습니까?");
@@ -79,7 +79,7 @@
 				location.href = '/movie/changeMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id
 						+ '&prev_schedule=' + String(sessionStorage.getItem('schedule_id'));
 			}else{
-				alert("영화 그대로 두기");
+				alert(movie_nm + "을(를) 그대로 시청합니다.");
 			}
 		}
 	}
