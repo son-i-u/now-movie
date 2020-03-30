@@ -9,6 +9,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <%@ include file="../includes/header.jsp"%>
 <body class="sb-nav-fixed">
 	<%@ include file="../includes/nav.jsp"%>
@@ -52,8 +55,15 @@
 					</div>
 				</div>
 			</c:forEach>
-			<!-- 제출 버튼 -->
-			<button type="button" onclick="selectPost()">submit</button>
+
+			<div class="login100-form validate-form flex-sb flex-w">
+				<!-- 제출 버튼 -->
+				<button class='login100-form-btn' type="button"
+					onclick="selectPost()">제출</button>
+				<span class="focus-input100"></span>
+			</div>
+
+
 		</main>
 	</div>
 
@@ -61,7 +71,8 @@
 				var movieArray = new Array();
 				var scoreArray = new Array();
 				
-	    		var $form = $('<form></form>');
+	    		var $form = $('
+	<form></form>');
 	    		$(document.body).append($form);
 				
 				$(document).ready(
@@ -123,7 +134,8 @@
 					    	$form.submit();
 				    	}
 				    }
-							
+		
+				    
 </script>
 </body>
 </html>

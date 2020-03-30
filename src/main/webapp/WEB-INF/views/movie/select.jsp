@@ -15,14 +15,23 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-			
-				<div>
-					 영화 다시 부르기<button class="btn" type="button" onclick="reload()"><img class="btn-img" src="/resources/images/icons/reload.png"></button>
+
+				<div style="margin-top: 10%;"></div>
+				<div style="text-align: right;">
+					영화 다시 부르기
+					<button class="btn" type="button" onclick="reload()">
+						<img class="btn-img" src="/resources/images/icons/reload.png"
+							style="height: 20px; width: 20px">
+					</button>
 				</div>
-				<h1 class="mt-2">아래 영화중 재밌는 영화 있으셨나요? 고객님을 위한 추천 시스템에 이용됩니다.</h1>
+
+				<div style="font-size: 1.5em;">
+					아래 영화중 재밌는 영화 있으셨나요? <br>고객님을 위한 추천 시스템에 이용됩니다.
+				</div>
+
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
-				<div class="row">
+				<div class="row" style="margin-top: 3%;">
 					<c:forEach items="${list }" var="movie">
 						<div class="col-xl-2 col-md-3" id="${movie.movie_id }">
 							${movie.movie_nm } <a id="${movie.movie_id }"
@@ -30,20 +39,46 @@
 								src="<spring:url value="${movie.img_loc }"/>" alt="..."
 								id="${movie.movie_id}img" class="jk_card">
 						</div>
-						
+
 					</c:forEach>
 
 					<!-- 접근 거부방지를 위한 -->
 					<sec:csrfInput />
 
 				</div>
-				<!-- 제출 버튼 -->
-				<button class='submit_btn' type="button" onclick="moviePost()">submit</button>
+
+				<div class="login100-form validate-form flex-sb flex-w">
+					<!-- 제출 버튼 -->
+					<button class='login100-form-btn' type="button"
+						onclick="moviePost()">제출</button>
+					<span class="focus-input100"></span>
+				</div>
+
 			</div>
 		</main>
 	</div>
 
+	<style>
+.col-xl-2 {
+	font-size: 1em;
+	font-weight: bold; margin-top : 5%;
+	font-family: 돋움;
+	margin-top: 5%;
+}
 
+.login100-form {
+	text-align: center;
+	margin-top: 30px;
+	padding-right: 40%;
+	padding-left: 40%;
+	height: 5%;
+}
+
+.login100-form-btn {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+</style>
 
 	<script type="text/javascript">
 

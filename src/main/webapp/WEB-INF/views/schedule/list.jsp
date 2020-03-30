@@ -18,6 +18,7 @@
 			<button id='regBtn' type="button" class="btn btn-xs pull-right">Register
 				New Schedule</button>
 			<div class="container-fluid">
+				<div style="margin-top: 10%;"></div>
 
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
@@ -30,7 +31,7 @@
 							<c:if test="${auth == 'true'}">
 								<th>삭제버튼</th>
 							</c:if>
-							
+
 						</tr>
 					</thead>
 
