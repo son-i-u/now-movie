@@ -20,6 +20,7 @@ public class movieLocationSchedule_VO {
 	private double latitude;
 	private double longitude;
 	
+	private String schedule_id;
 	private Date start_time;
 	private Date end_time;
 	private int left_min;

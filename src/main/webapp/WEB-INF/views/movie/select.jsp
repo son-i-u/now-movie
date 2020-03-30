@@ -16,18 +16,16 @@
 		<main>
 			<div class="container-fluid">
 
-				<div style="margin-top: 10%;"></div>
-				<div style="text-align: right;">
-					영화 다시 부르기
-					<button class="btn" type="button" onclick="reload()">
-						<img class="btn-img" src="/resources/images/icons/reload.png"
-							style="height: 20px; width: 20px">
-					</button>
-				</div>
-
-				<div style="font-size: 1.5em;">
-					아래 영화중 재밌는 영화 있으셨나요? <br>고객님을 위한 추천 시스템에 이용됩니다.
-				</div>
+				<h1>선호 영화 선택</h1>
+				<p>고객님을 위한 추천 시스템에 이용됩니다.</p>
+				<ol class="breadcrumb mb-4">
+					<li>영화 다시 부르기
+						<button class="btn" type="button" onclick="reload()">
+							<img class="btn-img" src="/resources/images/icons/reload.png"
+								style="height: 20px; width: 20px">
+						</button>
+					</li>
+				</ol>
 
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
@@ -37,7 +35,8 @@
 							${movie.movie_nm } <a id="${movie.movie_id }"
 								onclick="movieselect(${movie.movie_id}); "> <img
 								src="<spring:url value="${movie.img_loc }"/>" alt="..."
-								id="${movie.movie_id}img" class="jk_card">
+								id="${movie.movie_id}img" class="jk_card"
+								style="height: 230px; width: 310px">
 						</div>
 
 					</c:forEach>
@@ -47,11 +46,11 @@
 
 				</div>
 
-				<div class="login100-form validate-form flex-sb flex-w">
-					<!-- 제출 버튼 -->
-					<button class='login100-form-btn' type="button"
-						onclick="moviePost()">제출</button>
-					<span class="focus-input100"></span>
+				<!-- 제출 버튼 -->
+				<div class="container-login100-form-btn m-t-17">
+					<button class='submit_btn login100-form-btn' type="button"
+						onclick="moviePost()" style="margin: 30px 0px; float: right;">
+						submit</button>
 				</div>
 
 			</div>
@@ -61,7 +60,8 @@
 	<style>
 .col-xl-2 {
 	font-size: 1em;
-	font-weight: bold; margin-top : 5%;
+	font-weight: bold;
+	margin-top: 5%;
 	font-family: 돋움;
 	margin-top: 5%;
 }

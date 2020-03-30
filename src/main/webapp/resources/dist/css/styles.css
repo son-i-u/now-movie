@@ -997,7 +997,7 @@ pre code {
 	}
 }
 
-@media ( min-width : 100px) {
+@media ( min-width : 768px) {
 	.col-md {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -1163,7 +1163,7 @@ pre code {
 	}
 }
 
-@media ( min-width : 100px) {
+@media ( min-width : 992px) {
 	.col-lg {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -4597,18 +4597,11 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 }
 
 
-.card-img{
+.card-img, .card-img-top {
 	border-top-left-radius: calc(0.25rem - 1px);
 	border-top-right-radius: calc(0.25rem - 1px);
 }
 
-.card-img-top{
-	filter: brightness(50%);
-	border-top-left-radius: calc(0.25rem - 1px);
-	border-top-right-radius: calc(0.25rem - 1px);
-} 
-
-	
 .card-img, .card-img-bottom {
 	border-bottom-right-radius: calc(0.25rem - 1px);
 	border-bottom-left-radius: calc(0.25rem - 1px);

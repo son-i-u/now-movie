@@ -7,4 +7,5 @@ public class userPrefer_VO {
 	private String user_id;
 	private String movie_id;
 	private int score;
+	public String schedule_id;
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -18,51 +18,50 @@
 
 	<div id="layoutSidenav_content">
 		<main>
+			<h2 class="center">ì˜í™” í‰ê°€</h2>
 			<c:forEach items="${mncList}" var="movie">
-				<div class="center-form">
+				<div class="wrap-login100 p-t-50 p-b-90 center">
 					<img src="<spring:url value="${movie.img_loc }"/>"
-						class="movie-img" alt="...">
-
-					<!-- Æò°¡¹öÆ° -->
-					<div class="form-group">
-						<label>¾ó¸¶³ª Áñ°Å¿ì¼Ì³ª¿ä?</label>
-						<div class="checkbox">
+						class="movie-img score-inline" alt="..."
+						style="height: 230px; width: 310px; margin: 16px 16px 16px 0px;">
+					<!-- í‰ê°€ë²„íŠ¼ -->
+					<div class="form-group"
+						style="text-align: center; margin-right: 16px;">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'1')">1Á¡
+								onclick="movieScore(${movie.movie_id},'1')"> 1ì 
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'2')">2Á¡
+								onclick="movieScore(${movie.movie_id},'2')"> 2ì 
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'3')">3Á¡
+								onclick="movieScore(${movie.movie_id},'3')"> 3ì 
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'4')">4Á¡
+								onclick="movieScore(${movie.movie_id},'4')"> 4ì 
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'5')">5Á¡
+								onclick="movieScore(${movie.movie_id},'5')"> 5ì 
 							</label>
 						</div>
-
 					</div>
 				</div>
 			</c:forEach>
 
-			<div class="login100-form validate-form flex-sb flex-w">
-				<!-- Á¦Ãâ ¹öÆ° -->
-				<button class='login100-form-btn' type="button"
-					onclick="selectPost()">Á¦Ãâ</button>
-				<span class="focus-input100"></span>
+			<!-- ì œì¶œ ë²„íŠ¼ -->
+			<div class="container-login100-form-btn m-t-17">
+				<button type="button" onclick="selectPost()"
+					class="login100-form-btn" style="margin: 10px 0px">submit
+				</button>
 			</div>
-
 
 		</main>
 	</div>
@@ -71,8 +70,7 @@
 				var movieArray = new Array();
 				var scoreArray = new Array();
 				
-	    		var $form = $('
-	<form></form>');
+	    		var $form = $('<form></form>');
 	    		$(document.body).append($form);
 				
 				$(document).ready(
@@ -81,9 +79,9 @@
 				});
 							
 			
-				     /*Å¬¸¯½Ã ¿µÈ­Á¡¼ö ¹è¿­¿¡ Ãß°¡ */
+				     /*í´ë¦­ì‹œ ì˜í™”ì ìˆ˜ ë°°ì—´ì— ì¶”ê°€ */
 				    function movieScore(data, score) {
-				    	console.log('µ¥ÀÌÅÍ°¡ Ãß°¡µË´Ï´Ù.');
+				    	console.log('ë°ì´í„°ê°€ ì¶”ê°€ë©ë‹ˆë‹¤.');
 
 						const idx = movieArray.indexOf(data);
 						if ( idx > -1 ){
@@ -94,33 +92,33 @@
 						movieArray.push(data);
 						scoreArray.push(score);
 						
-						console.log(movieArray.length + "movieArray length ÀÔ´Ï´Ù.");
-						console.log(scoreArray.length + "scoreArray length ÀÔ´Ï´Ù.");
+						console.log(movieArray.length + "movieArray length ì…ë‹ˆë‹¤.");
+						console.log(scoreArray.length + "scoreArray length ì…ë‹ˆë‹¤.");
 				    }
 				  
-				    /* post·Î Àü´Ş */
+				    /* postë¡œ ì „ë‹¬ */
 				    function selectPost(){
 				    	
-				    	/* ¼±ÅÃ ¿µÈ­ ¾øÀ» ½Ã °æ°í ¾Ë¸² */
+				    	/* ì„ íƒ ì˜í™” ì—†ì„ ì‹œ ê²½ê³  ì•Œë¦¼ */
 				    	if(movieArray.length == 0){
-				    		 var delConfirm = confirm('Æò°¡ÇÏ½Å ¿µÈ­°¡ ¾ø½À´Ï´Ù. °è¼Ó ÁøÇàÇÏ½Ã°Ú½À´Ï±î?');
+				    		 var delConfirm = confirm('í‰ê°€í•˜ì‹  ì˜í™”ê°€ ì—†ìŠµë‹ˆë‹¤. ê³„ì† ì§„í–‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 				    		   if (delConfirm) {
 				    			   self.location="/movie/recommend";
 				    		   }
 				    		   else {
-				    		      /* Ãë¼ÒÇÏ°í ¿µÈ­ Æò°¡ ´Ù½Ã ÁøÇà */
+				    		      /* ì·¨ì†Œí•˜ê³  ì˜í™” í‰ê°€ ë‹¤ì‹œ ì§„í–‰ */
 				    		   }
 				    	}else if(movieArray.length < ${fn:length(mncList)}){
-				    		var delConfirm = confirm('Æò°¡ÇÏÁö ¾ÊÀº  ¿µÈ­°¡ ÀÖ½À´Ï´Ù. °è¼Ó ÁøÇàÇÏ½Ã°Ú½À´Ï±î?');
+				    		var delConfirm = confirm('í‰ê°€í•˜ì§€ ì•Šì€  ì˜í™”ê°€ ìˆìŠµë‹ˆë‹¤. ê³„ì† ì§„í–‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 				    		   if (delConfirm) {
 				    			   self.location="/movie/recommend";
 				    		   }
 				    		   else {
-				    		       	/*  Ãë¼ÒÇÏ°í ¿µÈ­ Æò°¡ ´Ù½Ã ÁøÇà */
+				    		       	/*  ì·¨ì†Œí•˜ê³  ì˜í™” í‰ê°€ ë‹¤ì‹œ ì§„í–‰ */
 				    		   }
 				    	}else{
 				    		
-				    		/*  Æò°¡ ¿µÈ­ ÀÖÀ» ½Ã ±×´ë·Î Á¦Ãâ */
+				    		/*  í‰ê°€ ì˜í™” ìˆì„ ì‹œ ê·¸ëŒ€ë¡œ ì œì¶œ */
 					    	$form.attr('action','/movie/evaluate');
 					    	$form.attr('method','post');
 					    	
