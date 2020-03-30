@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.soniu.domain.movieLocationSchedule_VO;
 import com.soniu.domain.movie_VO;
 import com.soniu.domain.userPreferMovie_VO;
+import com.soniu.domain.userPreferSchedule_VO;
 import com.soniu.domain.userPrefer_VO;
 import com.soniu.mapper.MovieMapper;
 import com.soniu.mapper.UserPreferMapper;
@@ -71,18 +72,34 @@ public class MovieServiceImpl implements MovieService {
 		return userPreferMapper.getUserPrefer(user_id);
 	}
 	
-	public void nowMovieInsert(String movie_id, int score) {
-		
+	@Override
+	public List<userPreferSchedule_VO> getUserPreferSchedule(String user_id) {
+		log.info("Service user_id: " + user_id);
+		return userPreferMapper.getUserPreferSchedule(user_id);
+	}
+
+	public void nowMovieInsert(String movie_id, int score, String schedule_id) {
+
 		/* user session id , static cause error at server start */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
-		
+
 		userPrefer_VO uf = new userPrefer_VO();
 		uf.setUser_id(user_id);
 		uf.setMovie_id(movie_id);
 		uf.setScore(score);
+		uf.setSchedule_id(schedule_id);
 
-		userPreferMapper.insert(uf);
+		userPreferMapper.insertNow(uf);
+	}
+	
+	public void nowMovieChange(String movie_id, String schedule_id, String prev_schedule) {
+
+		/* user session id , static cause error at server start */
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user_id = auth.getName();
+
+		userPreferMapper.changeNow(user_id, movie_id, schedule_id, prev_schedule);
 	}
 
 	/* 처음 선호영화 선택, default score 4 */

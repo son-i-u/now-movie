@@ -11,8 +11,17 @@
 	</select>
 
 	<insert id="insert">
-		insert into user_prefer values (#{user_id},#{movie_id},#{score})
+		insert into user_prefer (user_id, movie_id, score)  values (#{user_id},#{movie_id},#{score})
 	</insert>
+	
+	<insert id="insertNow">
+		insert into user_prefer (user_id, movie_id, score, schedule_id)  values (#{user_id},#{movie_id},#{score},#{schedule_id})
+	</insert>
+	
+	<update id="changeNow">
+		update user_prefer set movie_id=#{movie_id}, schedule_id=#{schedule_id}
+		where user_id=#{user_id} and schedule_id=#{prev_schedule}
+	</update>
 
 	<!-- 영화를 본 후 , 평점 재입력 -->
 	<update id="update">
@@ -24,6 +33,12 @@
 	 <![CDATA[select * from user_prefer where user_id=#{user_id} and score < 0 ]]>
 	</select>
 	
-
+	<select id="getUserPreferSchedule" resultType="com.soniu.domain.userPreferSchedule_VO">
+		select score, user_prefer.user_id user_id, user_prefer.movie_id movie_id, schedule.schedule_id schedule_id,
+		to_char(start_time, 'yyyy-mm-dd hh24:mi:ss') as start_time, to_char(end_time, 'yyyy-mm-dd hh24:mi:ss') as end_time
+		from user_prefer, schedule
+		where user_prefer.schedule_id = schedule.schedule_id
+		and user_id=#{user_id}
+	</select>
 	
 </mapper>
