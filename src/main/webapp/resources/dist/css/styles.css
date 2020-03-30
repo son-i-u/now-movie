@@ -4581,13 +4581,52 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 	width: 100%;
 }
 
-
 .card-a:hover{
 	filter: brightness(50%);
 }
 
-.jk_card{
-	max-width:100%;height:auto;
+.card-wrapper {
+	overflow: hidden;
+}
+
+.center-text{
+	text-align: center;
+}
+
+<!-- for select.jsp -->
+
+#title{
+	margin: 20px;
+}
+
+div.fixed {
+	z-index: 999;	
+	display:scroll;
+	position:fixed; 
+	bottom:10px; 
+	right:20px;
+}
+
+h1#top, div.fixed p {
+	text-align: center;
+	background-color:rgba(255,255,255,0.7);
+}
+
+.normal-card{
+	border-top-left-radius: calc(0.25rem - 1px);
+	border-top-right-radius: calc(0.25rem - 1px);
+	max-width: 100%;
+	height: auto;
+}
+
+.selected-card{
+	filter: brightness(50%);
+	
+	border-top-left-radius: calc(0.25rem - 1px);
+	border-top-right-radius: calc(0.25rem - 1px);
+	max-width: 100%;
+	height: auto;
+	
 }
 
 .submit_btn{
@@ -4596,6 +4635,10 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 	height:auto;
 }
 
+.submit-btn{
+	max-width: 100%;
+	height:auto;
+}
 
 .card-img, .card-img-top {
 	border-top-left-radius: calc(0.25rem - 1px);
@@ -9694,8 +9737,14 @@ html, body {
 	background-color: #e9ecef;
 }
 
+.img-wrapper{
+	margin: auto;
+  	width: 50%;
+}
+
 .movie-img{
-	width: auto; height: auto;
+	width: 100%
+	height: auto;
     max-width: 200px;
     max-height: 300px;
 }

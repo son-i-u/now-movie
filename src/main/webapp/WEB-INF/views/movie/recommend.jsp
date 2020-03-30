@@ -17,7 +17,18 @@
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
-			<h3 class="mt-4" >${ loginID }님 맞춤 추천 영화</h1>
+			<h3 id="top" class="mt-4" >${ loginID }님 맞춤 추천 영화</h3>
+			
+							<div class="fixed" href="#bottom" title=Top>
+					<a class="remote-control" href="#top">
+						<p style="padding:5px;">TOP</p>
+					</a>
+				
+					<a class="remote-control" href="#bottom">
+						<p style="padding:5px;">BOTTOM</p>
+					</a>
+				</div>
+			
 			<ol class="breadcrumb mb-4">
 				<li>시작하기</li>
 				<li>
@@ -39,6 +50,7 @@
 
 			<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 			<div class="row" id="cardContainer"></div>
+			<div id="bottom"></div>
 		</div>
 	</div>
 	
@@ -178,6 +190,8 @@
 		var movie_hour, movie_min;
 		movie_hour = Number(movieTime.substring(11, 13));
 		movie_min = Number(movieTime.substring(14, 16));
+		console.log("영화 끝: " + movie_hour + ":" + movie_min);
+		console.log("지금: " + now_hour + ":" + now_min);
 		
 		if(movie_hour > now_hour){
 			console.log(movie_hour - now_hour + "시간 남음: 영화가 아직 끝나지 않았습니다.");
@@ -199,7 +213,7 @@
 	}
 	
 	<c:forEach items="${ preferScheduleList }" var="preferSchedule">
-		//다 String으로 끊어서 비교하면 될듯~!
+		console.log('${preferSchedule}');
 		if("${preferSchedule.score}" < 0){
 			console.log("평가하지 않은 영화가 있습니다.");
 			isUserWatching(String('${preferSchedule.end_time}'), String("${preferSchedule.schedule_id}"));
@@ -234,26 +248,26 @@
 				+ '<h5 class="card-title">'
 				+ prefer.movie_nm
 				+ '</h5>'
-				+ '<p class="card-text">주연:'
+				+ '<p class="card-text">'
 				+ prefer.actor
 				+ '</p>'
-				+ '<p class="card-text" style="margin: 0px;"><small class="text-muted">'
+				+ '<p class="card-text text-right" style="margin: 0px;"><small class="text-muted">'
 				+ prefer.theator_nm
 				+ ' '
-				+ '<label id="distance' + i + '">'
+				+ '<label id="distance' + i + '"><strong>'
 				+ prefer.distance
-				+ '</label>'
+				+ '</strong></label>'
 				+ '</small></p>'
-				+ '<p class="card-text" style="margin: 0px;"><small class="text-muted">'
+				+ '<p class="card-text text-right" style="margin: 0px;"><small class="text-muted"><strong>'
 				+ prefer.left_min
-				+ '분 뒤 시작 </small></p>'
+				+ '분</strong> 뒤 시작 </small></p>'
 				+'<button id="select" class="login100-form-btn" onclick="movieSelect(\'' 
 						+ prefer.movie_nm + '\', ' + prefer.movie_id + ', ' + prefer.schedule_id
 				+ ');">영화 보기</button>' 
 				+ '</div></div></div></div>';
 
 		card.innerHTML = itemStr;
-		card.className = 'col-xl-6 col-lg-6 cardForm'
+		card.className = 'col-xl-6 col-lg-6 col-md-6 cardForm'
 
 		document.getElementById("cardContainer").appendChild(card);
 	}
@@ -268,6 +282,7 @@
 		}
 
 		var last = document.createElement('p');
+		last.className = 'center-text';
 		last.innerHTML = "마지막 결과입니다."; //wait
 		document.getElementById("cardContainer").appendChild(last); //wait
 	}
