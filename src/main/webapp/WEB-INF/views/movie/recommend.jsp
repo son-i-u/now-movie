@@ -248,7 +248,7 @@
 				+ '<p class="card-text">'
 				+ '<small class="text-muted">'
 				+ prefer.left_min
-				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;" onclick="movieSelect(\'' 
+				+ '분 뒤 시작 </small><button id="select" style="margin-left: 10px;" class="txt1" onclick="movieSelect(\'' 
 						+ prefer.movie_nm + '\', ' + prefer.movie_id + ', ' + prefer.schedule_id
 				+ ');">영화 보기</button></p>' 
 				+ '</div></div></div></div>';
