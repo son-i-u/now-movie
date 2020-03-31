@@ -9187,6 +9187,10 @@ supports ((position: -webkit-sticky ) or (position: sticky )) { .sticky-top
 	text-align: center !important;
 }
 
+.page-header{
+	margin-top: 60px;
+}
+
 @media ( min-width : 576px) {
 	.text-sm-left {
 		text-align: left !important;

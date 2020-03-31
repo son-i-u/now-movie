@@ -42,7 +42,7 @@
 				<div>
 					<c:out value="${error}" />
 				</div>
-			</div></li>Wed Mar 18 10:52:54 KST 2020
+			</div></li>
 	</ul>
 </nav>
 
