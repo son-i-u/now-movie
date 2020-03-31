@@ -21,9 +21,8 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-				<div style="margin-top: 10%;"></div>
 				<form role="form" action="/schedule/movieInsert" method="post"
-					enctype="multipart/form-data" onsubmit="return check()">
+					enctype="multipart/form-data">
 					<div class="form-group">
 						<label>MOVIE_NM</label> <input class="form-control"
 							name='movie_nm' id='movie_nm' maxlength='20'>
@@ -59,16 +58,16 @@
 							class="form-control" name='img_loc' id='img_loc'>
 					</div>
 
-					<!--  
 					<div class="form-group">
 						<label>이미지를 올리세요</label> <input name="uploadFile" id="file-upload"
 							type="file" accept=".jpg,.jpeg,.png" multiple><br>
 					</div>
--->
+
 					<!-- 접근 거부방지를 위한 -->
 					<sec:csrfInput />
 
-					<input type="submit" class="btn btn-default">
+					<button type="submit" class="btn btn-default">Submit
+						Button</button>
 					<button type="reset" class="btn btn-default">Reset Button</button>
 
 
@@ -78,18 +77,7 @@
 		</main>
 	</div>
 
-	<script type="text/javascript">
-		$(document).ready(function() {
 
-		});
-		function check() {
-			s
-			var check = true;
-
-			return check;
-
-		};
-	</script>
 
 
 

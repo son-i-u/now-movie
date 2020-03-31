@@ -24,18 +24,19 @@
 
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="jdbcUrl"
-			value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
-		<property name="username" value="admin"></property>
-		<property name="password" value="admin"></property>
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> 
+			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property> 
+			<property name="username" value="admin"></property> <property name="password" 
+			value="admin"></property>
 
 		<!-- 로컬 DB연결과 EC2 DB연결 주석 구분 -->
-		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property> 
-			<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@son2u-db-instance.ccxd729mccym.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property> 
-			<property name="username" value="son2u"></property> <property name="password" 
-			value="thsdldbWkd"></property> -->
+		<!-- <property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@son2u-db-instance.ccxd729mccym.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
+
+		<property name="username" value="son2u"></property>
+		<property name="password" value="thsdldbWkd"></property>  -->
 
 	</bean>
 
@@ -63,6 +64,9 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="batchManager" class="com.soniu.utils.getBatchFile">
 	</bean>
 
 	<bean id="HttpManager"

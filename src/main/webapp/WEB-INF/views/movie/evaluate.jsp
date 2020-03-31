@@ -9,60 +9,65 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 <%@ include file="../includes/header.jsp"%>
 <body class="sb-nav-fixed">
 	<%@ include file="../includes/nav.jsp"%>
 
 	<div id="layoutSidenav_content">
-		<main>
-			<h2 class="center">영화 평가</h2>
+		<main style="overflow: hidden;">
+			<h2 id="top" class="center">영화 평가</h2>
+			<div class="row">
 			<c:forEach items="${mncList}" var="movie">
-				<div class="wrap-login100 p-t-50 p-b-90 center">
-					<img src="<spring:url value="${movie.img_loc }"/>"
-						class="movie-img score-inline" alt="..."
-						style="height: 230px; width: 310px; margin: 16px 16px 16px 0px;">
+				<div class="col-12" style="margin: 0px;">
+					<div class="img-wrapper">
+					<img src="<spring:url value="${movie.img_loc }"/>" class="movie-img score-inline" alt="..."></div>
 					<!-- 평가버튼 -->
-					<div class="form-group"
-						style="text-align: center; margin-right: 16px;">
+					<div class="form-group" style="text-align: center; margin-right: 16px;">
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'1')"> 1점
+							<label> <input type="radio" name="${movie.movie_id}" onclick="movieScore(${movie.movie_id},'1')">
+								1점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'2')"> 2점
+							<label> <input type="radio" name="${movie.movie_id}" onclick="movieScore(${movie.movie_id},'2')">
+								2점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'3')"> 3점
+							<label> <input type="radio" name="${movie.movie_id}" onclick="movieScore(${movie.movie_id},'3')">
+								3점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'4')"> 4점
+							<label> <input type="radio" name="${movie.movie_id}" onclick="movieScore(${movie.movie_id},'4')">
+								4점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'5')"> 5점
+							<label> <input type="radio" name="${movie.movie_id}" onclick="movieScore(${movie.movie_id},'5')">
+								5점
 							</label>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-
+			</div>
+			<div class="fixed" href="#bottom" title=Top>
+					<a class="remote-control" href="#top">
+						<p style="padding:5px;">TOP</p>
+					</a>
+				
+					<a class="remote-control" href="#bottom">
+						<p style="padding:5px;">BOTTOM</p>
+					</a>
+				</div>
+			
 			<!-- 제출 버튼 -->
-			<div class="container-login100-form-btn m-t-17">
-				<button type="button" onclick="selectPost()"
-					class="login100-form-btn" style="margin: 10px 0px">submit
+			<div id="bottom" class="container-login100-form-btn m-t-17">
+				<button type="button" onclick="selectPost()" class="login100-form-btn" style="margin: 10px 0px">
+					submit
 				</button>
 			</div>
-
 		</main>
 	</div>
 
@@ -132,8 +137,7 @@
 					    	$form.submit();
 				    	}
 				    }
-		
-				    
+							
 </script>
 </body>
 </html>

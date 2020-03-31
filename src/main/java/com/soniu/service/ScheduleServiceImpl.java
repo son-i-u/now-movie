@@ -45,6 +45,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return mapper.remove(schedule_id);
 	}
 
+
+
 	@Override
 	public void movieInsert(movie_VO mv, MultipartFile[] uploadFile) {
 
@@ -52,29 +54,39 @@ public class ScheduleServiceImpl implements ScheduleService {
 		String uploadFolder = "C:\\image";
 
 		/* img_loc 을 위한 파싱 */
-		String img_loc = "/img/"+mv.getMovie_nm_en()+".png";
-		mv.setImg_loc(img_loc);
-		/*
-		 * for (MultipartFile multipartFile : uploadFile) {
-		 * log.info("------------------------------------------------");
-		 * log.info("Upload File Name: " + multipartFile.getOriginalFilename());
-		 * log.info("Upload File Size :" + multipartFile.getSize());
-		 * 
-		 * /* 파일 타입 지정을 위한 파싱 String file_type = multipartFile.getContentType();
-		 * String[] type_parse = file_type.split("/");
-		 * 
-		 * if (type_parse[1].equals("jpeg")) { type_parse[1] = "jpg"; }
-		 * 
-		 * 파일이름 movie_nm_en + jpg / png String file_name = mv.getMovie_id()+ "." +
-		 * type_parse[1];
-		 * 
-		 * 파일 저장 File saveFile = new File(uploadFolder, file_name);
-		 * 
-		 * movie 객체 변경 img_loc = img_loc + file_name; mv.setImg_loc(img_loc);
-		 * 
-		 * transferTo = 저장 try { multipartFile.transferTo(saveFile); } catch (Exception
-		 * e) { log.error(e.getMessage()); } }
-		 */
+		String img_loc = "/img/";
+
+		for (MultipartFile multipartFile : uploadFile) {
+			log.info("------------------------------------------------");
+			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size :" + multipartFile.getSize());
+
+			/* 파일 타입 지정을 위한 파싱 */
+			String file_type = multipartFile.getContentType();
+			String[] type_parse = file_type.split("/");
+
+			if (type_parse[1].equals("jpeg")) {
+				type_parse[1] = "jpg";
+			}
+
+			/* 파일이름 movie_nm_en + jpg / png */
+			String file_name = mv.getMovie_id()+ "." + type_parse[1];
+
+			/* 파일 저장 */
+			File saveFile = new File(uploadFolder, file_name);
+
+			/* movie 객체 변경 */
+			img_loc = img_loc + file_name;
+			mv.setImg_loc(img_loc);
+
+			/* transferTo = 저장 */
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}
+
 		mapper.movieInsert(mv);
 	}
 
@@ -95,7 +107,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public int getScheduleSize() {
-
+		
 		return mapper.getScheduleSize();
 	}
 
