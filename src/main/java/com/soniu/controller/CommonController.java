@@ -71,13 +71,15 @@ public class CommonController {
 	 */
 
 	@PostMapping("/logout_force")
-	public void logoutPost(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	public String logoutPost(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		// SecurityContextHolder.clearContext();
 
 		SecurityContext context = SecurityContextHolder.getContext();
 		context.setAuthentication((Authentication) null);
 
 		SecurityContextHolder.clearContext();
+		
+		return "redirect:/customLogin";
 
 	}
 

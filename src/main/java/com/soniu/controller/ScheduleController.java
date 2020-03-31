@@ -72,10 +72,9 @@ public class ScheduleController {
 
 	/* jk */
 	@PostMapping("/insert")
-	public String ScheduleInsertPost(Schedule_VO sv, RedirectAttributes rttr) {
+	public String ScheduleInsertPost(Schedule_VO sv) {
 		log.info("insert...: " + sv);
 		service.insertSchedule(sv);
-		rttr.addFlashAttribute("result", sv.getTheator_id());
 
 		return "redirect:/schedule/list";
 	}
