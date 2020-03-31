@@ -17,9 +17,10 @@
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
+		<h1>''''''''</h1>
 			<h3 id="top" class="mt-4" >${ loginID }님 맞춤 추천 영화</h3>
 			
-							<div class="fixed" href="#bottom" title=Top>
+				<div class="fixed" href="#bottom" title=Top>
 					<a class="remote-control" href="#top">
 						<p style="padding:5px;">TOP</p>
 					</a>
@@ -29,7 +30,7 @@
 					</a>
 				</div>
 			
-			<ol class="breadcrumb mb-4">
+			<ol class="breadcrumb mb-4 text-center">
 				<li>시작하기</li>
 				<li>
 					<div class="dropdown">
@@ -43,7 +44,7 @@
 						</div>
 					</div>
 				</li>
-				<li>이내의 영화입니다.
+				<li>이내의 영화
 					<image onclick="refresh();" src="/resources/images/icons/reload.png" style="height: 20px; width: 20px"></image>
 				</li>
 			</ol>
