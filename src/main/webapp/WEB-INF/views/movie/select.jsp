@@ -15,17 +15,8 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-			<div class="fixed" href="#bottom" title=Top>
-					<a class="remote-control" href="#top">
-						<p style="padding:5px;">TOP</p>
-					</a>
-				
-					<a class="remote-control" href="#bottom">
-						<p style="padding:5px;">BOTTOM</p>
-					</a>
-				</div>
 
-				<h1 id='top'>선호 영화 선택</h1>
+				<h1>선호 영화 선택</h1>
 				<p>고객님을 위한 추천 시스템에 이용됩니다.</p>
 				<ol class="breadcrumb mb-4">
 					<li>영화 다시 부르기
@@ -40,11 +31,11 @@
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row" style="margin-top: 3%;">
 					<c:forEach items="${list }" var="movie">
-						<div class="col-xl-2 col-md-3 col-4" id="${movie.movie_id }">
+						<div class="col-xl-2 col-md-3" id="${movie.movie_id }">
 							${movie.movie_nm } <a id="${movie.movie_id }"
 								onclick="movieselect(${movie.movie_id}); "> <img
 								src="<spring:url value="${movie.img_loc }"/>" alt="..."
-								id="${movie.movie_id}img" class="normal-card"
+								id="${movie.movie_id}img" class="jk_card"
 								style="height: 230px; width: 310px">
 						</div>
 
@@ -114,7 +105,7 @@
 						if(class_id == 'card-img-top'){
 							
 							/* 재클릭한 영화는 배열에서 제거 */
-							$("#"+data+"img").attr('class','normal-card');
+							$("#"+data+"img").attr('class','jk_card');
 							const idx = movieArray.indexOf(data);
 							if ( idx > -1 ) movieArray.splice(idx,1);
 							
@@ -122,7 +113,7 @@
 							console.log(data + "클릭했습니다.");
 							movieArray.push(data);
 							console.log(movieArray.length+ "선택한 movie 수입니다.");
-							$("#"+data+"img").attr('class','selected-card');
+							$("#"+data+"img").attr('class','card-img-top');
 						}
 						
 				    }
