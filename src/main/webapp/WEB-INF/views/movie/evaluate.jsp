@@ -58,8 +58,8 @@
 
 			<!-- 제출 버튼 -->
 			<div class="container-login100-form-btn m-t-17">
-				<button type="button" onclick="selectPost()"
-					class="login100-form-btn" style="margin: 10px 0px">submit
+				<button type="button" onclick="selectPost()" class="login100-form-btn">
+					submit
 				</button>
 			</div>
 

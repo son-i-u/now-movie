@@ -17,8 +17,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<h2 class="page-header">${ loginID }님,요청하신영화정보입니다.</h2>
-						<h1 class="page-header">movie info</h1>
+						<h1 class="page-header text-center">영화 상세 정보</h1>
 					</div>
 					<!--  /.col-lg-12 -->
 				</div>
@@ -60,8 +59,7 @@
 											<input class="form-control" name='writer'
 												value="${ movie.nation }" readonly="readonly">
 										</div>
-
-										<button data-oper='list' class="btn btn-info"
+										<button data-oper='list' class="login100-form-btn" style="margin-bottom: 16px;"
 											onclick="location.href='/movie/recommend'">List</button>
 									</div>
 								</c:forEach>
