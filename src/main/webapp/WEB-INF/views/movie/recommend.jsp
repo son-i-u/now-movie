@@ -17,7 +17,6 @@
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<div class="container-fluid">
-		<h1>''''''''</h1>
 			<h3 id="top" class="mt-4" >${ loginID }님 맞춤 추천 영화</h3>
 			
 				<div class="fixed" href="#bottom" title=Top>
@@ -241,7 +240,7 @@
 		var card = document.createElement('div');
 
 		var itemStr = '<div class="card" style="max-width: 540px;"><div class="row">'
-				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;" onclick="toDetailPage(' + prefer.movie_id + ')">'
+				+ '<div class="col-5" onclick="toDetailPage(' + prefer.movie_id + ')">'
 				+ '<img src="<spring:url value="' + prefer.img_loc + '"/>"'
 				+ 'class="card-img" alt="..."></div>'
 				+ '<div class="col-7" style="padding-left: 0px;">'

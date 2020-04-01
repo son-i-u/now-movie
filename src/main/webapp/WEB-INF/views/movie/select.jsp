@@ -41,7 +41,7 @@
 								<img src="<spring:url value="${movie.img_loc }"/>" alt="..."
 								id="${movie.movie_id}img" class="normal-card">
 							</a>
-							<p>${movie.movie_nm }</p> 
+							<p class="text-center">${movie.movie_nm }</p> 
 						</div>
 					</c:forEach>
 
