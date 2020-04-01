@@ -19,47 +19,36 @@ public class UserPreferTest {
 
 	@Setter(onMethod_ = @Autowired)
 	private UserPreferMapper mapper;
-	
+
 	@Test
 	public void preferInsertTest() {
+
 		
-		int start_movie_id = 11;
-		
-		for(int i=1; i<80; i++) {
+		for (int i = 1; i < 200; i++) {
 			userPrefer_VO uv = new userPrefer_VO();
-			
-			if(start_movie_id > 20) {
-				start_movie_id -= 10;
-			}
-			
-			int start_score = 1;
-			
-			for(int j=0;j<5; j++) {
-				String user_id = "user" + i;
-				int movie_id = start_movie_id + j;
-				
-				if(movie_id > 20) {
-					movie_id -= 10;
-				}
-				String mv_id = String.valueOf(movie_id);
-			
-				uv.setUser_id(user_id);
-				uv.setMovie_id(mv_id);
-				
-				if(start_score > 5) {
-					start_score -= 5;
-				}
-				uv.setScore(start_score);
-				
-				mapper.insert(uv);
-				start_score += 1;
-			}
-			
-			start_movie_id += 1;
-			
+
+			double dValue = Math.random();
+			int iValue = (int) (dValue * 79) + 1;
+
+			String user_id = "user" + iValue;
+
+			dValue = Math.random();
+			iValue = (int) (dValue * 30) + 1;
+
+			String mv_id = String.valueOf(iValue);
+
+			dValue = Math.random();
+			iValue = (int) (dValue * 5) + 1;
+					
+			uv.setScore(iValue);
+			uv.setUser_id(user_id);
+			uv.setMovie_id(mv_id);
+
+			mapper.insert(uv);
+
 		}
 		
-		
-		//mapper.scheduleInsert(sv);
+
+		// mapper.scheduleInsert(sv);
 	}
 }
