@@ -12,6 +12,76 @@
 <head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script>
+	/* 지금 시간과 비교해 상영중인 영화를 저장할 배열 */
+	var onScreenArr = new Array();
+	
+	/* 현재 시간 설정 */
+	var nowTime = new Date();	
+	var nowString = String(nowTime);
+	var now_day, now_hour, now_min;
+	now_day = Number(nowString.substring(8, 10));
+	now_hour = Number(nowString.substring(16, 18));
+	now_min = Number(nowString.substring(19, 21));
+	console.log("지금: " + now_day + "일 " + now_hour + ":" + now_min);
+	
+	function removeAllChildNodes(element) {
+		console.log(element);
+		while (element.hasChildNodes()) {
+			element.removeChild(element.firstChild);
+		}
+	}
+	
+	<c:forEach items="${preferScheduleList}" var="preferSchedule">
+		/* 영화 상영 종료 시간 저장 */
+		var movie_day, movie_hour, movie_min;
+		movie_day = Number('${preferSchedule.end_time}'.substring(8, 10));
+		movie_hour = Number('${preferSchedule.end_time}'.substring(11, 13));
+		movie_min = Number('${preferSchedule.end_time}'.substring(14, 16));
+		console.log("영화 끝: " + movie_hour + ":" + movie_min);
+
+		if(movie_day > now_day){
+			console.log(24 + movie_hour - now_hour + "시간 남음: 영화가 아직 끝나지 않았습니다.");
+			onScreenArr.push('${preferSchedule.movie_id}');
+		}
+		else if(movie_hour > now_hour){
+			console.log(movie_hour - now_hour + "시간 남음: 영화가 아직 끝나지 않았습니다.");
+			onScreenArr.push('${preferSchedule.movie_id}');
+		}
+		else if(movie_hour == now_hour) {
+			if(movie_min > now_min){
+				console.log(movie_min - now_min + "분 남음: 영화가 아직 끝나지 않았습니다.");
+				onScreenArr.push('${preferSchedule.movie_id}');
+			}
+			else
+				console.log("상영이 완료된 영화 스케줄 입니다.")
+		}
+		else{
+			console.log("지금 보고 있는 영화가 없습니다.");
+		}
+	</c:forEach>
+	
+	console.log(onScreenArr);
+	
+	window.onload = function(){
+		for(var i = 0; i < onScreenArr.length; i++){
+			var scoreBoard = document.getElementById("eval" + onScreenArr[i]);
+			console.log(scoreBoard);
+			
+			removeAllChildNodes(scoreBoard);
+			
+			/* 점수판이 사라진 자리에 텍스트 생성 */			
+			var block = document.createElement('p');
+			var text = "아직 상영중인 영화입니다.";
+			
+			block.className = "text-center";
+			block.innerHTML = text;
+			scoreBoard.appendChild(block);
+		}
+	}
+</script>
+
 </head>
 
 
@@ -23,11 +93,11 @@
 
 		<main>
 			<div style="margin-top: 100px;"></div>
-			<div class="show_info">
+			<div class="show_info" style="margin-bottom: 20px; padding-top: 30px;">
 				<span class="bold_text_1">영화관람 즐거우셨나요?</span>
 			</div>
 
-			<c:forEach items="${mncList}" var="movie">
+			<c:forEach items="${mncList}" var="movie">	
 				<div class="col-12" style="margin: 0px;">
 					<div class="img-wrapper">
 						<img src="<spring:url value="${movie.img_loc }"/>"
@@ -35,8 +105,7 @@
 							onerror="this.src='http://placehold.it/200x290'">
 					</div>
 					<!-- 평가버튼 -->
-					<div class="form-group"
-						style="text-align: center; margin-right: 16px;">
+					<div id="eval${movie.movie_id}" class="form-group" style="text-align: center; margin-right: 16px;">
 						<div class="checkbox score-inline">
 							 <label> <input type="radio"
 								name="${movie.movie_id}" id="${movie.movie_id}"
