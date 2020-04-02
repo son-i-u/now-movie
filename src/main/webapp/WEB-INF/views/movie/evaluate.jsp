@@ -21,7 +21,10 @@
 
 	<div id="layoutSidenav_content">
 		<main>
-			<h2 class="center">영화 평가</h2>
+			<div style="margin-top: 100px;"></div>
+			<div class="show_info">
+				<span class="bold_text_1">영화관람 즐거우셨나요?</span>
+			</div>
 			<c:forEach items="${mncList}" var="movie">
 				<div class="wrap-login100 p-t-50 p-b-90 center">
 					<img src="<spring:url value="${movie.img_loc }"/>"
@@ -33,58 +36,86 @@
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
 								id="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'1')"> 1점
+								onclick="movieScore(${movie.movie_id},'1')"><span>
+									1점</span>
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
 								id="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'2')"> 2점
+								onclick="movieScore(${movie.movie_id},'2')"> <span>
+									2점</span>
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
 								id="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'3')"> 3점
+								onclick="movieScore(${movie.movie_id},'3')"> <span>
+									3점</span>
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
 								id="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'4')"> 4점
+								onclick="movieScore(${movie.movie_id},'4')"> <span>
+									4점</span>
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
 								id="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'5')"> 5점
+								onclick="movieScore(${movie.movie_id},'5')"> <span>
+									5점</span>
 							</label>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-
 			<!-- 제출 버튼 -->
 			<div class="container-login100-form-btn m-t-17">
 				<button type="button" onclick="selectPost()"
 					class="login100-form-btn">submit</button>
 			</div>
-
 		</main>
 	</div>
 
 	<style>
 .container-login100-form-btn {
-	max-width: 25%;
+	max-width: 33.3333%;
+	margin-left: 33.3333%;
+}
+
+/*text*/
+.bold_text_1 {
+	color: #5d5d5d;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.show_info {
 	text-align: center;
 }
 
-input[type="radio"] {
-	
+input[type=radio] {
+	display: none;
 }
 
-input[typd="radio"]:checked {
-	
+input[type=radio]:checked+span {
+	border: 1px solid #23a3a7;
+	background: #23a3a7;
+	color: #fff;
+}
+
+input[type=radio]+span {
+	display: inline-block;
+	background: none;
+	border: 1px solid #dfdfdf;
+	padding: 0px 10px;
+	text-align: center;
+	height: 35px;
+	line-height: 33px;
+	font-weight: 500;
+	cursor: pointer;
 }
 </style>
 	<script type="text/javascript">

@@ -32,6 +32,7 @@
 								id="${movie.movie_id }"
 								onclick="movieselect(${movie.movie_id}); "> <img
 								src="<spring:url value="${movie.img_loc }"/>" alt="..."
+								onerror="this.src='http://placehold.it/200x290'"
 								id="${movie.movie_id}img" class="jk_card">
 						</div>
 					</c:forEach>
