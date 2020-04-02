@@ -23,6 +23,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		log.warn("login success");
 		
+		
 		//session
 		HttpSession session = request.getSession();
 		String user_id = auth.getName();
