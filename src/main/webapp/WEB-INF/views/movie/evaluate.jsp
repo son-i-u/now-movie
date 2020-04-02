@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -8,55 +8,199 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script>
+	/* ì§€ê¸ˆ ì‹œê°„ê³¼ ë¹„êµí•´ ìƒì˜ì¤‘ì¸ ì˜í™”ë¥¼ ì €ì¥í•  ë°°ì—´ */
+	var onScreenArr = new Array();
+	
+	/* í˜„ì¬ ì‹œê°„ ì„¤ì • */
+	var nowTime = new Date();	
+	var nowString = String(nowTime);
+	var now_day, now_hour, now_min;
+	now_day = Number(nowString.substring(8, 10));
+	now_hour = Number(nowString.substring(16, 18));
+	now_min = Number(nowString.substring(19, 21));
+	console.log("ì§€ê¸ˆ: " + now_day + "ì¼ " + now_hour + ":" + now_min);
+	
+	function removeAllChildNodes(element) {
+		console.log(element);
+		while (element.hasChildNodes()) {
+			element.removeChild(element.firstChild);
+		}
+	}
+	
+	<c:forEach items="${preferScheduleList}" var="preferSchedule">
+		/* ì˜í™” ìƒì˜ ì¢…ë£Œ ì‹œê°„ ì €ì¥ */
+		var movie_day, movie_hour, movie_min;
+		movie_day = Number('${preferSchedule.end_time}'.substring(8, 10));
+		movie_hour = Number('${preferSchedule.end_time}'.substring(11, 13));
+		movie_min = Number('${preferSchedule.end_time}'.substring(14, 16));
+		console.log("ì˜í™” ë: " + movie_hour + ":" + movie_min);
+
+		if(movie_day > now_day){
+			console.log(24 + movie_hour - now_hour + "ì‹œê°„ ë‚¨ìŒ: ì˜í™”ê°€ ì•„ì§ ëë‚˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+			onScreenArr.push('${preferSchedule.movie_id}');
+		}
+		else if(movie_hour > now_hour){
+			console.log(movie_hour - now_hour + "ì‹œê°„ ë‚¨ìŒ: ì˜í™”ê°€ ì•„ì§ ëë‚˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+			onScreenArr.push('${preferSchedule.movie_id}');
+		}
+		else if(movie_hour == now_hour) {
+			if(movie_min > now_min){
+				console.log(movie_min - now_min + "ë¶„ ë‚¨ìŒ: ì˜í™”ê°€ ì•„ì§ ëë‚˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+				onScreenArr.push('${preferSchedule.movie_id}');
+			}
+			else
+				console.log("ìƒì˜ì´ ì™„ë£Œëœ ì˜í™” ìŠ¤ì¼€ì¤„ ì…ë‹ˆë‹¤.")
+		}
+		else{
+			console.log("ì§€ê¸ˆ ë³´ê³  ìˆëŠ” ì˜í™”ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		}
+	</c:forEach>
+	
+	console.log(onScreenArr);
+	
+	window.onload = function(){
+		for(var i = 0; i < onScreenArr.length; i++){
+			var scoreBoard = document.getElementById("eval" + onScreenArr[i]);
+			console.log(scoreBoard);
+			
+			removeAllChildNodes(scoreBoard);
+			
+			/* ì ìˆ˜íŒì´ ì‚¬ë¼ì§„ ìë¦¬ì— í…ìŠ¤íŠ¸ ìƒì„± */			
+			var block = document.createElement('p');
+			var text = "ì•„ì§ ìƒì˜ì¤‘ì¸ ì˜í™”ì…ë‹ˆë‹¤.";
+			
+			block.className = "text-center";
+			block.innerHTML = text;
+			scoreBoard.appendChild(block);
+		}
+	}
+</script>
+
+</head>
+
+
 <%@ include file="../includes/header.jsp"%>
 <body class="sb-nav-fixed">
 	<%@ include file="../includes/nav.jsp"%>
 
 	<div id="layoutSidenav_content">
+
 		<main>
-			<c:forEach items="${mncList}" var="movie">
-				<div class="center-form">
-					<img src="<spring:url value="${movie.img_loc }"/>"
-						class="movie-img" alt="...">
+			<div style="margin-top: 100px;"></div>
+			<div class="show_info" style="margin-bottom: 20px; padding-top: 30px;">
+				<span class="bold_text_1">ì˜í™”ê´€ëŒ ì¦ê±°ìš°ì…¨ë‚˜ìš”?</span>
+			</div>
 
-					<!-- Æò°¡¹öÆ° -->
-					<div class="form-group">
-						<label>¾ó¸¶³ª Áñ°Å¿ì¼Ì³ª¿ä?</label>
-						<div class="checkbox">
-							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'1')">1Á¡
+			<c:forEach items="${mncList}" var="movie">	
+				<div class="col-12" style="margin: 0px;">
+					<div class="img-wrapper">
+						<img src="<spring:url value="${movie.img_loc }"/>"
+							class="movie-img score-inline" alt="..."
+							onerror="this.src='http://placehold.it/200x290'">
+					</div>
+					<!-- í‰ê°€ë²„íŠ¼ -->
+					<div id="eval${movie.movie_id}" class="form-group" style="text-align: center; margin-right: 16px;">
+						<div class="checkbox score-inline">
+							 <label> <input type="radio"
+								name="${movie.movie_id}" id="${movie.movie_id}"
+								onclick="movieScore(${movie.movie_id},'1')"><span>
+									1ì </span>
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'2')">2Á¡
+								id="${movie.movie_id}"
+								onclick="movieScore(${movie.movie_id},'2')"> <span>
+									2ì </span>
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'3')">3Á¡
+								id="${movie.movie_id}"
+								onclick="movieScore(${movie.movie_id},'3')"> <span>
+									3ì </span>
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'4')">4Á¡
+								id="${movie.movie_id}"
+								onclick="movieScore(${movie.movie_id},'4')"> <span>
+									4ì </span>
 							</label>
 						</div>
-						<div class="checkbox">
+						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
-								onclick="movieScore(${movie.movie_id},'5')">5Á¡
-							</label>
-						</div>
+								id="${movie.movie_id}"
+								onclick="movieScore(${movie.movie_id},'5')"> <span>
+									5ì </span>
 
+							</label>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
-			<!-- Á¦Ãâ ¹öÆ° -->
-			<button type="button" onclick="selectPost()">submit</button>
-		</main>
+	</div>
+	<div class="fixed" href="#bottom" title=Top>
+		<a class="remote-control" href="#top">
+			<p style="padding: 5px;">TOP</p>
+		</a> <a class="remote-control" href="#bottom">
+			<p style="padding: 5px;">BOTTOM</p>
+		</a>
 	</div>
 
+	<!-- ì œì¶œ ë²„íŠ¼ -->
+	<div id="bottom" class="container-login100-form-btn m-t-17">
+		<button type="button" onclick="selectPost()" class="login100-form-btn"
+			style="margin: 10px 0px">submit</button>
+	</div>
+	</main>
+	</div>
+
+	<style>
+.container-login100-form-btn {
+	max-width: 33.3333%;
+	margin-left: 33.3333%;
+}
+
+/*text*/
+.bold_text_1 {
+	color: #5d5d5d;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.show_info {
+	text-align: center;
+}
+
+input[type=radio] {
+	display: none;
+}
+
+input[type=radio]:checked+span {
+	border: 1px solid #23a3a7;
+	background: #23a3a7;
+	color: #fff;
+}
+
+input[type=radio]+span {
+	display: inline-block;
+	background: none;
+	border: 1px solid #dfdfdf;
+	padding: 0px 10px;
+	text-align: center;
+	height: 35px;
+	line-height: 33px;
+	font-weight: 500;
+	cursor: pointer;
+}
+</style>
 	<script type="text/javascript">
 				var movieArray = new Array();
 				var scoreArray = new Array();
@@ -70,9 +214,9 @@
 				});
 							
 			
-				     /*Å¬¸¯½Ã ¿µÈ­Á¡¼ö ¹è¿­¿¡ Ãß°¡ */
+				     /*í´ë¦­ì‹œ ì˜í™”ì ìˆ˜ ë°°ì—´ì— ì¶”ê°€ */
 				    function movieScore(data, score) {
-				    	console.log('µ¥ÀÌÅÍ°¡ Ãß°¡µË´Ï´Ù.');
+				    	console.log('ë°ì´í„°ê°€ ì¶”ê°€ë©ë‹ˆë‹¤.');
 
 						const idx = movieArray.indexOf(data);
 						if ( idx > -1 ){
@@ -83,33 +227,33 @@
 						movieArray.push(data);
 						scoreArray.push(score);
 						
-						console.log(movieArray.length + "movieArray length ÀÔ´Ï´Ù.");
-						console.log(scoreArray.length + "scoreArray length ÀÔ´Ï´Ù.");
+						console.log(movieArray.length + "movieArray length ì…ë‹ˆë‹¤.");
+						console.log(scoreArray.length + "scoreArray length ì…ë‹ˆë‹¤.");
 				    }
 				  
-				    /* post·Î Àü´Ş */
+				    /* postë¡œ ì „ë‹¬ */
 				    function selectPost(){
 				    	
-				    	/* ¼±ÅÃ ¿µÈ­ ¾øÀ» ½Ã °æ°í ¾Ë¸² */
+				    	/* ì„ íƒ ì˜í™” ì—†ì„ ì‹œ ê²½ê³  ì•Œë¦¼ */
 				    	if(movieArray.length == 0){
-				    		 var delConfirm = confirm('Æò°¡ÇÏ½Å ¿µÈ­°¡ ¾ø½À´Ï´Ù. °è¼Ó ÁøÇàÇÏ½Ã°Ú½À´Ï±î?');
+				    		 var delConfirm = confirm('í‰ê°€í•˜ì‹  ì˜í™”ê°€ ì—†ìŠµë‹ˆë‹¤. ê³„ì† ì§„í–‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 				    		   if (delConfirm) {
 				    			   self.location="/movie/recommend";
 				    		   }
 				    		   else {
-				    		      /* Ãë¼ÒÇÏ°í ¿µÈ­ Æò°¡ ´Ù½Ã ÁøÇà */
+				    		      /* ì·¨ì†Œí•˜ê³  ì˜í™” í‰ê°€ ë‹¤ì‹œ ì§„í–‰ */
 				    		   }
 				    	}else if(movieArray.length < ${fn:length(mncList)}){
-				    		var delConfirm = confirm('Æò°¡ÇÏÁö ¾ÊÀº  ¿µÈ­°¡ ÀÖ½À´Ï´Ù. °è¼Ó ÁøÇàÇÏ½Ã°Ú½À´Ï±î?');
+				    		var delConfirm = confirm('í‰ê°€í•˜ì§€ ì•Šì€  ì˜í™”ê°€ ìˆìŠµë‹ˆë‹¤. ê³„ì† ì§„í–‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 				    		   if (delConfirm) {
 				    			   self.location="/movie/recommend";
 				    		   }
 				    		   else {
-				    		       	/*  Ãë¼ÒÇÏ°í ¿µÈ­ Æò°¡ ´Ù½Ã ÁøÇà */
+				    		       	/*  ì·¨ì†Œí•˜ê³  ì˜í™” í‰ê°€ ë‹¤ì‹œ ì§„í–‰ */
 				    		   }
 				    	}else{
 				    		
-				    		/*  Æò°¡ ¿µÈ­ ÀÖÀ» ½Ã ±×´ë·Î Á¦Ãâ */
+				    		/*  í‰ê°€ ì˜í™” ìˆì„ ì‹œ ê·¸ëŒ€ë¡œ ì œì¶œ */
 					    	$form.attr('action','/movie/evaluate');
 					    	$form.attr('method','post');
 					    	

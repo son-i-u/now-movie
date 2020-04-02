@@ -1,14 +1,11 @@
 package com.soniu.mapper_test;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.soniu.domain.movie_VO;
-import com.soniu.mapper.UserMapper;
+import com.soniu.mapper.UserPreferMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -17,11 +14,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class UserMapper_test {
 
-	private UserMapper mapper;
+	private UserPreferMapper mapper;
 
 	@Test
-	public void testGetMovie() {
-			
-
+	public void testGetMovieJoin() {
+		//System.out.println(mapper.getMovieLocationSchedule().get(0).getActor() + "입니다");
+		mapper.getUserPreferSchedule("user10").forEach(movie -> log.info(movie));
 	}
 }

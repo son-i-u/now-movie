@@ -70,7 +70,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			}
 
 			/* 파일이름 movie_nm_en + jpg / png */
-			String file_name = mv.getMovie_nm_en() + "." + type_parse[1];
+			String file_name = mv.getMovie_id()+ "." + type_parse[1];
 
 			/* 파일 저장 */
 			File saveFile = new File(uploadFolder, file_name);
@@ -103,6 +103,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 			member_check = !member_check;
 		}
 		return Boolean.toString(member_check);
+	}
+
+	@Override
+	public int getScheduleSize() {
+		
+		return mapper.getScheduleSize();
 	}
 
 }

@@ -11,4 +11,5 @@ public interface ScheduleMapper {
 	public void scheduleInsert(Schedule_VO sv);
 	public boolean remove(String schedule_id);
 	public void movieInsert(movie_VO mv);
+	public int getScheduleSize();
 }

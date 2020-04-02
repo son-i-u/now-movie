@@ -27,17 +27,28 @@ public class MovieController {
 
 	private MovieService movieService;
 
-	@GetMapping("/getUserLocation")
-	public void location() {
+	@GetMapping("/refresh")
+	public String location() {
 
+		return "redirect:/movie/recommend";
 	}
 
 	@GetMapping("/nowMovie")
-	public String nowMovie(@RequestParam String movie_id) {
+	public String nowMovie(@RequestParam String movie_id, @RequestParam String schedule_id) {
 
 		System.out.println("---now movie---");
-		System.out.println("--movie_id:" + movie_id + "--");
-		movieService.nowMovieInsert(movie_id, -1);
+		System.out.println("--movie:" + movie_id + ", schedule" + schedule_id + "--");
+		movieService.nowMovieInsert(movie_id, -1, schedule_id);
+
+		return "redirect:/movie/recommend";
+	}
+	
+	@GetMapping("/changeMovie")
+	public String changeMovie(@RequestParam String movie_id, @RequestParam String schedule_id, @RequestParam String prev_schedule) {
+
+		System.out.println("---change movie---");
+		System.out.println("--movie:" + movie_id + ", schedule" + schedule_id + "--");
+		movieService.nowMovieChange(movie_id, schedule_id, prev_schedule);
 
 		return "redirect:/movie/recommend";
 	}
@@ -54,28 +65,9 @@ public class MovieController {
 		System.out.println("--session: " + user_lat + ", " + user_lon + "--");
 
 		model.addAttribute("preferList", movieService.getUserPrefer(user_id));
+		model.addAttribute("preferScheduleList", movieService.getUserPreferSchedule(user_id));
 		model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
 	}
-
-	/*
-	 * @PostMapping("/recommend") public ModelAndView goStudent(HttpServletRequest
-	 * httpServletRequest, Model model) {
-	 * 
-	 * Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	 * String user_id = auth.getName(); log.info("RequestMethod.POST");
-	 * 
-	 * String userLat = httpServletRequest.getParameter("userLat"); String userLon =
-	 * httpServletRequest.getParameter("userLon"); System.out.println("---user : " +
-	 * userLat + ", " + userLon);
-	 * 
-	 * model.addAttribute("movieInfoList", movieService.getMovieLocationSchedule());
-	 * model.addAttribute("preferList", movieService.getUserPrefer(user_id));
-	 * 
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName("movie/recommend");
-	 * mav.addObject("userLat", userLat); mav.addObject("userLon", userLon);
-	 * 
-	 * return mav; }
-	 */
 
 	/* jy */
 	@GetMapping("/info")
@@ -104,6 +96,7 @@ public class MovieController {
 		/* stil not evaluated.. */
 		log.info("evaluate page called.....");
 		model.addAttribute("mncList", movieService.getMovieNotSee(user_id));
+		model.addAttribute("preferScheduleList", movieService.getUserPreferSchedule(user_id));
 	}
 
 	/* jk */

@@ -54,7 +54,7 @@
 					</div>
 
 					<div class="form-group">
-						<label>IMG_LOC 자동으로 movie_nm_en.type 으로 올라갑니다. 입력하지 마세요</label> <input
+						<label>IMG_LOC 자동으로 movie_id.type 으로 올라갑니다. 입력하지 마세요</label> <input
 							class="form-control" name='img_loc' id='img_loc'>
 					</div>
 

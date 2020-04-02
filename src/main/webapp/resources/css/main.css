@@ -1,6 +1,13 @@
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
 
-
-
+.score-inline {
+	display: inline-block;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
@@ -415,7 +422,7 @@ iframe {
   opacity: 1;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 200px) {
   .alert-validate::before {
     visibility: visible;
     opacity: 1;
