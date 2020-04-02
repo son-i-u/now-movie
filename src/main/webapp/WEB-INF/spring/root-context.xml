@@ -34,12 +34,12 @@
 		<property name="username" value="admin"></property>
 		<property name="password" value="admin"></property>
 
-		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property> 
+<!-- 		 <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property> 
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@son2u-db-instance.ccxd729mccym.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
 
-		<property name="username" value="son2u-db-instance"></property>
-		<property name="password" value="thsdldbWkd"></property>
- -->
+		<property name="username" value="son2u"></property>
+		<property name="password" value="thsdldbWkd"></property> -->
+ 
 	</bean>
 
 	<!-- HikariCP configuration -->
@@ -63,13 +63,14 @@
 		<property name="configLocation"
 			value="classpath:/mybatis-config.xml"></property>
 	</bean>
+	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<bean id="batchManager" class="com.soniu.utils.getBatchFile">
-	</bean>
+	<!-- <bean id="batchManager" class="com.soniu.utils.getBatchFile">
+	</bean> -->
 
 	<bean id="HttpManager"
 		class="com.soniu.utils.HttpConnectionExample">

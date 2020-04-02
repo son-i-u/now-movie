@@ -29,8 +29,9 @@ public class MovieServiceImpl implements MovieService {
 	private MovieMapper movieMapper;
 	private UserPreferMapper userPreferMapper;
 
-	@Autowired
-	getBatchFile Gbf = new getBatchFile();
+	/*
+	 * @Autowired getBatchFile Gbf = new getBatchFile();
+	 */
 
 	@Override
 	public List<movie_VO> getList() {

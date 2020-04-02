@@ -46,7 +46,7 @@ public class CommonController {
         log.info(user_id+"...login id");
         
 		if(error != null) {
-			model.addAttribute("error", "login error check your account");
+			model.addAttribute("error", "아이디, 비밀번호를 다시 확인하세요.");
 		}
 		
 		if(logout != null) {
