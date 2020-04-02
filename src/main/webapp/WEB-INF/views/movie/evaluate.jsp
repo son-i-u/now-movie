@@ -20,7 +20,9 @@
 			<c:forEach items="${mncList}" var="movie">
 				<div class="col-12" style="margin: 0px;">
 					<div class="img-wrapper">
-					<img src="<spring:url value="${movie.img_loc }"/>" class="movie-img score-inline" alt="..."></div>
+						<img src="<spring:url value="${movie.img_loc }"/>" class="movie-img score-inline" alt="..."
+							onerror="this.src='http://placehold.it/200x290'">
+					</div>
 					<!-- 평가버튼 -->
 					<div class="form-group" style="text-align: center; margin-right: 16px;">
 						<div class="checkbox score-inline">

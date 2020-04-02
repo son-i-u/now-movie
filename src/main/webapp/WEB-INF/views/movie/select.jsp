@@ -39,7 +39,8 @@
 						<div class="col-xl-2 col-md-3 col-sm-4 col-4" id="${movie.movie_id }">
 							<a id="${movie.movie_id }" onclick="movieselect(${movie.movie_id}); "> 
 								<img src="<spring:url value="${movie.img_loc }"/>" alt="..."
-								id="${movie.movie_id}img" class="normal-card">
+									id="${movie.movie_id}img" class="normal-card"
+									onerror="this.src='http://placehold.it/200x290'">
 							</a>
 							<p class="text-center">${movie.movie_nm }</p> 
 						</div>
