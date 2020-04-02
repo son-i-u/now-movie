@@ -96,6 +96,7 @@ public class MovieController {
 		/* stil not evaluated.. */
 		log.info("evaluate page called.....");
 		model.addAttribute("mncList", movieService.getMovieNotSee(user_id));
+		model.addAttribute("preferScheduleList", movieService.getUserPreferSchedule(user_id));
 	}
 
 	/* jk */

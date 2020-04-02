@@ -201,7 +201,7 @@
 			sessionStorage.setItem('movie_hour', movie_hour);
 			sessionStorage.setItem('movie_min', movie_min);
 			sessionStorage.setItem('schedule_id', schedule_id);
-			console.log("지금 보고있는 영화: " + sessionStorage.getItem('schedule_id'));
+			console.log("지금 보고있는 영화: " + sessionStorage.getItem('movie_nm'));
 		}
 		else if(movie_hour == now_hour) {
 			if(movie_min > now_min){
@@ -216,10 +216,8 @@
 	
 	<c:forEach items="${ preferScheduleList }" var="preferSchedule">
 		console.log('${preferSchedule}');
-		if("${preferSchedule.score}" < 0){
-			console.log("평가하지 않은 영화가 있습니다.");
-			isUserWatching(String('${preferSchedule.end_time}'), String("${preferSchedule.schedule_id}"));
-		}	
+		console.log("평가하지 않은 영화가 있습니다.");
+		isUserWatching(String('${preferSchedule.end_time}'), String("${preferSchedule.schedule_id}"));
 	</c:forEach>	
 	
 	/* Delete all movie info card */
