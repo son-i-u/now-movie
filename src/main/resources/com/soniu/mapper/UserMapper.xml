@@ -32,5 +32,10 @@
 		#{AUTH}
 		)
 	</insert>
+	
+	<!-- <select id="idCheck" resultType="com.soniu.domain.userInfo_VO">
+		select USER_ID from USER_INFO
+			where USER_ID = #{USER_ID}
+	</select> -->
 
 </mapper>

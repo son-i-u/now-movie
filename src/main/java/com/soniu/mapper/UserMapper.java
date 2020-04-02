@@ -10,6 +10,8 @@ public interface UserMapper {
 	public userInfo_VO read(/* String USER_ID */);
 	public void join(userInfo_VO us_vo);
 	public userInfoAuth_VO read2(/* String USER_ID */);
-	public void join2(userInfoAuth_VO at_vo);	
+	public void join2(userInfoAuth_VO at_vo);
+	
+	/* public userInfo_VO idCheck(String USER_ID) throws Exception; */
 
 }

@@ -30,8 +30,9 @@ public class MovieServiceImpl implements MovieService {
 	private MovieMapper movieMapper;
 	private UserPreferMapper userPreferMapper;
 
-	@Autowired
-	getBatchFile Gbf = new getBatchFile();
+	/*
+	 * @Autowired getBatchFile Gbf = new getBatchFile();
+	 */
 
 	@Override
 	public List<movie_VO> getList() {
@@ -143,7 +144,6 @@ public class MovieServiceImpl implements MovieService {
 
 	public List<movieLocationSchedule_VO> getMovieLocationSchedule() {
 
-		// user session id , static cause error at server start
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user_id = auth.getName();
 
@@ -153,7 +153,6 @@ public class MovieServiceImpl implements MovieService {
 		List<movieLocationSchedule_VO> getMLS = movieMapper.getMovieLocationSchedule();
 		List<movieLocationSchedule_VO> ret_getMLS = new ArrayList<>();
 
-		// getMSL 에서 상위 무비만 다시 넣어서 ret
 		for (int i = 0; i < getMLS.size(); i++) {
 			if (movieList.contains(getMLS.get(i).getMovie_id())) {
 				log.info(getMLS.get(i).getMovie_id());

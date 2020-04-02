@@ -34,11 +34,12 @@
 	</select>
 	
 	<select id="getUserPreferSchedule" resultType="com.soniu.domain.userPreferSchedule_VO">
-		select score, user_prefer.user_id user_id, user_prefer.movie_id movie_id, schedule.schedule_id schedule_id,
+		<![CDATA[select score, user_prefer.user_id user_id, user_prefer.movie_id movie_id, schedule.schedule_id schedule_id,
 		to_char(start_time, 'yyyy-mm-dd hh24:mi:ss') as start_time, to_char(end_time, 'yyyy-mm-dd hh24:mi:ss') as end_time
 		from user_prefer, schedule
 		where user_prefer.schedule_id = schedule.schedule_id
 		and user_id=#{user_id}
+		and score < 0 ]]>
 	</select>
 	
 </mapper>
