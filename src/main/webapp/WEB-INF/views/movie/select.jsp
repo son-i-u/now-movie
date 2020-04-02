@@ -96,7 +96,7 @@
 	}
 }
 
-@media screen and (min-width: 769px) and (max-width:1024px) {
+@media screen and (min-width: 769px) and (max-width:1167px) {
 	.col-xl-2 {
 		flex: 0 0 16.6666666667%;
 		max-width: 16.6666666667%;
@@ -125,7 +125,7 @@
 	}
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1168px) {
 	.col-xl-2 {
 		flex: 0 0 8.3333333333%;
 		max-width: 8.3333333333%;
@@ -135,10 +135,6 @@
 		padding-right: 0rem;
 		padding-left: 0rem;
 		height: auto;
-		margin-right: 0rem;
-		margin-left: 0rem;
-		padding-right: 0rem;
-		padding-left: 0rem;
 	}
 	.jk_card {
 		max-width: 100%;

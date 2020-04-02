@@ -8,8 +8,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
 
 
 <%@ include file="../includes/header.jsp"%>
@@ -29,26 +32,31 @@
 						style="text-align: center; margin-right: 16px;">
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
+								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'1')"> 1점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
+								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'2')"> 2점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
+								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'3')"> 3점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
+								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'4')"> 4점
 							</label>
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"
+								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'5')"> 5점
 							</label>
 						</div>
@@ -59,13 +67,26 @@
 			<!-- 제출 버튼 -->
 			<div class="container-login100-form-btn m-t-17">
 				<button type="button" onclick="selectPost()"
-					class="login100-form-btn" style="margin: 10px 0px">submit
-				</button>
+					class="login100-form-btn">submit</button>
 			</div>
 
 		</main>
 	</div>
 
+	<style>
+.container-login100-form-btn {
+	max-width: 25%;
+	text-align: center;
+}
+
+input[type="radio"] {
+	
+}
+
+input[typd="radio"]:checked {
+	
+}
+</style>
 	<script type="text/javascript">
 				var movieArray = new Array();
 				var scoreArray = new Array();
