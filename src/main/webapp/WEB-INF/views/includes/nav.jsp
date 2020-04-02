@@ -20,17 +20,14 @@
 					<c:out value="${sessionScope.USER_ID } : ${sessionScope.AUTH_ROLE}" />
 				</div>
 				<a class="dropdown-item" href="/movie/evaluate"> evalaute </a>
+				<form class="user" action="/logout_force" method='post'>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token }" /> <a class="dropdown-item"
+						href="/customLogin">Logout</a>
 
-				<div class="dropdown-item">
-					<form role="logout" class="user" action="/logout" method='post'>
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token }" /> <a class="dropdown-item"
-							href="/customLogin">Logout</a>
-						<sec:csrfInput />
-					</form>
-				</div>
-
-
+					<!-- 접근 거부방지를 위한 -->
+					<sec:csrfInput />
+				</form>
 				<a class="dropdown-item" href="/schedule/list"> <c:if
 						test="${sessionScope.AUTH_ROLE  eq 'ROLE_MANAGER'}">
 						<c:out value="admin page" />
@@ -38,14 +35,9 @@
 						<c:out value="admin page" />
 					</c:if>
 				</a>
-
 				<div>
 					<c:out value="${error}" />
 				</div>
-			</div></li>Wed Mar 18 10:52:54 KST 2020
+			</div></li>
 	</ul>
 </nav>
-
-<style>
-
-</style>

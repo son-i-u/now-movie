@@ -19,7 +19,7 @@
 		<div class="container-fluid">
 			<h3 id="top" class="mt-4" >${ loginID }님 맞춤 추천 영화</h3>
 			
-							<div class="fixed" href="#bottom" title=Top>
+				<div class="fixed" href="#bottom" title=Top>
 					<a class="remote-control" href="#top">
 						<p style="padding:5px;">TOP</p>
 					</a>
@@ -29,7 +29,7 @@
 					</a>
 				</div>
 			
-			<ol class="breadcrumb mb-4">
+			<ol class="breadcrumb mb-4 text-center">
 				<li>시작하기</li>
 				<li>
 					<div class="dropdown">
@@ -43,7 +43,7 @@
 						</div>
 					</div>
 				</li>
-				<li>이내의 영화입니다.
+				<li>이내의 영화
 					<image onclick="refresh();" src="/resources/images/icons/reload.png" style="height: 20px; width: 20px"></image>
 				</li>
 			</ol>
@@ -80,6 +80,7 @@
 		}
 		else if(user_watching == 'false'){
 			alert(movie_nm + "을(를) 선택했습니다.");
+			sessionStorage.setItem('movie_nm', movie_nm);
 			sessionStorage.setItem('schedule_id', schedule_id);
 			location.href = '/movie/nowMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id;
 		}
@@ -88,10 +89,11 @@
 			
 			if(result){
 				alert("지금 보고있는 영화를 바꿉니다.");
+				sessionStorage.setItem('movie_nm', movie_nm);
 				location.href = '/movie/changeMovie?movie_id=' + movie_id + '&schedule_id=' + schedule_id
 						+ '&prev_schedule=' + String(sessionStorage.getItem('schedule_id'));
 			}else{
-				alert(movie_nm + "을(를) 그대로 시청합니다.");
+				alert(sessionStorage.getItem('movie_nm') + "을(를) 그대로 시청합니다.");
 			}
 		}
 	}
@@ -218,13 +220,6 @@
 			console.log("평가하지 않은 영화가 있습니다.");
 			isUserWatching(String('${preferSchedule.end_time}'), String("${preferSchedule.schedule_id}"));
 		}	
-		
-		console.log("end: " + "${preferSchedule.end_time}");
-		console.log("now: " + nowTime);
-		console.log(typeof("${preferSchedule.end_time}"));
-		
-		console.log("${preferSchedule.end_time}" >= nowTime);
-		console.log("${preferSchedule.end_time}" < nowTime);
 	</c:forEach>	
 	
 	/* Delete all movie info card */
@@ -240,9 +235,11 @@
 		var card = document.createElement('div');
 
 		var itemStr = '<div class="card" style="max-width: 540px;"><div class="row">'
-				+ '<div class="col-5" style="padding: 10px 0px 0px 15px;" onclick="toDetailPage(' + prefer.movie_id + ')">'
+				+ '<div class="col-5" onclick="toDetailPage(' + prefer.movie_id + ')">'
 				+ '<img src="<spring:url value="' + prefer.img_loc + '"/>"'
-				+ 'class="card-img" alt="..."></div>'
+				+ 'class="card-img" onerror="this.src=\'http://placehold.it/47200x260\'"' 
+				+ ' alt="' + prefer.movie_nm + '">'
+				+'</div>'
 				+ '<div class="col-7" style="padding-left: 0px;">'
 				+ '<div class="card-body">'
 				+ '<h5 class="card-title">'
@@ -268,7 +265,6 @@
 
 		card.innerHTML = itemStr;
 		card.className = 'col-xl-6 col-lg-6 col-md-6 cardForm'
-
 		document.getElementById("cardContainer").appendChild(card);
 	}
 

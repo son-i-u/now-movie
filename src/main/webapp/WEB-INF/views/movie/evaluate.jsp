@@ -20,22 +20,26 @@
 	<%@ include file="../includes/nav.jsp"%>
 
 	<div id="layoutSidenav_content">
+
 		<main>
 			<div style="margin-top: 100px;"></div>
 			<div class="show_info">
 				<span class="bold_text_1">영화관람 즐거우셨나요?</span>
 			</div>
+
 			<c:forEach items="${mncList}" var="movie">
-				<div class="wrap-login100 p-t-50 p-b-90 center">
-					<img src="<spring:url value="${movie.img_loc }"/>"
-						class="movie-img score-inline" alt="..."
-						style="height: 230px; width: 310px; margin: 16px 16px 16px 0px;">
+				<div class="col-12" style="margin: 0px;">
+					<div class="img-wrapper">
+						<img src="<spring:url value="${movie.img_loc }"/>"
+							class="movie-img score-inline" alt="..."
+							onerror="this.src='http://placehold.it/200x290'">
+					</div>
 					<!-- 평가버튼 -->
 					<div class="form-group"
 						style="text-align: center; margin-right: 16px;">
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
-								id="${movie.movie_id}"
+							 <label> <input type="radio"
+								name="${movie.movie_id}" id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'1')"><span>
 									1점</span>
 							</label>
@@ -66,17 +70,27 @@
 								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'5')"> <span>
 									5점</span>
+
 							</label>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-			<!-- 제출 버튼 -->
-			<div class="container-login100-form-btn m-t-17">
-				<button type="button" onclick="selectPost()"
-					class="login100-form-btn">submit</button>
-			</div>
-		</main>
+	</div>
+	<div class="fixed" href="#bottom" title=Top>
+		<a class="remote-control" href="#top">
+			<p style="padding: 5px;">TOP</p>
+		</a> <a class="remote-control" href="#bottom">
+			<p style="padding: 5px;">BOTTOM</p>
+		</a>
+	</div>
+
+	<!-- 제출 버튼 -->
+	<div id="bottom" class="container-login100-form-btn m-t-17">
+		<button type="button" onclick="selectPost()" class="login100-form-btn"
+			style="margin: 10px 0px">submit</button>
+	</div>
+	</main>
 	</div>
 
 	<style>
@@ -184,8 +198,7 @@ input[type=radio]+span {
 					    	$form.submit();
 				    	}
 				    }
-		
-				    
+							
 </script>
 </body>
 </html>
