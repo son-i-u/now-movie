@@ -26,7 +26,7 @@ public class UserPreferTest {
 	public void preferInsertTest() {
 		
 		
-		for (int i = 1; i <200 ; i++) {
+		for (int i = 1; i <25; i++) {
 			userPrefer_VO uv = new userPrefer_VO();
 			Random rand = new Random();
 			
@@ -35,8 +35,8 @@ public class UserPreferTest {
 
 			String user_id = "user" + iValue;
 			
-			int min = 57;
-			int max = 129;
+			int min = 151;
+			int max = 158;
 
 			int randomNum = rand.nextInt(max - min + 1) + min;
 			String mv_id = String.valueOf(randomNum);

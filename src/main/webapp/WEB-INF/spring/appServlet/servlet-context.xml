@@ -26,6 +26,7 @@
 	<!-- 스프링에서 절대경로를 사용하기 위한 이미지 경로 나중에 서버 주소로 변경 -->
 	<!-- <resources mapping="/img/**" location="file:////home/centos/image/" 
 		/> -->
+
 	<resources mapping="/img/**" location="file:///C://image/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 

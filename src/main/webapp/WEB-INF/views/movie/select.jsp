@@ -34,12 +34,16 @@
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
 				<div class="row card-wrapper" style="margin-top: 3%;">
+
 					<c:forEach items="${list }" var="movie">
+
 						<div class="col-xl-2 col-md-3 col-sm-4 col-4"
 							id="${movie.movie_id }">
 							<a id="${movie.movie_id }"
-								onclick="movieselect(${movie.movie_id});"> <img
-								src="<spring:url value='${movie.img_loc }'/>" alt="..."
+								onclick="movieselect(${movie.movie_id});">
+								<hr
+									style="background-color: #990000; margin-left: 0%; padding-left: 0%; width: 100%; height: 1%;">
+								<img src="<spring:url value='${movie.img_loc }'/>" alt="..."
 								id="${movie.movie_id}img" class="normal-card"
 								onerror="this.src='http://placehold.it/200x290'">
 							</a>
@@ -100,7 +104,7 @@
 
 	/*text*/
 	.bold_text_1 {
-		color: #5d5d5d;
+		color: #FFFFFF;
 		font-size: 1.6rem;
 		font-weight: bold;
 	}
@@ -129,7 +133,7 @@
 
 	/*text*/
 	.bold_text_1 {
-		color: #5d5d5d;
+		color: #FFFFFF;
 		font-size: 2rem;
 		font-weight: bold;
 	}
@@ -158,10 +162,14 @@
 
 	/*text*/
 	.bold_text_1 {
-		color: #5d5d5d;
+		color: #FFFFFF;
 		font-size: 2rem;
 		font-weight: bold;
 	}
+}
+
+body {
+	background-color: black;
 }
 
 .text-center {
@@ -209,7 +217,23 @@
 		var lastCheck = true ;
 		var $form = $('<form> </form> '); $(document.body ).append ($form);
 		
-		 $(document ).ready (function() { });
+		 $(document ).ready (function() { 
+				/* height by width */
+				var cw = $('.col-xl-2').width();
+				var ch = cw *1.8;
+				$('.normal-card').css({'height':ch+'px'});
+			 
+			 
+		 });
+		 
+		 $(window).resize(function() { 
+			 /* height by width */
+				var cw = $('.col-xl-2').width();
+				var ch = cw *1.7;
+				$('.normal-card').css({'height':ch+'px'});
+		 });
+		 
+		 
 		//클릭시 선택 영화 배열에 추가 
 		function movieselect (data) {if (lastCheck == false){ lastCheck =
 		!lastCheck;return;
@@ -261,6 +285,14 @@
 			var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
 			var sec = $('<sec:csrfInput/>');
 								$form.append(test); $form.append(mArray); $form.append(sec);
-								$form.submit();lastCheck = !lastCheck } } </script>
+								$form.submit();lastCheck = !lastCheck }
+		
+		}
+		
+
+	
+		</script>
+
+
 </body>
 </html>
