@@ -1,5 +1,8 @@
 package com.soniu.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -45,6 +48,7 @@ public class CommonController {
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
 		log.info("logout : " + logout);
+		
 
 		/* session user_id .. */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -52,12 +56,18 @@ public class CommonController {
 		log.info(user_id + "...login id");
 
 		if (error != null) {
-			model.addAttribute("error", "login error check your account");
+			model.addAttribute("error", "아이디, 비밀번호를 확인하세요");
 		}
+		
+		/*
+		 * if (user_id != null) {
+		 * 
+		 * }
+		 */
+			
 
-		if (logout != null) {
-			model.addAttribute("logout", "Logout!!");
-		}
+	
+		
 	}
 
 	@GetMapping("/customLogout")

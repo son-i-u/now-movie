@@ -91,12 +91,24 @@
 	isGeoUseable()
 		.then(getUserLoc)
 		.then(transCoords);
+	
+	
 </script>
 </head>
 
 <body>
-	<h2><c:out value="${error }"/></h2>
-	<h2><c:out value="${logout }"/></h2>
+
+	
+		<h2><script>
+		if("${error}" != ''){
+				alert('<c:out value="${error}"/>')
+		}
+		else if("${logout}" != ''){
+			alert('<c:out value="${logout}"/>')
+		}
+	
+		</script></h2>
+	<%-- <h2><c:out value="${logout }"/></h2> --%>
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -147,6 +159,8 @@
 	
 
 	<div id="dropDownSelect1"></div>
+	
+	
 	
 
 	<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script>

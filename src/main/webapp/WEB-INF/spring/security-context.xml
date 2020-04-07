@@ -38,12 +38,15 @@
 		<!-- login page는 temporary 후에 변경할 것 -->
 		<security:form-login login-page="/customLogin"
 			login-processing-url="/login"
-			authentication-success-handler-ref="customLoginSuccess" />
+			authentication-success-handler-ref="customLoginSuccess"/>
+			
+		<security:logout logout-url="/logout_force" invalidate-session="true"/>
+			
 		<!-- Auto-login -->
 		<security:remember-me
 			data-source-ref="dataSource" token-validity-seconds="604800" />
 
-		<security:logout logout-url="/logout"
+		<security:logout logout-url="/logout_force"
 			logout-success-url="/customLogin" invalidate-session="true"
 			delete-cookies="remember-me
 			,JSESSION_ID" />
