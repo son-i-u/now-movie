@@ -14,8 +14,7 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
-
-
+				
 				<form action="/user/register_test" method="post" role="form"
 					id="usercheck" name="user_info">
 
@@ -68,9 +67,6 @@
 					<!-- 접근 거부방지를 위한 -->
 					<sec:csrfInput />
 				</form>
-
-
-
 			</div>
 		</main>
 	</div>

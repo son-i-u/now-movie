@@ -65,7 +65,6 @@
 			}
 		}
 
-		
 		var formObj = $("form");
 		$(document.body).append(formObj);
 
@@ -79,6 +78,7 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
+				<div style="margin-top: 10%;"></div>
 				<form role="form" action="/schedule/insert" method="post">
 					<div class="form-group">
 						<label>theator_id</label> <input class="form-control"
@@ -108,12 +108,11 @@
 					<!-- 접근 거부방지를 위한 -->
 					<sec:csrfInput />
 
-					<button type="submit" 
-						class="btn btn-default">Submit Button</button>
+					<button type="submit" class="btn btn-default">Submit
+						Button</button>
 					<button type="reset" class="btn btn-default">Reset Button</button>
 
 				</form>
-
 			</div>
 		</main>
 	</div>

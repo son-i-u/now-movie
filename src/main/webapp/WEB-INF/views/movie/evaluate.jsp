@@ -92,33 +92,35 @@
 	<div id="layoutSidenav_content">
 
 		<main>
-			<div style="margin-top: 100px;"></div>
-			<div class="show_info" style="margin-bottom: 20px; padding-top: 30px;">
+			<div style="margin-top: 5%;"></div>
+			<div class="show_info"
+				style="margin-bottom: 20px; padding-top: 30px;">
 				<span class="bold_text_1">영화관람 즐거우셨나요?</span>
 			</div>
 
-			<c:forEach items="${mncList}" var="movie">	
+			<c:forEach items="${mncList}" var="movie">
 				<div class="col-12" style="margin: 0px;">
-					<div class="img-wrapper">
+					<div class="wrap-login100 p-t-50 p-b-90 center">
 						<img src="<spring:url value="${movie.img_loc }"/>"
 							class="movie-img score-inline" alt="..."
 							onerror="this.src='http://placehold.it/200x290'">
 					</div>
 					<!-- 평가버튼 -->
-					<div id="eval${movie.movie_id}" class="form-group" style="text-align: center; margin-right: 16px;">
+					<div id="eval${movie.movie_id}" class="form-group"
+						style="text-align: center; margin-right: 16px;">
 						<div class="checkbox score-inline">
-							 <label> <input type="radio"
-								name="${movie.movie_id}" id="${movie.movie_id}"
+							<label><input type="radio" name="${movie.movie_id}"
+								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'1')"><span>
-									1점</span>
-							</label>
+									1점</span> </label>
+
 						</div>
 						<div class="checkbox score-inline">
-							<label> <input type="radio" name="${movie.movie_id}"
+							<label><input type="radio" name="${movie.movie_id}"
 								id="${movie.movie_id}"
 								onclick="movieScore(${movie.movie_id},'2')"> <span>
-									2점</span>
-							</label>
+									2점</span></label>
+
 						</div>
 						<div class="checkbox score-inline">
 							<label> <input type="radio" name="${movie.movie_id}"

@@ -14,6 +14,7 @@
 	<%@ include file="../includes/nav.jsp"%>
 	<div id="layoutSidenav_content">
 		<main>
+			<div style="margin-top: 10%;"></div>
 			<!-- /.panel-heading -->
 			<button id='regBtn' type="button" class="btn btn-xs pull-right">Register
 				New Schedule</button>
@@ -30,7 +31,7 @@
 							<c:if test="${auth == 'true'}">
 								<th>삭제버튼</th>
 							</c:if>
-							
+
 						</tr>
 					</thead>
 

@@ -16,35 +16,131 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <style type="text/css">
+@media screen and (min-width: 100px) and (max-width:768px) {
+	.layoutSidenav_content {
+		max-width: 100%;
+		padding-left: 0%;
+		padding-right: 0%;
+		padding-left: 0%;
+	}
+}
+
+.layoutSidenav_content {
+	max-width: 50%;
+	margin-left: 25%;
+	padding-left: 0%;
+	padding-right: 0%;
+	padding-left: 0%;
+}
+
+.page-info {
+	color: #5d5d5d;
+	font-size: 1.6rem;
+	font-weight: 900;
+}
+
+.submit-btn {
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: 900;
+}
+
 td {
 	border: 1px solid #000000;
 	border-collapse: collapse;
 }
 </style>
 </head>
-
-<%@ include file="../includes/header.jsp"%>
-<body class="sb-nav-fixed">
-</body>
-<%@ include file="../includes/nav.jsp"%>
-<div id="layoutSidenav_content">
-	<main>
-		<div class="container-fluid">
-
-
-
-
-
-
-
-			<!-- 				<style type="text/css">
+<!-- 				<style type="text/css">
 td {
 	border: 1px solid #000000;
 	border-collapse: collapse;
 }
 </style> -->
 
-			<script type="text/javascript">
+
+<body>
+
+	<%@ include file="../includes/header.jsp"%>
+	<%@ include file="../includes/nav.jsp"%>
+	<div style="margin-top: 3%;"></div>
+	<div class="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+
+
+				<article class="container">
+					<div class="page-header">
+						<div class="register-rm col-md-offset-3">
+							<h3>
+								<span class="page-info">회원가입</span>
+							</h3>
+						</div>
+					</div>
+					<div style="margin-top: 10%;"></div>
+					<div class="register-rm col-md-offset-3">
+
+						<form action="/user/register" method="post" role="form"
+							id="usercheck" name="user_info">
+
+							<div class="form-group">
+								<label for="id">아이디</label> <input type="text"
+									class="form-control" id="USER_ID" name="USER_ID"
+									placeholder="ID" autocomplete="off">
+								<div class="eheck_font" id="id_check"></div>
+							</div>
+
+							<div class="form-group">
+								<label for="pw">비밀번호</label> <input type="password"
+									class="form-control" id="PWD" name="PWD" placeholder="PASSWORD">
+								<div class="eheck_font" id="pw_check"></div>
+							</div>
+							<div class="form-group">
+								<label for="pw2">비밀번호 확인</label> <input type="password"
+									class="form-control" id="PWD2" name="PWD2"
+									placeholder="Confirm Password">
+								<div class="eheck_font" id="pw2_check"></div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="BIRTH">생년월일</label> <input type="tel"
+									class="form-control" id="BIRTH" name="BIRTH"
+									placeholder="ex) 19990101">
+								<div class="eheck_font" id="birth_check"></div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="PHONE_NUM">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input
+									type="tel" class="form-control" id="PHONE_NUM" name="PHONE_NUM"
+									placeholder="Phone Number">
+								<div class="eheck_font" id="phone_check"></div>
+							</div>
+
+							<div class="form-group">
+								<label for="GENDER">성별 </label> <input type="checkbox"
+									id="GENDER" name="GENDER" value="male">남 <input
+									type="checkbox" id="GENDER" name="GENDER" value="female">여
+							</div>
+
+
+
+							<div class="submit-btn login100-form-btn text-center">
+								<button type="submit">
+									<span class="submit-btn">회원가입</span>
+								</button>
+							</div>
+
+							<!-- 접근 거부방지를 위한 -->
+							<sec:csrfInput />
+						</form>
+					</div>
+				</article>
+		</main>
+	</div>
+
+	<script type="text/javascript">
 
 //모든 공백 체크 정규식
 var empJ = /\s/g;
@@ -299,81 +395,7 @@ $(document).ready(function() {
 
 
 </script>
-			<body>
-				<div style="margin-top: 10%; ">
-
-					<article class="container">
-						<div class="page-header">
-							<div class="col-md-6 col-md-offset-3">
-								<h3>회원가입</h3>
-							</div>
-
-						</div>
-						<div class="col-sm-6 col-md-offset-3">
-
-							<form action="/user/register" method="post" role="form"
-								id="usercheck" name="user_info">
-
-								<div class="form-group">
-									<label for="id">아이디</label> <input type="text"
-										class="form-control" id="USER_ID" name="USER_ID"
-										placeholder="ID" autocomplete="off">
-									<div class="eheck_font" id="id_check"></div>
-								</div>
-
-								<div class="form-group">
-									<label for="pw">비밀번호</label> <input type="password"
-										class="form-control" id="PWD" name="PWD"
-										placeholder="PASSWORD">
-									<div class="eheck_font" id="pw_check"></div>
-								</div>
-								<div class="form-group">
-									<label for="pw2">비밀번호 확인</label> <input type="password"
-										class="form-control" id="PWD2" name="PWD2"
-										placeholder="Confirm Password">
-									<div class="eheck_font" id="pw2_check"></div>
-								</div>
-
-
-								<div class="form-group">
-									<label for="BIRTH">생년월일</label> <input type="tel"
-										class="form-control" id="BIRTH" name="BIRTH"
-										placeholder="ex) 19990101">
-									<div class="eheck_font" id="birth_check"></div>
-								</div>
-
-
-								<div class="form-group">
-									<label for="PHONE_NUM">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input
-										type="tel" class="form-control" id="PHONE_NUM"
-										name="PHONE_NUM" placeholder="Phone Number">
-									<div class="eheck_font" id="phone_check"></div>
-								</div>
-
-								<div class="form-group">
-									<label for="GENDER">성별 </label> <input type="checkbox"
-										id="GENDER" name="GENDER" value="male">남 <input
-										type="checkbox" id="GENDER" name="GENDER" value="female">여
-								</div>
-
-
-
-								<div class="form-group text-center">
-									<button type="submit" class="btn btn-primary">회원가입</button>
-								</div>
-
-								<!-- 접근 거부방지를 위한 -->
-								<sec:csrfInput />
-							</form>
-						</div>
-					</article>
-				</div>
-			</body>
-		</div>
-	</main>
-</div>
-<!-- </body> -->
-
+</body>
 </html>
 
 

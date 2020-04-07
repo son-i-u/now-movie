@@ -15,6 +15,8 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid">
+
+				<div style="margin-top: 5%;"></div>
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header text-center">영화 상세 정보</h1>
@@ -34,7 +36,7 @@
 									<div class="col-xl-2" id="${movie.movie_id }">
 										<div class="form-group">
 											<img src="<spring:url value="${ movie.img_loc }"/>"
-											class="card-img" alt="...">
+												class="card-img" alt="...">
 										</div>
 
 										<div class="form-group">
@@ -43,23 +45,21 @@
 										</div>
 
 										<div class="form-group">
-											<label>장르</label> 
-											<input class="form-control" name='title'
+											<label>장르</label> <input class="form-control" name='title'
 												value="${ movie.genre }" readonly="readonly">
 										</div>
 
 										<div class="form-group">
-											<label>배우</label>
-											<input class="form-control" name='title'
+											<label>배우</label> <input class="form-control" name='title'
 												value="${ movie.actor }" readonly="readonly">
 										</div>
 
 										<div class="form-group">
-											<label>국가</label> 
-											<input class="form-control" name='writer'
+											<label>국가</label> <input class="form-control" name='writer'
 												value="${ movie.nation }" readonly="readonly">
 										</div>
-										<button data-oper='list' class="login100-form-btn" style="margin-bottom: 16px;"
+										<button data-oper='list' class="login100-form-btn"
+											style="margin-bottom: 16px;"
 											onclick="location.href='/movie/recommend'">List</button>
 									</div>
 								</c:forEach>

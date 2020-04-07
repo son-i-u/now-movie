@@ -16,15 +16,13 @@
 		<main>
 			<div class="container-fluid">
 				<h1 id="top">선호 영화 선택</h1>
-				<p>고객님을 위한 추천 시스템에 이용됩니다.</p>
-				<ol class="breadcrumb mb-4">
-					<li>영화 다시 부르기
-						<button class="btn" type="button" onclick="reload()">
-							<img class="btn-img" src="/resources/images/icons/reload.png"
-								style="height: 20px; width: 20px">
-						</button>
-					</li>
-				</ol>
+				<div class="show_info">
+					<span class="bold_text_1">선호영화를 선택하세요</span>
+					<button class="btn" type="button" onclick="reload()">
+						<img class="btn-img" src="/resources/images/icons/reload_white.jpg"
+							style="height: 30px; width: 30px;">
+					</button>
+				</div>
 
 				<div class="fixed" href="#bottom" title=Top>
 					<a class="remote-control" href="#top">
@@ -35,17 +33,21 @@
 				</div>
 
 				<!-- 영화 리스트 이미지 출력  / 버튼에 이미지 삽입 -->
-				<div class="row card-wrapper">
+				<div class="row card-wrapper" style="margin-top: 3%;">
+
 					<c:forEach items="${list }" var="movie">
 
 						<div class="col-xl-2 col-md-3 col-sm-4 col-4"
 							id="${movie.movie_id }">
 							<a id="${movie.movie_id }"
-								onclick="movieselect(${movie.movie_id});"> <img
-								src="<spring:url value='${movie.img_loc }'/>" alt="..."
+								onclick="movieselect(${movie.movie_id});">
+								<hr
+									style="background-color: #990000; margin-left: 0%; padding-left: 0%; width: 100%; height: 1%;">
+								<img src="<spring:url value='${movie.img_loc }'/>" alt="..."
 								id="${movie.movie_id}img" class="normal-card"
 								onerror="this.src='http://placehold.it/200x290'">
 							</a>
+
 							<p class="text-center">${movie.movie_nm }</p>
 						</div>
 					</c:forEach>
@@ -90,11 +92,11 @@
 		padding-left: 0rem;
 		height: auto;
 	}
-	.jk_card {
+	.normal-card {
 		max-width: 100%;
 	}
-	.click-card {
-		max-width: 100%;
+	.selected-card {
+		filter: brightness(50%);
 	}
 	.moive_id_font {
 		max-width: 100%;
@@ -102,7 +104,7 @@
 
 	/*text*/
 	.bold_text_1 {
-		color: #5d5d5d;
+		color: #FFFFFF;
 		font-size: 1.6rem;
 		font-weight: bold;
 	}
@@ -119,11 +121,11 @@
 		padding-left: 0rem;
 		height: auto;
 	}
-	.jk_card {
+	.normal-card {
 		max-width: 100%;
 	}
-	.click-card {
-		max-width: 100%;
+	.selected-card {
+		filter: brightness(50%);
 	}
 	.moive_id_font {
 		max-width: 100%;
@@ -131,7 +133,7 @@
 
 	/*text*/
 	.bold_text_1 {
-		color: #5d5d5d;
+		color: #FFFFFF;
 		font-size: 2rem;
 		font-weight: bold;
 	}
@@ -148,11 +150,11 @@
 		padding-left: 0rem;
 		height: auto;
 	}
-	.jk_card {
+	.normal-card {
 		max-width: 100%;
 	}
-	.click-card {
-		max-width: 100%;
+	.selected-card {
+		filter: brightness(50%);
 	}
 	.moive_id_font {
 		max-width: 100%;
@@ -160,10 +162,20 @@
 
 	/*text*/
 	.bold_text_1 {
-		color: #5d5d5d;
+		color: #FFFFFF;
 		font-size: 2rem;
 		font-weight: bold;
 	}
+}
+
+body {
+	background-color: black;
+}
+
+.text-center {
+	color: #5d5d5d;
+	font-size: 0.8rem;
+	font-weight: bold;
 }
 
 .login100-form {
@@ -179,7 +191,7 @@
 	font-size: 1.5em;
 }
 
-.click-card {
+.selected-card {
 	filter: brightness(50%);
 }
 
@@ -205,7 +217,23 @@
 		var lastCheck = true ;
 		var $form = $('<form> </form> '); $(document.body ).append ($form);
 		
-		 $(document ).ready (function() { });
+		 $(document ).ready (function() { 
+				/* height by width */
+				var cw = $('.col-xl-2').width();
+				var ch = cw *1.8;
+				$('.normal-card').css({'height':ch+'px'});
+			 
+			 
+		 });
+		 
+		 $(window).resize(function() { 
+			 /* height by width */
+				var cw = $('.col-xl-2').width();
+				var ch = cw *1.7;
+				$('.normal-card').css({'height':ch+'px'});
+		 });
+		 
+		 
 		//클릭시 선택 영화 배열에 추가 
 		function movieselect (data) {if (lastCheck == false){ lastCheck =
 		!lastCheck;return;
@@ -214,7 +242,7 @@
 		/* 이미지 변경을 위한 class 변경 */
 		var class_id = $("#"+data+ "img ").attr ('class');
 
-			if (class_id == 'selected-card '){
+			if (class_id == 'selected-card'){
 			/* 재클릭한 영화는 배열에서 제거 */ $("#"+data +"img").attr('class','normal-card');const
 			idx = movieArray.indexOf(data);if ( idx > -1 ) movieArray.splice(idx,1);
 	
@@ -257,6 +285,14 @@
 			var mArray = $('<input name="movieArray" type="hidden" value='+movieArray+'>');
 			var sec = $('<sec:csrfInput/>');
 								$form.append(test); $form.append(mArray); $form.append(sec);
-								$form.submit();lastCheck = !lastCheck } } </script>
+								$form.submit();lastCheck = !lastCheck }
+		
+		}
+		
+
+	
+		</script>
+
+
 </body>
 </html>
