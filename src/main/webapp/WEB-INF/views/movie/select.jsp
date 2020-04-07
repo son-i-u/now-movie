@@ -19,7 +19,7 @@
 				<div class="show_info">
 					<span class="bold_text_1">선호영화를 선택하세요</span>
 					<button class="btn" type="button" onclick="reload()">
-						<img class="btn-img" src="/resources/images/icons/reload.png"
+						<img class="btn-img" src="/resources/images/icons/reload_white.jpg"
 							style="height: 30px; width: 30px;">
 					</button>
 				</div>
