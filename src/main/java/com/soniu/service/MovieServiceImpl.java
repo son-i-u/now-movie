@@ -142,6 +142,7 @@ public class MovieServiceImpl implements MovieService {
 
 	}
 
+	/* python server를 통해 선호리스트를 받는다 */
 	public List<movieLocationSchedule_VO> getMovieLocationSchedule() {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
